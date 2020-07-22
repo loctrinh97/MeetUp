@@ -16,10 +16,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment frag=null;
         switch (position){
             case 0:
-                frag = new SignupFragment();
+                frag = new InforSignupFragment();
                 break;
             case 1:
-                frag = new LoginFragment();
+                frag = new InforLoginFragment();
                 break;
         }
         return frag;
