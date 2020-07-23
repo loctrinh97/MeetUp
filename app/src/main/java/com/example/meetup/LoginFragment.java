@@ -1,12 +1,13 @@
 package com.example.meetup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,7 +34,6 @@ public class LoginFragment extends Fragment {
         imgSignUp = view.findViewById(R.id.imgSignUp);
         imgLogin = view.findViewById(R.id.imgLogin);
 
-
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,11 +54,11 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+
     private void addFragmentSignupInfor() {
         fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container2, new InforSignupFragment(), null);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }
@@ -66,9 +66,31 @@ public class LoginFragment extends Fragment {
     private void addFragmentLoginInfor() {
         fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container2, new InforLoginFragment(), null);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.container2, new InforLoginFragment(), "fragmentLoginInfor");
         fragmentTransaction.commit();
 
+    }
+    @Override
+    public void onPause() {
+        Log.d("fragmentB", "fragmentB: onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d("fragmentB", "fragmentB: onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.d("fragmentB", "fragmentB: onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d("fragmentB", "fragmentB: onDestroy");
+        super.onDestroy();
     }
 }

@@ -51,18 +51,18 @@
                 app:layout_constraintVertical_bias="0.075" />
 
             <EditText
-                android:textColor="#000000"
-                android:fontFamily="sans-serif"
-                android:textSize="16sp"
                 android:id="@+id/editTextTextPersonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
                 android:layout_marginTop="25dp"
-                android:ems="10"
                 android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="hovaten@rikkeisoft.com"
                 android:inputType="textPersonName"
-                android:text="anhnt6@rikkeisoft.com"
+                android:textColor="#000000"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
                 app:layout_constraintStart_toStartOf="@+id/imgRectangle"
                 app:layout_constraintTop_toTopOf="@+id/imgRectangle"
@@ -121,7 +121,8 @@
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="343:60"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="260dp"
                 android:layout_marginEnd="16dp"
@@ -137,18 +138,18 @@
 
             <EditText
 
-                android:textColor="#000000"
-                android:fontFamily="sans-serif"
-                android:textSize="16sp"
                 android:id="@+id/edtPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
                 android:layout_marginTop="25dp"
-                android:ems="10"
                 android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Độ dài 6-16 kí tự"
                 android:inputType="textPassword"
-                android:text="anhnt6@rikkei"
+                android:textColor="#000000"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
                 app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
                 app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
@@ -178,7 +179,8 @@
                 app:layout_constraintTop_toTopOf="@+id/imgRectangle3" />
 
             <TextView
-                android:id="@+id/tvForgetPassword"
+                android:onClick="onClick"
+                android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="250dp"
