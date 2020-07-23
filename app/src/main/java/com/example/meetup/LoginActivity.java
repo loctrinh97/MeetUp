@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,13 +16,31 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addFragmentLogin();
         addFragmentSignupInfor();
+        Log.d("test", "activity: onCreate");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d("test", "activity: onResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void addFragmentLogin() {
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container, new LoginFragment(), null);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.add(R.id.container1, new LoginFragment(), null);
         fragmentTransaction.commit();
     }
 
@@ -29,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container2, new InforSignupFragment(), null);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }
