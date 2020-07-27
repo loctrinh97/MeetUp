@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--    view 1-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imgRectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.275"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.024"
+                app:srcCompat="@drawable/ic_rectangleinput">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
+                app:layout_constraintVertical_bias="0.523"
+                app:srcCompat="@drawable/ic_icon_profile_filled" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="68dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#A8A2B2"
+                android:text="Họ và tên"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
+                app:layout_constraintVertical_bias="0.075" />
+
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="74dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:focusable="auto"
+                android:fontFamily="sans-serif"
+                android:hint="Họ tên của bạn"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
+                app:layout_constraintVertical_bias="0.851" />
+
+            <!--view 2-->
+            <ImageView
+                android:layout_marginTop="40dp"
+                android:id="@+id/imgRectangle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.275"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1"
+                app:srcCompat="@drawable/ic_rectangleinput">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle2"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle2"
+                app:layout_constraintVertical_bias="0.523"
+                app:srcCompat="@drawable/ic_icon_email_filled" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="68dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#A8A2B2"
+                android:text="Email"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle2"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle2"
+                app:layout_constraintVertical_bias="0.075" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="74dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="hovaten@rikkeisoft.com"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle2"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle2"
+                app:layout_constraintVertical_bias="0.851" />
+            <!--    view 3-->
+            <ImageView
+                android:layout_marginTop="120dp"
+                android:id="@+id/imgRectangle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.275"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1"
+                app:srcCompat="@drawable/ic_rectangleinput">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgLock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
+                app:layout_constraintVertical_bias="0.523"
+                app:srcCompat="@drawable/ic_icon_lock_filled" />
+
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="68dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#A8A2B2"
+                android:text="Mật khẩu"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
+                app:layout_constraintVertical_bias="0.075" />
+
+            <EditText
+
+                android:id="@+id/edtPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="74dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="Độ dài 6-16 ký tự"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
+                app:layout_constraintVertical_bias="0.851" />
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="343:60"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="260dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_rectangle_btn"
+                android:fontFamily="sans-serif"
+                android:text="ĐĂNG KÝ"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:fontFamily="sans-serif"
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:text="Bỏ qua"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="0.5dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle" />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="0.5dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle2" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="0.5dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/imgRectangle3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

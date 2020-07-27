@@ -26,7 +26,7 @@ private Handler delay = new Handler();
             @Override
             public void run() {
                 try {
-                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, SignupLoginActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception ignored) {
