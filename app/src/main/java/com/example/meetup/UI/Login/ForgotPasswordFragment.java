@@ -1,4 +1,4 @@
-package com.example.meetup.view;
+package com.example.meetup.UI.Login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

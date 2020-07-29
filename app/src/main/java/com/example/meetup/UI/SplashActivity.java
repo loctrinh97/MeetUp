@@ -1,4 +1,4 @@
-package com.example.meetup.view;
+package com.example.meetup.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.meetup.R;
+import com.example.meetup.UI.Home.HomeActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -28,14 +29,14 @@ private Handler delay = new Handler();
             @Override
             public void run() {
                 try {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception ignored) {
                     ignored.printStackTrace();
                 }
             }
-        },1000);
+        },2000);
     }
 
 

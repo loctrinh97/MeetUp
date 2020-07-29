@@ -196,7 +196,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="260dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_btn_disable"
+                android:background="@drawable/ic_rectangle_btn"
                 android:fontFamily="sans-serif"
                 android:text="ĐĂNG KÝ"
                 android:textColor="#FFFFFF"

@@ -1,4 +1,4 @@
-package com.example.meetup.view;
+package com.example.meetup.UI.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
