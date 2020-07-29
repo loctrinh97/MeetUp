@@ -4,6 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+
+    tools:context=".UI.Home.HomeActivity">
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/app_viewPager"
+        android:layout_width="409dp"
+        android:layout_marginBottom="64dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/app_tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+
+        android:id="@+id/app_tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:background="@drawable/botron"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/color_common"
+        app:tabTextAppearance="@style/CustomTextAppearanceTab"
+        app:tabTextColor="@color/color_text_defaut">
+
+    </com.google.android.material.tabs.TabLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

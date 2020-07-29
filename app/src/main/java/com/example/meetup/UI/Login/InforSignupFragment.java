@@ -1,4 +1,4 @@
-package com.example.meetup;
+package com.example.meetup.UI.Login;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.meetup.R;
 
 public class InforSignupFragment extends Fragment {
     public InforSignupFragment() {
