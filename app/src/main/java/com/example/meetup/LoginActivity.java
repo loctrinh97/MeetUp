@@ -1,12 +1,10 @@
-package com.example.meetup.view;
+package com.example.meetup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.example.meetup.R;
 
 public class LoginActivity extends AppCompatActivity {
 
