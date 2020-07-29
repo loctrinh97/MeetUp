@@ -1,10 +1,8 @@
-package com.example.meetup.view;
+package com.example.meetup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.example.meetup.R;
 
 public class HomeActivity extends AppCompatActivity {
 

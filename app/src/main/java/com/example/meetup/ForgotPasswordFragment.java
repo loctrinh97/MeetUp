@@ -1,4 +1,4 @@
-package com.example.meetup.view;
+package com.example.meetup;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import com.example.meetup.R;
 
 public class ForgotPasswordFragment extends Fragment {
     @Nullable
