@@ -1,4 +1,4 @@
-package com.example.meetup;
+package com.example.meetup.view;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.meetup.R;
 
 public class InforLoginFragment extends Fragment implements View.OnClickListener {
     TextView tvForgotPassword;
