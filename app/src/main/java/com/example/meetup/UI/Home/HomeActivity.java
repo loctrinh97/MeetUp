@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         app_adapter.addFrag(new HomeFragment(),"Danh mục");
         app_adapter.addFrag(new HomeFragment(),"Cá nhân");
         app_viewPager.setAdapter(app_adapter);
+        setupTabIcons();
         app_tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -49,12 +50,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        setupTabIcons();
+
     }
     private void setupTabIcons() {
 
         app_tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        app_tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.color_common));
+//        app_tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.color_common));
         app_tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         app_tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         app_tabLayout.getTabAt(3).setIcon(tabIcons[3]);

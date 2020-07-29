@@ -28,9 +28,6 @@ public class NewsFragment extends Fragment {
     List<News> newsList;
     private NewsViewModel mViewModel;
 
-    public static NewsFragment newInstance() {
-        return new NewsFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,7 +45,7 @@ public class NewsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
+
         // TODO: Use the ViewModel
     }
 
