@@ -3,42 +3,27 @@ package com.example.meetup.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import retrofit2.Response;
-
 public class User {
-    public String email;
-    public String name;
-    public String password;
-
-    public User(String email, String name, String password) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-    }
-
-    public User(User response) {
-        this.token = token;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     @SerializedName("status")
     @Expose
     private Integer status;
-    @SerializedName("token")
+    @SerializedName("response")
     @Expose
-    private String token;
+    private UserResponse response;
 
+    public Integer getStatus() {
+        return status;
+    }
 
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public UserResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(UserResponse response) {
+        this.response = response;
+    }
 }
