@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.meetup.Model.User;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
+import com.example.meetup.ulti.Define;
+
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +27,7 @@ public class UserViewModel extends ViewModel {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                   //  response.body().getResponse().getToken();
-                    if (response.body().getStatus() == 1){
+                    if (response.body().getStatus() == Define.STATUS_CODE_SUCCESS){
                         messCreateAccount.setValue("Create account successful !");
                     }else{
                         messCreateAccount.setValue("Account is exist !");

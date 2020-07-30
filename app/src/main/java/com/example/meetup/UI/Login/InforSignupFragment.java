@@ -10,22 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-
 import com.example.meetup.R;
 import com.example.meetup.viewmodel.UserViewModel;
 
-import io.reactivex.internal.util.BlockingHelper;
+
 
 public class InforSignupFragment extends Fragment {
     EditText edtName, edtEmail, edtPassword;
     TextView tvMessCreateAccount;
     Button btnSignUp;
-    Boolean edtNameChange = false;
-    Boolean edtEmailChange = false;
-    Boolean edtPasswordChange = false;
+    boolean edtNameChange = false;
+    boolean edtEmailChange = false;
+    boolean edtPasswordChange = false;
 
 
     public InforSignupFragment() {
@@ -59,7 +57,7 @@ public class InforSignupFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 edtNameChange = true;
-                if (edtNameChange == true && edtEmailChange == true && edtPasswordChange == true) {
+                if (edtNameChange && edtEmailChange && edtPasswordChange) {
                     btnSignUp.setBackgroundResource(R.drawable.ic_rectangle_btn);
                 }
             }
@@ -79,7 +77,7 @@ public class InforSignupFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 edtEmailChange = true;
-                if (edtNameChange == true && edtEmailChange == true && edtPasswordChange == true) {
+                if (edtNameChange && edtEmailChange && edtPasswordChange ) {
                     btnSignUp.setBackgroundResource(R.drawable.ic_rectangle_btn);
                 }
             }
@@ -99,7 +97,7 @@ public class InforSignupFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 edtPasswordChange = true;
-                if (edtNameChange == true && edtEmailChange == true && edtPasswordChange == true) {
+                if (edtNameChange  && edtEmailChange && edtPasswordChange) {
                     btnSignUp.setBackgroundResource(R.drawable.ic_rectangle_btn);
                 }
             }

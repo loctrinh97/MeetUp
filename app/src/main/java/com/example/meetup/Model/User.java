@@ -6,16 +6,16 @@ import com.google.gson.annotations.SerializedName;
 public class User {
     @SerializedName("status")
     @Expose
-    private Integer status;
+    private int status;
     @SerializedName("response")
     @Expose
     private UserResponse response;
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
