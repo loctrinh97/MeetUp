@@ -1,11 +1,15 @@
-package com.example.meetup.Model;
+package com.example.meetup.model;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.sql.Timestamp;
+
+import com.bumptech.glide.Glide;
 
 import io.reactivex.annotations.NonNull;
 
@@ -95,5 +99,12 @@ public class News {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @BindingAdapter("profileImage")
+    public static void loadImage(final ImageView view, final String imageUrl){
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .into(view);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.meetup.UI.Home;
+package com.example.meetup.view.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.meetup.R;
-import com.example.meetup.Adapter.ViewPagerAdapter;
+import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeActivity extends AppCompatActivity {

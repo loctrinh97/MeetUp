@@ -1,10 +1,7 @@
-package com.example.meetup.Repository;
+package com.example.meetup.repository;
 
-import android.app.Application;
-
-import com.example.meetup.DAO.NewsDAO;
-import com.example.meetup.Database.AppDatabase;
-import com.example.meetup.Model.News;
+import com.example.meetup.dao.NewsDAO;
+import com.example.meetup.model.News;
 import com.example.meetup.MyApplication;
 
 import java.util.List;
