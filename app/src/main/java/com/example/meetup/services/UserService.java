@@ -9,12 +9,27 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface UserService {
-@POST("register")
-Call<User> signUp(@Body User post);
+
+    // register service
+    @POST("register")
+    Call<User> signUp(@Body User post);
+
     @FormUrlEncoded
     @POST("register")
     Call<User> signUp(
             @Field("name") String name,
+            @Field("email") String email,
+            @Field("password") String password
+    );
+
+
+    // login service
+    @POST("login")
+    Call<User> login(@Body User post);
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<User> login(
             @Field("email") String email,
             @Field("password") String password
     );

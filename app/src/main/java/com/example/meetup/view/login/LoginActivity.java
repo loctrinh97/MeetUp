@@ -20,14 +20,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addFragmentLogin();
         addFragmentSignupInfor();
-        Log.d("test", "activity: onCreate");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        Log.d("test", "activity: onResume");
     }
 
     @Override

@@ -5,39 +5,26 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class User {
-    public String email;
-    public String name;
-    public String password;
-
-    public User(String email, String name, String password) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-    }
-
-    public User(User response) {
-        this.token = token;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     @SerializedName("status")
     @Expose
-    private Integer status;
-    @SerializedName("token")
+    private int status;
+    @SerializedName("response")
     @Expose
-    private String token;
+    private UserResponse response;
 
+    public int getStatus() {
+        return status;
+    }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public UserResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(UserResponse response) {
+        this.response = response;
+    }
 }
