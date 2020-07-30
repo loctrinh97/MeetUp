@@ -1,4 +1,4 @@
-package com.example.meetup.UI.Login;
+package com.example.meetup.view.login;
 
 import android.os.Bundle;
 import android.util.Log;

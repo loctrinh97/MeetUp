@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
 
-    tools:context="com.example.meetup.UI.Login.LoginActivity">
+    tools:context="com.example.meetup.view.login.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"

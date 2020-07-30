@@ -1,6 +1,6 @@
 package com.example.meetup.services;
 
-import com.example.meetup.Repository.UserRepository;
+import com.example.meetup.repository.UserRepository;
 
 public class ApiUtils {
     public static final String BASE_URL = "http://meetup.rikkei.org/api/v0/";

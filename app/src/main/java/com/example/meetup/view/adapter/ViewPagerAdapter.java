@@ -1,4 +1,4 @@
-package com.example.meetup.Adapter;
+package com.example.meetup.view.adapter;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

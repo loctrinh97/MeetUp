@@ -1,4 +1,4 @@
-package com.example.meetup.Repository;
+package com.example.meetup.repository;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

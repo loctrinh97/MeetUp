@@ -1,4 +1,4 @@
-package com.example.meetup.Model;
+package com.example.meetup.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import io.reactivex.annotations.NonNull;
 
 @Entity(tableName = "events")
-public class Events {
+public class Event {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

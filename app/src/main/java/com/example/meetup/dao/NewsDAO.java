@@ -1,11 +1,11 @@
-package com.example.meetup.DAO;
+package com.example.meetup.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.meetup.Model.News;
+import com.example.meetup.model.News;
 
 import java.util.List;
 

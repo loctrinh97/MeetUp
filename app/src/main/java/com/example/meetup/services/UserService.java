@@ -1,6 +1,6 @@
 package com.example.meetup.services;
 
-import com.example.meetup.Model.User;
+import com.example.meetup.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

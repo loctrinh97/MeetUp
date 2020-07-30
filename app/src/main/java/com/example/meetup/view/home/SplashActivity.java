@@ -1,4 +1,4 @@
-package com.example.meetup.UI.Home;
+package com.example.meetup.view.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meetup.R;
-import com.example.meetup.UI.Login.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {

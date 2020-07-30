@@ -5,13 +5,14 @@ import android.util.Patterns;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.meetup.Model.User;
+import com.example.meetup.model.User;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
 
+
 import org.jetbrains.annotations.NotNull;
 
-import retrofit2.Call;
+
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -23,8 +24,9 @@ public class UserViewModel extends ViewModel {
     public static void createAccount(String name, String email, String password) {
         mUserService = ApiUtils.getUserService();
         mUserService.signUp(name, email, password).enqueue(new Callback<User>() {
+
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(retrofit2.Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     messCreateAccount ="Create account successful !";
                     saveToken(response.body());
@@ -32,7 +34,7 @@ public class UserViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(retrofit2.Call<User> call, Throwable t) {
                 messCreateAccount ="error !";
             }
         });

@@ -1,4 +1,4 @@
-package com.example.meetup.UI.Home;
+package com.example.meetup.view.home;
 
 import android.os.Bundle;
 
@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.meetup.Base.BaseFragment;
-import com.example.meetup.UI.News.NewsFragment;
+import com.example.meetup.base.BaseFragment;
+import com.example.meetup.view.news.NewsFragment;
 import com.example.meetup.R;
-import com.example.meetup.Adapter.ViewPagerAdapter;
+import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends BaseFragment {
