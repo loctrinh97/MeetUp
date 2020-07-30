@@ -188,13 +188,28 @@
                 app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
                 app:layout_constraintVertical_bias="0.851" />
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvMessCreateAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="Create account successful !"
+                android:textColor="#A50000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgRectangle3">
+            </TextView>
+
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintDimensionRatio="343:60"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="260dp"
+                android:layout_marginTop="280dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/ic_btn_disable"
                 android:fontFamily="sans-serif"
