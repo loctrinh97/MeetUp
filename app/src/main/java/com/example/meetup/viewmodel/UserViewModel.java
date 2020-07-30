@@ -41,7 +41,7 @@ public class UserViewModel extends ViewModel {
         });
     }
 
-
+    
 
     static boolean isEmpty(String name){
         return TextUtils.isEmpty(name);
