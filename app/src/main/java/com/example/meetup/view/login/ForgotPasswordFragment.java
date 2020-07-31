@@ -80,7 +80,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
                     @Override
                     public void onChanged(String s) {
                         tvMessForgot.setText(UserViewModel.messResetPassword.getValue());
-                        if (UserViewModel.messResetPassword.getValue().equals(Define.LOGIN_SUCCESS)) {
+                        if (UserViewModel.messResetPassword.getValue().equals(R.string.login_success)) {
                             tvMessForgot.setTextColor(getResources().getColor(R.color.colorPrimary));
                         }
                         tvMessForgot.setVisibility(View.VISIBLE);

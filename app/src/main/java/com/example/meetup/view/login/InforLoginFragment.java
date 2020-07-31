@@ -124,7 +124,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onChanged(String s) {
                         tvMessLogin.setText(UserViewModel.messLogin.getValue());
-                        if (UserViewModel.messLogin.getValue().equals(Define.LOGIN_SUCCESS)) {
+                        if (UserViewModel.messLogin.getValue().equals(R.string.login_success)) {
                             tvMessLogin.setTextColor(getResources().getColor(R.color.colorPrimary));
                         }
                         tvMessLogin.setVisibility(View.VISIBLE);

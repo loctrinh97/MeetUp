@@ -27,6 +27,7 @@ public class InforSignupFragment extends Fragment {
     EditText edtNameSignup, edtEmailSignup, edtPasswordSignup;
     TextView tvMessCreateAccount, tvIgnore;
     Button btnSignUpConfirm;
+    UserViewModel viewModel ;
 
     public InforSignupFragment() {
         // Required empty public constructor
@@ -44,7 +45,7 @@ public class InforSignupFragment extends Fragment {
         edtPasswordSignup = view.findViewById(R.id.edtPasswordSignup);
         btnSignUpConfirm = view.findViewById(R.id.btnSignUpConfirm);
         tvMessCreateAccount = view.findViewById(R.id.tvMessCreateAccount);
-
+        viewModel = new UserViewModel(getActivity().getApplicationContext());
 
         // check unable button when change text
         edtNameSignup.addTextChangedListener(new TextWatcher() {
@@ -107,15 +108,15 @@ public class InforSignupFragment extends Fragment {
                 String emailSignUp = edtEmailSignup.getText().toString().trim();
                 String passwordSignUp = edtPasswordSignup.getText().toString().trim();
                 if (!UserViewModel.validateSignUp(nameSignUp, emailSignUp, passwordSignUp)) {
-                    Toast.makeText(getActivity(), UserViewModel.messValidateSignUp, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(UserViewModel.idMessValidateSignUp), Toast.LENGTH_SHORT).show();
                 } else {
-                    UserViewModel.createAccount(nameSignUp, emailSignUp, passwordSignUp);
+                    viewModel.createAccount(nameSignUp, emailSignUp, passwordSignUp);
                     // live data
-                    UserViewModel.messCreateAccount.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
+                    viewModel.messCreateAccount.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
-                            tvMessCreateAccount.setText(UserViewModel.messCreateAccount.getValue());
-                            if (UserViewModel.messCreateAccount.getValue().equals(Define.CREATE_ACCOUNT_SUCCESS)) {
+                            tvMessCreateAccount.setText(viewModel.messCreateAccount.getValue());
+                            if (UserViewModel.messCreateAccount.getValue().equals(R.string.create_account_success)) {
                                 tvMessCreateAccount.setTextColor(getResources().getColor(R.color.colorPrimary));
                             }
                             tvMessCreateAccount.setVisibility(View.VISIBLE);
