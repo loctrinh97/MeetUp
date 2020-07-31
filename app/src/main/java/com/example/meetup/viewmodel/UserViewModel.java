@@ -10,7 +10,7 @@ import android.widget.EditText;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.meetup.MyApplication;
+import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.R;
 import com.example.meetup.model.User;
 import com.example.meetup.services.ApiUtils;
