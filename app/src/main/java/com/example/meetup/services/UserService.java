@@ -7,13 +7,11 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface UserService {
 
     // register service
-    @POST("register")
-    Call<User> signUp(@Body User post);
-
     @FormUrlEncoded
     @POST("register")
     Call<User> signUp(
@@ -23,14 +21,15 @@ public interface UserService {
     );
 
 
-    // login service
     @POST("login")
-    Call<User> login(@Body User post);
-
-    @FormUrlEncoded
-    @POST("register")
     Call<User> login(
-            @Field("email") String email,
-            @Field("password") String password
+            @Query("email") String email,
+            @Query("password") String password
+    );
+
+
+    @POST("resetPassword")
+    Call<User> resetPassword(
+            @Query("email") String email
     );
 }
