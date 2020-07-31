@@ -13,9 +13,9 @@ import com.example.meetup.databinding.ItemNewsBinding;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    List<News> list_News;
+    List<News> listNews;
     public NewsAdapter(List<News> NewsList) {
-        this.list_News = NewsList;
+        this.listNews = NewsList;
     }
 
     @NonNull
@@ -28,14 +28,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
-        News news = list_News.get(position);
+        News news = listNews.get(position);
         holder.bind(news);
     }
 
 
     @Override
     public int getItemCount() {
-        return list_News.size();
+        return listNews.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

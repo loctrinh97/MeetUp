@@ -2,7 +2,7 @@ package com.example.meetup.repository;
 
 import com.example.meetup.dao.NewsDAO;
 import com.example.meetup.model.News;
-import com.example.meetup.MyApplication;
+import com.example.meetup.ulti.MyApplication;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class ListNewsRepository{
     public static ListNewsRepository getInstance(){
 
         if(listNewsRepository==null){
-            listNewsRepository = new ListNewsRepository(AppDatabase.getInstance(MyApplication.getAppContext()).getNewsDao());
+            listNewsRepository = new ListNewsRepository(AppDatabase.getInstance().getNewsDao());
         }
         return listNewsRepository;
     }
