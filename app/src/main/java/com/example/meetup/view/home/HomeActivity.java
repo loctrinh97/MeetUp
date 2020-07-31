@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.meetup.R;
+import com.example.meetup.model.Event;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 

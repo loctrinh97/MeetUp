@@ -44,7 +44,7 @@
         android:textSize="14sp"
         android:layout_marginStart="17dp"
         android:layout_marginEnd="17dp"
-        android:text="@{news.publish_date}"
+        android:text="@{news.setPublishDate}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
