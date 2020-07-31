@@ -1,36 +1,35 @@
 package com.example.meetup.services;
 
 import com.example.meetup.model.User;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface UserService {
 
     // register service
     @POST("register")
-    Call<User> signUp(@Body User post);
-
-    @FormUrlEncoded
-    @POST("register")
     Call<User> signUp(
-            @Field("name") String name,
-            @Field("email") String email,
-            @Field("password") String password
+            @Query("name") String name,
+            @Query("email") String email,
+            @Query("password") String password
     );
 
 
-    // login service
     @POST("login")
-    Call<User> login(@Body User post);
-
-    @FormUrlEncoded
-    @POST("register")
     Call<User> login(
-            @Field("email") String email,
-            @Field("password") String password
+            @Query("email") String email,
+            @Query("password") String password
+    );
+
+
+    @POST("resetPassword")
+    Call<User> resetPassword(
+            @Query("email") String email
     );
 }

@@ -30,7 +30,7 @@ private Handler delay = new Handler();
             public void run() {
                 try {
                     //TODO: đang test nè
-                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception ignored) {

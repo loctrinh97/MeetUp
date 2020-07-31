@@ -51,13 +51,14 @@
                 app:layout_constraintVertical_bias="0.075" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edtEmailLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
                 android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
+                android:focusable="auto"
                 android:fontFamily="sans-serif"
                 android:hint="hovaten@rikkeisoft.com"
                 android:inputType="textPersonName"
@@ -66,7 +67,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
                 app:layout_constraintStart_toStartOf="@+id/imgRectangle"
                 app:layout_constraintTop_toTopOf="@+id/imgRectangle"
-                app:layout_constraintVertical_bias="0.851" />
+         />
             <View
                 android:id="@+id/divider1"
                 android:layout_width="0.5dp"
@@ -134,7 +135,7 @@
             </TextView>
 
             <Button
-                android:id="@+id/btnSignUp"
+                android:id="@+id/btnLoginConfirm"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintDimensionRatio="343:60"
@@ -153,7 +154,7 @@
 
             <EditText
 
-                android:id="@+id/edtPassword"
+                android:id="@+id/edtPasswordLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
@@ -172,7 +173,7 @@
 
             <TextView
                 android:fontFamily="sans-serif"
-                android:id="@+id/textView2"
+                android:id="@+id/tvIgnoreLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
@@ -181,7 +182,7 @@
                 android:text="Bỏ qua"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
+                app:layout_constraintTop_toBottomOf="@+id/btnLoginConfirm" />
 
             <View
                 android:id="@+id/divider2"
@@ -194,7 +195,6 @@
                 app:layout_constraintTop_toTopOf="@+id/imgRectangle3" />
 
             <TextView
-                android:onClick="onClick"
                 android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

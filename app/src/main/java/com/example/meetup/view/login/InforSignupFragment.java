@@ -1,5 +1,6 @@
 package com.example.meetup.view.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,21 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+
 import com.example.meetup.R;
+import com.example.meetup.ulti.Define;
+import com.example.meetup.view.home.HomeActivity;
 import com.example.meetup.viewmodel.UserViewModel;
 
+import java.util.Objects;
 
 
 public class InforSignupFragment extends Fragment {
-    EditText edtName, edtEmail, edtPassword;
-    TextView tvMessCreateAccount;
-    Button btnSignUp;
-    boolean edtNameChange = false;
-    boolean edtEmailChange = false;
-    boolean edtPasswordChange = false;
-
+    EditText edtNameSignup, edtEmailSignup, edtPasswordSignup;
+    TextView tvMessCreateAccount, tvIgnore;
+    Button btnSignUpConfirm;
+    UserViewModel viewModel ;
 
     public InforSignupFragment() {
         // Required empty public constructor
@@ -36,88 +39,86 @@ public class InforSignupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_signup_infor, container, false);
-
-        edtName = view.findViewById(R.id.edtName);
-        edtEmail = view.findViewById(R.id.edtEmail);
-        edtPassword = view.findViewById(R.id.edtPassword);
-        btnSignUp = view.findViewById(R.id.btnSignUp);
+        tvIgnore = view.findViewById(R.id.tvIgnore);
+        edtNameSignup = view.findViewById(R.id.edtNameSignup);
+        edtEmailSignup = view.findViewById(R.id.edtEmailSignup);
+        edtPasswordSignup = view.findViewById(R.id.edtPasswordSignup);
+        btnSignUpConfirm = view.findViewById(R.id.btnSignUpConfirm);
         tvMessCreateAccount = view.findViewById(R.id.tvMessCreateAccount);
+        viewModel = new UserViewModel(getActivity().getApplicationContext());
 
-        edtName.addTextChangedListener(new TextWatcher() {
+        // check unable button when change text
+        edtNameSignup.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                edtNameChange = true;
-                if (edtNameChange && edtEmailChange && edtPasswordChange) {
-                    btnSignUp.setBackgroundResource(R.drawable.ic_rectangle_btn);
-                }
+                UserViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
             }
         });
 
-        edtEmail.addTextChangedListener(new TextWatcher() {
+        edtEmailSignup.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                edtEmailChange = true;
-                if (edtNameChange && edtEmailChange && edtPasswordChange ) {
-                    btnSignUp.setBackgroundResource(R.drawable.ic_rectangle_btn);
-                }
+                UserViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
             }
         });
 
-        edtPassword.addTextChangedListener(new TextWatcher() {
+        edtPasswordSignup.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                edtPasswordChange = true;
-                if (edtNameChange  && edtEmailChange && edtPasswordChange) {
-                    btnSignUp.setBackgroundResource(R.drawable.ic_rectangle_btn);
-                }
+                UserViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
             }
         });
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        tvIgnore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = edtName.getText().toString().trim();
-                String email = edtEmail.getText().toString().trim();
-                String password = edtPassword.getText().toString().trim();
-                if (!UserViewModel.validateSignUp(name, email, password)) {
-                    Toast.makeText(getActivity(), UserViewModel.messValidate, Toast.LENGTH_SHORT).show();
-                } else {
-                    UserViewModel.createAccount(name, email, password);
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
-                    UserViewModel.messCreateAccount.observe(getActivity(), new Observer<String>() {
+        btnSignUpConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nameSignUp = edtNameSignup.getText().toString().trim();
+                String emailSignUp = edtEmailSignup.getText().toString().trim();
+                String passwordSignUp = edtPasswordSignup.getText().toString().trim();
+                if (!UserViewModel.validateSignUp(nameSignUp, emailSignUp, passwordSignUp)) {
+                    Toast.makeText(getActivity(), getString(UserViewModel.idMessValidateSignUp), Toast.LENGTH_SHORT).show();
+                } else {
+                    viewModel.createAccount(nameSignUp, emailSignUp, passwordSignUp);
+                    // live data
+                    viewModel.messCreateAccount.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
-                            tvMessCreateAccount.setText(UserViewModel.messCreateAccount.getValue());
+                            tvMessCreateAccount.setText(viewModel.messCreateAccount.getValue());
+                            if (UserViewModel.messCreateAccount.getValue().equals(R.string.create_account_success)) {
+                                tvMessCreateAccount.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            }
                             tvMessCreateAccount.setVisibility(View.VISIBLE);
                         }
                     });
