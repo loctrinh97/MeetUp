@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <FrameLayout
         android:id="@+id/header"
@@ -17,7 +18,7 @@
             android:textStyle="bold"
             android:text="Trang chủ"
 
-            android:textSize="@dimen/textsize_header"
+            android:textSize="@dimen/text_header"
             android:layout_marginTop="20dp"
             android:layout_marginStart="16dp"
             android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
 
-        app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
 
