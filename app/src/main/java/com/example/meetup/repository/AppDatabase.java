@@ -2,12 +2,11 @@ package com.example.meetup.repository;
 
 
 
-import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.dao.NewsDAO;
 import com.example.meetup.model.News;
 
@@ -21,9 +20,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract NewsDAO getNewsDao();
 
-    public static AppDatabase getInstance(Context context){
+    public static AppDatabase getInstance(){
         if(database == null){
-            database= Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,DATABASE_NAME)
+            database= Room.databaseBuilder(MyApplication.getAppContext(),AppDatabase.class,DATABASE_NAME)
                     .fallbackToDestructiveMigration()
                     .build();
         }

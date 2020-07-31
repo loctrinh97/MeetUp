@@ -12,7 +12,7 @@ import java.util.List;
 import io.reactivex.Flowable;
 @Dao
 public interface NewsDAO {
-    @Query("SELECT * from news order by publish_date desc limit :pageSize")
+    @Query("SELECT * from news order by publishDate desc limit :pageSize")
     Flowable<List<News>> getListNews(int pageSize);
 
     @Insert
