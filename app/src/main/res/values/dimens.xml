@@ -4,4 +4,6 @@
     <dimen name="_60dp">60dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <dimen name="text_header">24sp</dimen>
+    <dimen name="_20dp">20dp</dimen>
+    <dimen name="_30dp">30dp</dimen>
 </resources>

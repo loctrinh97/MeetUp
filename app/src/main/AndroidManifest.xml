@@ -9,10 +9,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
         <activity android:name=".view.home.HomeActivity" />
-        <activity android:name=".view.login.LoginActivity" />
+        <activity android:name=".view.login.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".view.home.SplashActivity">
 
             <intent-filter>

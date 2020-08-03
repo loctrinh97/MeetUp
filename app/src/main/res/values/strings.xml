@@ -2,5 +2,16 @@
     <string name="app_name">MeetUp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_enter_your_name">Vui lòng nhập tên của bạn </string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="please_enter_email">Vui lòng nhập email đúng định dạng</string>
+    <string name="please_enter_password">Mật khẩu cần có 6-16 kí tự</string>
+    <string name="create_account_success">Tạo tài khoản thành công</string>
+    <string name="account_exist">Tài khoản đã tồn tại</string>
+    <string name="error_login">Sai tài khoản hoặc mật khẩu</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="error_network">Đã xảy ra lỗi</string>
+    <string name="reset_password">Mật khẩu của bạn đã được cấp lại, vui lòng kiểm tra email</string>
+    <string name="email_not_found">Tài khoản chưa đăng kí</string>
 
 </resources>
