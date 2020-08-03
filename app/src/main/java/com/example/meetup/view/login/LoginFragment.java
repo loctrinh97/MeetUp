@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.meetup.R;
+import com.example.meetup.view.personal.PersonalLoginFragment;
 
 public class LoginFragment extends Fragment {
     Button btnSignUp;
@@ -34,6 +35,11 @@ public class LoginFragment extends Fragment {
         btnSignUp = view.findViewById(R.id.btnSignUp);
         imgSignUp = view.findViewById(R.id.imgSignUp);
         imgLogin = view.findViewById(R.id.imgLogin);
+
+        if (PersonalLoginFragment.personalLogin){
+            imgSignUp.setVisibility(View.GONE);
+            imgLogin.setVisibility(View.VISIBLE);
+        }
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

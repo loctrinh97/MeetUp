@@ -17,7 +17,6 @@ import com.example.meetup.model.User;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
 import com.example.meetup.ulti.Define;
-import com.google.gson.JsonObject;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +34,9 @@ public class UserViewModel extends ViewModel {
     public static MutableLiveData<String> messCreateAccount = new MutableLiveData<>();
     public static MutableLiveData<String> messLogin = new MutableLiveData<>();
     public static MutableLiveData<String> messResetPassword = new MutableLiveData<>();
+    public static SharedPreferences sharedPref = MyApplication.getAppContext()
+            .getSharedPreferences("tokenPref",Context.MODE_PRIVATE);
+    public static SharedPreferences.Editor token = sharedPref.edit();
 
     public UserViewModel(Context context) {
         this.context = context;
@@ -71,13 +73,8 @@ public class UserViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == Define.STATUS_CODE_SUCCESS) {
                         // save token
-//                        SharedPreferences sharedPref = MyApplication.getAppContext()
-//                                .getSharedPreferences("tokenPref",Context.MODE_PRIVATE);
-//
-//                        SharedPreferences.Editor token = sharedPref.edit();
-//                        token.putString("token",response.body().getResponse().getToken());
-//                        token.commit();
-
+                        token.putString("token",response.body().getResponse().getToken());
+                        token.commit();
                         messLogin.setValue(context.getString(R.string.login_success));
                     } else {
                         messLogin.setValue(context.getString(R.string.error_login));
@@ -90,6 +87,17 @@ public class UserViewModel extends ViewModel {
                     messLogin.setValue(context.getString(R.string.error_network));
             }
         });
+    }
+
+    public static String getPrefToken(){
+         String token = sharedPref.getString("token",null);
+         return token;
+    }
+
+    public static SharedPreferences.Editor setPrefToken(){
+         token.clear();
+         token.apply();
+         return token;
     }
 
     public static void resetPassword(String emailForgot) {
@@ -154,7 +162,6 @@ public class UserViewModel extends ViewModel {
         }
     }
 
-
     public static boolean validateSignUp(String name, String email, String password) {
         if (isEmpty(name)) {
             idMessValidateSignUp = R.string.please_enter_your_name;
@@ -190,6 +197,8 @@ public class UserViewModel extends ViewModel {
         }
         return true;
     }
+
+
 
 
 }

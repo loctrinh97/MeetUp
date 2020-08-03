@@ -116,7 +116,8 @@ public class InforSignupFragment extends Fragment {
                         @Override
                         public void onChanged(String s) {
                             tvMessCreateAccount.setText(viewModel.messCreateAccount.getValue());
-                            if (UserViewModel.messCreateAccount.getValue().equals(R.string.create_account_success)) {
+                            if (UserViewModel.messCreateAccount.getValue().equals(getString(R.string.create_account_success))) {
+//                                Tạo tài khoản thành công
                                 tvMessCreateAccount.setTextColor(getResources().getColor(R.color.colorPrimary));
                             }
                             tvMessCreateAccount.setVisibility(View.VISIBLE);

@@ -1,5 +1,6 @@
 package com.example.meetup.view.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.meetup.R;
 import com.example.meetup.ulti.Define;
+import com.example.meetup.view.home.HomeActivity;
 import com.example.meetup.viewmodel.UserViewModel;
 
 import java.util.Objects;
@@ -28,7 +30,7 @@ import java.util.Objects;
 public class ForgotPasswordFragment extends Fragment implements View.OnClickListener {
     EditText edtEmailForgot;
     Button btnResetPassword;
-    TextView tvMessForgot;
+    TextView tvMessForgot, tvIgnoreResetPw;
     ImageView imgBack;
 
     @Nullable
@@ -38,6 +40,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
         edtEmailForgot = view.findViewById(R.id.edtEmailForgot);
         tvMessForgot= view.findViewById(R.id.tvMessForgot);
         btnResetPassword = view.findViewById(R.id.btnResetPassword);
+        tvIgnoreResetPw = view.findViewById(R.id.tvIgnoreResetPw);
         imgBack = view.findViewById(R.id.imgBack);
         imgBack.setOnClickListener(this);
         btnResetPassword.setOnClickListener(this);
@@ -63,6 +66,10 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        if (v.equals(tvIgnoreResetPw)){
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
+        }
         if (v.equals(imgBack)){
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
