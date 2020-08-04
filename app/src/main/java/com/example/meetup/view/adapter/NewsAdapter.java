@@ -42,7 +42,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         News news = listNews.get(position);
         Glide.with(holder.binding.getRoot())
                 .load(news.getDetailUrl())
-                .override(300,100)
                 .into(holder.binding.thumbnail);
         holder.bind(news);
 
