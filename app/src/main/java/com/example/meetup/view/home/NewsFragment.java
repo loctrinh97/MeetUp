@@ -2,6 +2,8 @@ package com.example.meetup.view.home;
 
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,15 +49,12 @@ public class NewsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    @Nullable Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.news_fragment,container,false);
-        newsViewModel = new ViewModelProvider(getActivity()).get(NewsViewModel.class);
+        newsViewModel = new ViewModelProvider(getParentFragment()).get(NewsViewModel.class);
         recyclerView = binding.recyclerNews;
         setUpRecyclerView();
-
-        
-
         final Observer<List<News>> newsObserver = new Observer<List<News>>() {
             @Override
             public void onChanged(List<News> news) {
@@ -77,16 +76,22 @@ public class NewsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        mDisposable.dispose();
+
     }
 
     private void setUpRecyclerView(){
-
+        newsList = new ArrayList<>();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        news_adapter = new NewsAdapter(newsViewModel.getNewsList());
+        newsList = newsViewModel.getNewsList(10);
+        news_adapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(news_adapter);
-
-
+        news_adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent browerIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(newsList.get(position).getDetailUrl()));
+                startActivity(browerIntent);
+            }
+        });
     }
 }

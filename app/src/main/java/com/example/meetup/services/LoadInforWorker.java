@@ -7,9 +7,16 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.example.meetup.model.News;
 import com.example.meetup.model.NewsResponse;
+import com.example.meetup.repository.ListNewsRepository;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import io.reactivex.Scheduler;
 import retrofit2.Call;
@@ -29,7 +36,10 @@ public class LoadInforWorker extends Worker {
             @Override
             public void onResponse(@NotNull Call<NewsResponse> call, Response<NewsResponse> response) {
                 assert response.body() != null;
-                logResult(response.body());
+                List<News> list = response.body().getResponse().getNews();
+                ListNewsRepository.getInstance().clearList();
+                ListNewsRepository.getInstance().insertNews(list);
+
             }
 
             @Override
@@ -40,7 +50,7 @@ public class LoadInforWorker extends Worker {
         return Result.success();
     }
 
-    public void logResult(NewsResponse newsResponse){
-        Log.d("Test", "logResult: "+newsResponse.toString());
+    public void logResult(String result){
+        Log.d("Test", "logResult: "+result);
     }
 }

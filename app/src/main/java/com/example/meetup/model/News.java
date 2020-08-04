@@ -23,6 +23,7 @@ import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.annotations.NonNull;
+import kotlin.jvm.JvmStatic;
 
 @Entity(tableName = "news")
 public class News {
@@ -49,15 +50,26 @@ public class News {
     @Expose
     @ColumnInfo(name = "feed")
     private String feed;
+    @SerializedName("detail_url")
     @Expose
     @ColumnInfo(name = "detail_url")
     private String detailUrl;
-    public News(){
 
+    public News(){
     }
     @Ignore
     public News(int id, String thumb, String publish_date, String title, String author, String feed,String detail_url){
         this.newId = id;
+        this.author=author;
+        this.title = title;
+        this.thumb = thumb;
+        this.publishDate = publish_date;
+        this.feed = feed;
+        this.detailUrl = detail_url;
+    }
+
+    @Ignore
+    public News( String thumb, String publish_date, String title, String author, String feed,String detail_url){
         this.author=author;
         this.title = title;
         this.thumb = thumb;
@@ -122,25 +134,6 @@ public class News {
         this.title = title;
     }
 
-    @BindingAdapter("profileImage")
-    public static void loadImage(final ImageView view, String imageUrl){
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        view.setImageResource(R.drawable.stock_photo);
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        view.setImageDrawable(resource);
-                        return true;
-                    }
-                })
-                .into(view);
-    }
 
     @NotNull
     @Override

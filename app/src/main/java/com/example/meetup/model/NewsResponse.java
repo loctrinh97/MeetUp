@@ -10,31 +10,33 @@ public class NewsResponse {
     @Expose
     private long status;
 
-    @SerializedName("respone.news")
+    @SerializedName("response")
     @Expose
-    private List<News> newsList;
+    private Response response;
 
-    public void setNewsList(List<News> newsList) {
-        this.newsList = newsList;
+    public void setResponse(Response response) {
+        this.response = response;
     }
 
-    public void setStatus(long status) {
-        this.status = status;
-    }
-
-    public List<News> getNewsList() {
-        return newsList;
-    }
-
-    public long getStatus() {
-        return status;
+    public Response getResponse() {
+        return response;
     }
 
     @Override
     public String toString() {
         return "NewsResponse{" +
                 "status=" + status +
-                ", newsList=" + newsList +
+                ", response=" + response +
                 '}';
     }
+
+    public void setStatus(long status) {
+        this.status = status;
+    }
+
+
+    public long getStatus() {
+        return status;
+    }
+
 }

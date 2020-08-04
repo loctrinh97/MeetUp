@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface NewsService {
-    @GET("/listNews")
+    @GET("listNews")
     Call<NewsResponse> getListNews();
 }

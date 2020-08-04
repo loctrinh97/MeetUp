@@ -20,16 +20,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp">
         <ImageView
             android:scaleType="fitXY"
-            android:id="@+id/thumnail"
+            android:id="@+id/thumbnail"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:profileImage="@{news.thumb}"/>
+            android:layout_height="match_parent" />
 <!--        <ImageView-->
 <!--           android:src="@drawable/round_frame"-->
 <!--            android:layout_width="match_parent"-->
@@ -76,7 +75,7 @@
         android:id="@+id/author"
         android:textColor="@color/color_text_defaut"
         android:textSize="14sp"
-
+        android:layout_marginStart="@dimen/_5dp"
         app:layout_constraintStart_toEndOf="@id/text_boi"
         android:text="@{news.author}"
         android:layout_marginTop="3dp"
@@ -108,7 +107,7 @@
         android:id="@+id/feed"
         android:textColor="@color/color_text_defaut"
         android:textSize="14sp"
-
+        android:layout_marginStart="@dimen/_5dp"
         app:layout_constraintStart_toEndOf="@id/text_tu"
         android:text="@{news.feed}"
         android:layout_marginTop="3dp"

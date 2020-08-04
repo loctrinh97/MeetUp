@@ -15,8 +15,12 @@ import io.reactivex.Flowable;
 @Dao
 public interface NewsDAO {
     @Query("SELECT * from news order by publish_date desc limit :pageSize")
-    Flowable<List<News>> getListNews(int pageSize);
+    List<News> getListNews(int pageSize);
 
+    @Query("SELECT * from news where new_id = :id")
+    News getNews(int id);
+    @Query("Select count(new_id) from news")
+    int getCountColum();
     @Insert
     void insertNews(List<News> news);
 

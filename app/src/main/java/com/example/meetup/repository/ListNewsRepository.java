@@ -24,12 +24,22 @@ public class ListNewsRepository{
 
     public ListNewsRepository(NewsDAO dao){ this.dao = dao;}
 
-    public Flowable<List<News>> getListNews(int pageSize){
+    public List<News> getListNews(int pageSize){
         return dao.getListNews(pageSize);
     };
 
     public void insertNews(List<News> news){
        dao.insertNews(news);
+    }
+    public int getCountColumn(){
+        return dao.getCountColum();
+    }
+    public void clearList(){
+        dao.deleteNews();
+    }
+
+    public News getNews(int id){
+       return dao.getNews(id);
     }
 
 
