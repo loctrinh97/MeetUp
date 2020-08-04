@@ -84,7 +84,7 @@ public class NewsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         newsList = newsViewModel.getNewsList(10);
-        news_adapter = new NewsAdapter(newsList);
+        news_adapter = new NewsAdapter(newsList,getContext());
         recyclerView.setAdapter(news_adapter);
         news_adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
             @Override

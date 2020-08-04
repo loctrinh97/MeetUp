@@ -47,16 +47,12 @@ public class EventsFragment extends Fragment {
         binding.testApi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String imageUrl = "https://znews-photo.zadn.vn/w660/Uploaded/iutmvz/2018_10_18/TT022_zing.jpg";
-                Glide.with(binding.getRoot())
-                        .load(imageUrl)
-                        .into(binding.imageTest);
-                Log.d("Event", "Success ");
-//                Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-//                OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
-//                myBuilder.setConstraints(constraints);
-//                workRequest = myBuilder.build();
-//                WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+
+                Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+                OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
+                myBuilder.setConstraints(constraints);
+                workRequest = myBuilder.build();
+                WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
 //                Log.d("TestDB", "onClick: "+newsViewModel.getNews(1).toString());
             }
         });

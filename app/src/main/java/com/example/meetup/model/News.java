@@ -23,7 +23,6 @@ import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.annotations.NonNull;
-import kotlin.jvm.JvmStatic;
 
 @Entity(tableName = "news")
 public class News {

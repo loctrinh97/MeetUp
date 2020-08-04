@@ -1,5 +1,6 @@
 package com.example.meetup.view.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,10 @@ import io.reactivex.Flowable;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     List<News> listNews;
     public OnItemClickListener listener;
-    public NewsAdapter(List<News> NewsList) {
+    Context context;
+    public NewsAdapter(List<News> NewsList,Context context) {
         this.listNews = NewsList;
+        this.context = context;
     }
 
     @NonNull
@@ -34,15 +37,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemNewsBinding binding = ItemNewsBinding.inflate(layoutInflater, parent, false);
+
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         News news = listNews.get(position);
-        Glide.with(holder.binding.getRoot())
-                .load(news.getDetailUrl())
-                .into(holder.binding.thumbnail);
+        if(news.getThumb()!=null){
+            Glide.with(context)
+                    .load(news.getThumb())
+                    .override(343,200)
+                    .into(holder.binding.thumbnail);
+        }
+
         holder.bind(news);
 
 
@@ -84,4 +92,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
+
 }
