@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.meetup.R;
 import com.example.meetup.view.home.HomeActivity;
+import com.example.meetup.view.registerlogin.login.LoginViewModel;
 
 import java.util.Objects;
 
@@ -43,7 +45,8 @@ public class InforSignupFragment extends Fragment {
         edtPasswordSignup = view.findViewById(R.id.edtPasswordSignup);
         btnSignUpConfirm = view.findViewById(R.id.btnSignUpConfirm);
         tvMessCreateAccount = view.findViewById(R.id.tvMessCreateAccount);
-       // viewModel = new signUpViewModel(getActivity().getApplicationContext());
+        signUpViewModel = new ViewModelProvider(getActivity()).get(SignUpViewModel.class);
+        // viewModel = new signUpViewModel(getActivity().getApplicationContext());
 
         // check unable button when change text
         edtNameSignup.addTextChangedListener(new TextWatcher() {

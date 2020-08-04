@@ -16,10 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.meetup.R;
 import com.example.meetup.view.home.HomeActivity;
 import com.example.meetup.view.registerlogin.resetpassword.ForgotPasswordFragment;
+import com.example.meetup.viewmodel.NewsViewModel;
 
 import java.util.Objects;
 
@@ -40,6 +42,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        loginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
         View view = inflater.inflate(R.layout.fragment_login_infor, container, false);
         tvForgotPassword = view.findViewById(R.id.tvForgotPassword);
         btnLoginConfirm = view.findViewById(R.id.btnLoginConfirm);
@@ -68,6 +71,8 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
                 loginViewModel.checkEnableButtonLogin(edtEmailLogin, edtPasswordLogin, btnLoginConfirm);
             }
         });
+
+
         edtPasswordLogin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

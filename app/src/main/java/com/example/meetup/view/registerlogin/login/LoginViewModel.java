@@ -18,27 +18,19 @@ import com.example.meetup.services.UserService;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 
-import org.jetbrains.annotations.NotNull;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
-    public static MyApplication myApplication;
-    public static UserService mUserService;
-    public static int messValidateLogin;
-    public static Context context;
-    public static MutableLiveData<String> messLogin = new MutableLiveData<>();
-    public static SharedPreferences sharedPref = MyApplication.getAppContext()
-            .getSharedPreferences("tokenPref",Context.MODE_PRIVATE);
-    public static SharedPreferences.Editor token = sharedPref.edit();
+    private UserService mUserService;
+    public int messValidateLogin;
+    public MutableLiveData<String> messLogin = new MutableLiveData<>();
+    public SharedPreferences sharedPref = MyApplication.getAppContext()
+            .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
+    public SharedPreferences.Editor token = sharedPref.edit();
 
-    public LoginViewModel(Context context) {
-        this.context = context;
-    }
-
-    public static void accountLogin(String emailLogin, String passwordLogin) {
+    public void accountLogin(String emailLogin, String passwordLogin) {
         mUserService = ApiUtils.getUserService();
         mUserService.login(emailLogin, passwordLogin).enqueue(new Callback<User>() {
             @Override
@@ -46,38 +38,38 @@ public class LoginViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == Define.STATUS_CODE_SUCCESS) {
                         // save token
-                        token.putString("token",response.body().getResponse().getToken());
+                        token.putString("token", response.body().getResponse().getToken());
                         token.commit();
-                        messLogin.setValue("Đăng nhập thành công");
+                        messLogin.setValue(MyApplication.getAppContext().getString(R.string.login_success));
                     } else {
-                        messLogin.setValue("Sai tài khoản hoặc mật khẩu");
+                        messLogin.setValue(MyApplication.getAppContext().getString(R.string.error_login));
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                messLogin.setValue("Đã xảy ra lỗi");
+                messLogin.setValue(MyApplication.getAppContext().getString(R.string.error));
             }
         });
     }
 
-    public static String getPrefToken(){
-        String token = sharedPref.getString("token",null);
+    public String getPrefToken() {
+        String token = sharedPref.getString("token", null);
         return token;
     }
 
-    public static SharedPreferences.Editor clearPrefToken(){
+    public SharedPreferences.Editor clearPrefToken() {
         token.clear();
         token.apply();
         return token;
     }
 
-    static boolean isEmail(String email) {
+    boolean isEmail(String email) {
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
-    static boolean isPassword(String password) {
+    boolean isPassword(String password) {
         if (password.length() < 6 || password.length() > 16) {
             return true;
         } else {
@@ -85,7 +77,7 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    public static void checkEnableButtonLogin(EditText edtEmail, EditText edtPassword, Button btnLogin) {
+    public void checkEnableButtonLogin(EditText edtEmail, EditText edtPassword, Button btnLogin) {
         if ((edtEmail.getText().length() == 0) || (edtPassword.getText().length() == 0)) {
             btnLogin.setBackgroundResource(R.drawable.ic_btn_disable);
         } else {
@@ -93,7 +85,7 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    public static boolean validateLogin(String email, String password) {
+    public boolean validateLogin(String email, String password) {
         if (!isEmail(email)) {
             messValidateLogin = R.string.please_enter_email;
             return false;

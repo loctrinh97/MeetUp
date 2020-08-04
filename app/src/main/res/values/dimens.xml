@@ -10,4 +10,8 @@
     <dimen name="_21dp">21dp</dimen>
     <dimen name="_15dp">15dp</dimen>
     <dimen name="_16dp">16dp</dimen>
+    <dimen name="_154dp">154dp</dimen>
+    <dimen name="_14sp">14dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
+    <dimen name="_27dp">27dp</dimen>
 </resources>

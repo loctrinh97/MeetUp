@@ -10,7 +10,7 @@
     <string name="account_exist">Tài khoản đã tồn tại</string>
     <string name="error_login">Sai tài khoản hoặc mật khẩu</string>
     <string name="login_success">Đăng nhập thành công</string>
-    <string name="error_network">Đã xảy ra lỗi</string>
+    <string name="error">Đã xảy ra lỗi</string>
     <string name="reset_password">Mật khẩu của bạn đã được cấp lại, vui lòng kiểm tra email</string>
     <string name="email_not_found">Tài khoản chưa đăng kí</string>
     <string name="huongdan">Vui lòng nhập email để nhận hướng dẫn đặt lại mật khẩu</string>
@@ -23,5 +23,6 @@
     <string name="btn_login">ĐĂNG NHẬP</string>
     <string name="tv_dont_have_account">Chưa có tài khoản?</string>
     <string name="tv_sign_up_now">Đăng kí ngay!</string>
+    <string name="end_today">KẾT THÚC HÔM NAY</string>
 
 </resources>

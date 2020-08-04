@@ -48,11 +48,10 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:2.2.5"
     annotationProcessor "android.arch.persistence.room:compiler:2.2.5"
     implementation "androidx.room:room-rxjava2:2.2.5"
+    // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
-// Retrofit
-
-
-
+//card view
+    implementation "androidx.cardview:cardview:1.0.0"
 // JSON Parsing
     implementation 'com.google.code.gson:gson:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -66,6 +65,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
+//  okhttp
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
 
 }

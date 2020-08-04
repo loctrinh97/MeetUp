@@ -1,6 +1,7 @@
 package com.example.meetup.view.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +15,10 @@ import com.google.android.material.tabs.TabLayout;
 
 public class HomeActivity extends AppCompatActivity {
     String token;
+    LoginViewModel loginViewModel;
     ViewPagerAdapter app_adapter;
     ViewPager app_viewPager;
     TabLayout app_tabLayout;
-    LoginViewModel loginViewModel;
     private int[] tabIcons = {
             R.drawable.ic_icon_home,
             R.drawable.ic_icon_located,
@@ -29,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Log.d("test","onCreateHOME");
+        loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         app_adapter = new ViewPagerAdapter(getSupportFragmentManager());
         app_viewPager = findViewById(R.id.app_viewPager);
         app_tabLayout = findViewById(R.id.app_tabLayout);
@@ -36,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         app_adapter.addFrag(new HomeFragment(),"Trang chủ");
         app_adapter.addFrag(new HomeFragment(),"Gần tôi");
         app_adapter.addFrag(new HomeFragment(),"Danh mục");
-        token = LoginViewModel.getPrefToken();
+        token = loginViewModel.getPrefToken();
         if (token == null){
             app_adapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
         } else {
