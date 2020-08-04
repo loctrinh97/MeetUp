@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:text="Trang chủ"
+            android:text="@string/mypage"
             android:textColor="#ffffff"
             android:textSize="@dimen/text_header"
             android:textStyle="bold" />

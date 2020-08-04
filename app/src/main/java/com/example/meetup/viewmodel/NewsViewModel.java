@@ -14,11 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewsViewModel extends ViewModel {
 //    Flowable<List<News>> newsList ;
-    Flowable<List<News>> listNewsRepository;
+    ListNewsRepository repository = ListNewsRepository.getInstance();
+
     List<News> newsList;
+    Flowable<List<News>> newsListRoom;
+
     private  MutableLiveData<List<News>> list;
 
     public MutableLiveData<List<News>> getCurrentList(){
@@ -31,8 +37,10 @@ public class NewsViewModel extends ViewModel {
 
 
     public NewsViewModel(){
-        listNewsRepository = ListNewsRepository.getInstance().getListNews(10);
+
         newsList = new ArrayList<>();
+
+
         //        newsList = ListNewsRepository.getInstance().getListNews(10);
 
     }
@@ -46,6 +54,7 @@ public class NewsViewModel extends ViewModel {
         newsList.add(new News(6,"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQUOtF_mAcIqdSTf10G4YvEsEomVUn0Yelc6A&usqp=CAU","4838383838","Get awesome thing and make it perject","Nguyễn Thanh Tùng","instagram","baomoi.com"));
         newsList.add(new News(7,"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQUOtF_mAcIqdSTf10G4YvEsEomVUn0Yelc6A&usqp=CAU","4838383838","Get awesome thing and make it perject, unbbelievabe","Nguyễn Thanh Tùng","instagram","baomoi.com"));
         newsList.add(new News(8,"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQUOtF_mAcIqdSTf10G4YvEsEomVUn0Yelc6A&usqp=CAU","4838383838","Get awesome thing and make it perject","Nguyễn Thanh Tùng","instagram","baomoi.com"));
+        repository.insertNews(newsList);
         list.setValue(newsList);
     }
 
@@ -53,8 +62,17 @@ public class NewsViewModel extends ViewModel {
         newsList.clear();
         list.setValue(newsList);
     }
+//    public List<News> getNewsList(int pageSize) {
+//        repository.getListNews(pageSize)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({list ->  getNewsList(pageSize)},
+//                        )
+//        repository.getListNews(pageSize);
+//    }
+
+
     public List<News> getNewsList() {
         return newsList;
     }
-
 }

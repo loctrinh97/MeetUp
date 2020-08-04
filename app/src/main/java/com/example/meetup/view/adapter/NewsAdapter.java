@@ -2,15 +2,21 @@ package com.example.meetup.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.meetup.model.News;
 import com.example.meetup.databinding.ItemNewsBinding;
 
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     List<News> listNews;
@@ -30,6 +36,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         News news = listNews.get(position);
         holder.bind(news);
+
+
     }
 
 
@@ -52,5 +60,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             binding.executePendingBindings();
         }
     }
+
 
 }

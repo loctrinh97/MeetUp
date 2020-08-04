@@ -1,7 +1,9 @@
 package com.example.meetup.model;
 
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,25 +12,44 @@ import androidx.room.PrimaryKey;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.example.meetup.R;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.annotations.NonNull;
 
 @Entity(tableName = "news")
 public class News {
+    @SerializedName("id")
+    @Expose
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "new_id")
     private long newId;
+    @SerializedName("thumb_img")
+    @Expose
     @ColumnInfo(name = "thumb")
     private String thumb;
+    @SerializedName("publish_date")
+    @Expose
     @ColumnInfo(name = "publish_date")
     private String publishDate;
+    @Expose
     @ColumnInfo(name = "title")
     private String title;
+    @Expose
     @ColumnInfo(name = "author")
     private String author;
+    @Expose
     @ColumnInfo(name = "feed")
     private String feed;
+    @Expose
     @ColumnInfo(name = "detail_url")
     private String detailUrl;
     public News(){
@@ -102,9 +123,36 @@ public class News {
     }
 
     @BindingAdapter("profileImage")
-    public static void loadImage(final ImageView view, final String imageUrl){
+    public static void loadImage(final ImageView view, String imageUrl){
         Glide.with(view.getContext())
                 .load(imageUrl)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        view.setImageResource(R.drawable.stock_photo);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        view.setImageDrawable(resource);
+                        return true;
+                    }
+                })
                 .into(view);
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "News{" +
+                "newId=" + newId +
+                ", thumb='" + thumb + '\'' +
+                ", publishDate='" + publishDate + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", feed='" + feed + '\'' +
+                ", detailUrl='" + detailUrl + '\'' +
+                '}';
     }
 }
