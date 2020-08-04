@@ -1,7 +1,6 @@
-package com.example.meetup.view.login;
+package com.example.meetup.view.registerlogin;
 
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -12,8 +11,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.meetup.R;
-import com.example.meetup.view.personal.PersonalLoginFragment;
-import com.example.meetup.viewmodel.UserViewModel;
+import com.example.meetup.view.personal.login.PersonalLoginFragment;
+import com.example.meetup.view.registerlogin.login.InforLoginFragment;
+import com.example.meetup.view.registerlogin.register.InforSignupFragment;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.meetup.view.personal;
+package com.example.meetup.view.personal.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.meetup.R;
-import com.example.meetup.view.login.LoginActivity;
+import com.example.meetup.view.registerlogin.LoginActivity;
 
 public class PersonalLoginFragment extends Fragment implements View.OnClickListener {
     Button btnPersonalLogin;

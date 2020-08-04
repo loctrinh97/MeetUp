@@ -1,4 +1,4 @@
-package com.example.meetup.view.personal;
+package com.example.meetup.view.personal.joined;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

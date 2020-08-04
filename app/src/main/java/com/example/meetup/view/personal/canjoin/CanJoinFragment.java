@@ -1,17 +1,15 @@
-package com.example.meetup.view.personal;
+package com.example.meetup.view.personal.canjoin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.meetup.R;
-import com.example.meetup.viewmodel.UserViewModel;
 
 public class CanJoinFragment extends Fragment {
     @Nullable

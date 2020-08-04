@@ -1,4 +1,4 @@
-package com.example.meetup.view.login;
+package com.example.meetup.view.registerlogin.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.meetup.R;
-import com.example.meetup.ulti.Define;
 import com.example.meetup.view.home.HomeActivity;
-import com.example.meetup.viewmodel.UserViewModel;
 
 import java.util.Objects;
 
@@ -27,7 +25,7 @@ public class InforSignupFragment extends Fragment {
     EditText edtNameSignup, edtEmailSignup, edtPasswordSignup;
     TextView tvMessCreateAccount, tvIgnore;
     Button btnSignUpConfirm;
-    UserViewModel viewModel ;
+    SignUpViewModel signUpViewModel ;
 
     public InforSignupFragment() {
         // Required empty public constructor
@@ -45,7 +43,7 @@ public class InforSignupFragment extends Fragment {
         edtPasswordSignup = view.findViewById(R.id.edtPasswordSignup);
         btnSignUpConfirm = view.findViewById(R.id.btnSignUpConfirm);
         tvMessCreateAccount = view.findViewById(R.id.tvMessCreateAccount);
-        viewModel = new UserViewModel(getActivity().getApplicationContext());
+       // viewModel = new signUpViewModel(getActivity().getApplicationContext());
 
         // check unable button when change text
         edtNameSignup.addTextChangedListener(new TextWatcher() {
@@ -59,7 +57,7 @@ public class InforSignupFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                UserViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
+                signUpViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
             }
         });
 
@@ -74,7 +72,7 @@ public class InforSignupFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                UserViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
+                signUpViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
             }
         });
 
@@ -89,7 +87,7 @@ public class InforSignupFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                UserViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
+                signUpViewModel.checkEnableButtonSignUp(edtNameSignup, edtEmailSignup, edtPasswordSignup, btnSignUpConfirm);
             }
         });
 
@@ -107,18 +105,20 @@ public class InforSignupFragment extends Fragment {
                 String nameSignUp = edtNameSignup.getText().toString().trim();
                 String emailSignUp = edtEmailSignup.getText().toString().trim();
                 String passwordSignUp = edtPasswordSignup.getText().toString().trim();
-                if (!UserViewModel.validateSignUp(nameSignUp, emailSignUp, passwordSignUp)) {
-                    Toast.makeText(getActivity(), getString(UserViewModel.idMessValidateSignUp), Toast.LENGTH_SHORT).show();
+                if (!signUpViewModel.validateSignUp(nameSignUp, emailSignUp, passwordSignUp)) {
+                    Toast.makeText(getActivity(), getString(signUpViewModel.idMessValidateSignUp), Toast.LENGTH_SHORT).show();
                 } else {
-                    viewModel.createAccount(nameSignUp, emailSignUp, passwordSignUp);
+                    signUpViewModel.createAccount(nameSignUp, emailSignUp, passwordSignUp);
                     // live data
-                    viewModel.messCreateAccount.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
+                    signUpViewModel.messCreateAccount.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
-                            tvMessCreateAccount.setText(viewModel.messCreateAccount.getValue());
-                            if (UserViewModel.messCreateAccount.getValue().equals(getString(R.string.create_account_success))) {
+                            tvMessCreateAccount.setText(signUpViewModel.messCreateAccount.getValue());
+                            if (signUpViewModel.messCreateAccount.getValue().equals(getString(R.string.create_account_success))) {
 //                                Tạo tài khoản thành công
                                 tvMessCreateAccount.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            } else {
+                                tvMessCreateAccount.setTextColor(getResources().getColor(R.color.color_alert));
                             }
                             tvMessCreateAccount.setVisibility(View.VISIBLE);
                         }

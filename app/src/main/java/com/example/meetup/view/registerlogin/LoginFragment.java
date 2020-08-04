@@ -1,4 +1,4 @@
-package com.example.meetup.view.login;
+package com.example.meetup.view.registerlogin;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +13,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.meetup.R;
-import com.example.meetup.view.personal.PersonalLoginFragment;
+import com.example.meetup.view.personal.login.PersonalLoginFragment;
+import com.example.meetup.view.registerlogin.login.InforLoginFragment;
+import com.example.meetup.view.registerlogin.register.InforSignupFragment;
 
 public class LoginFragment extends Fragment {
     Button btnSignUp;
@@ -63,7 +65,7 @@ public class LoginFragment extends Fragment {
 
 
     private void addFragmentSignupInfor() {
-        fragmentManager = getFragmentManager();
+        fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container2, new InforSignupFragment(), null);
         fragmentTransaction.commit();
@@ -71,7 +73,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void addFragmentLoginInfor() {
-        fragmentManager = getFragmentManager();
+        fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container2, new InforLoginFragment(), "fragmentLoginInfor");
         fragmentTransaction.commit();
