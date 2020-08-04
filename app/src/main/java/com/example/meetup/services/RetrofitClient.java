@@ -1,11 +1,11 @@
-package com.example.meetup.repository;
+package com.example.meetup.services;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserRepository {
+public class RetrofitClient {
 
     private static Retrofit retrofit = null;
 
