@@ -1,7 +1,9 @@
 package com.example.meetup.model;
 
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,33 +12,63 @@ import androidx.room.PrimaryKey;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.example.meetup.R;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.annotations.NonNull;
 
 @Entity(tableName = "news")
 public class News {
+    @SerializedName("id")
+    @Expose
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "new_id")
     private long newId;
+    @SerializedName("thumb_img")
+    @Expose
     @ColumnInfo(name = "thumb")
     private String thumb;
+    @SerializedName("publish_date")
+    @Expose
     @ColumnInfo(name = "publish_date")
     private String publishDate;
+    @Expose
     @ColumnInfo(name = "title")
     private String title;
+    @Expose
     @ColumnInfo(name = "author")
     private String author;
+    @Expose
     @ColumnInfo(name = "feed")
     private String feed;
+    @SerializedName("detail_url")
+    @Expose
     @ColumnInfo(name = "detail_url")
     private String detailUrl;
-    public News(){
 
+    public News(){
     }
     @Ignore
     public News(int id, String thumb, String publish_date, String title, String author, String feed,String detail_url){
         this.newId = id;
+        this.author=author;
+        this.title = title;
+        this.thumb = thumb;
+        this.publishDate = publish_date;
+        this.feed = feed;
+        this.detailUrl = detail_url;
+    }
+
+    @Ignore
+    public News( String thumb, String publish_date, String title, String author, String feed,String detail_url){
         this.author=author;
         this.title = title;
         this.thumb = thumb;
@@ -101,10 +133,18 @@ public class News {
         this.title = title;
     }
 
-    @BindingAdapter("profileImage")
-    public static void loadImage(final ImageView view, final String imageUrl){
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .into(view);
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "News{" +
+                "newId=" + newId +
+                ", thumb='" + thumb + '\'' +
+                ", publishDate='" + publishDate + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", feed='" + feed + '\'' +
+                ", detailUrl='" + detailUrl + '\'' +
+                '}';
     }
 }

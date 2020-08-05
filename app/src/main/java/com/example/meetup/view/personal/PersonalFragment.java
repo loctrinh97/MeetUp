@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
@@ -29,6 +30,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        loginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
         View view = inflater.inflate(R.layout.fragment_personal, container, false);
         viewPager = view.findViewById(R.id.vp_personal);
         tabLayout = view.findViewById(R.id.tl_personal);

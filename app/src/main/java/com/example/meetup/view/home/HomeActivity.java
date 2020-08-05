@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
+import com.example.meetup.view.category.CategoryFragment;
 import com.example.meetup.view.personal.PersonalFragment;
 import com.example.meetup.view.personal.login.PersonalLoginFragment;
 import com.example.meetup.view.registerlogin.login.LoginViewModel;
@@ -16,9 +17,9 @@ import com.google.android.material.tabs.TabLayout;
 public class HomeActivity extends AppCompatActivity {
     String token;
     LoginViewModel loginViewModel;
-    ViewPagerAdapter app_adapter;
-    ViewPager app_viewPager;
-    TabLayout app_tabLayout;
+    ViewPagerAdapter appAdapter;
+    ViewPager appViewPager;
+    TabLayout appTabLayout;
     private int[] tabIcons = {
             R.drawable.ic_icon_home,
             R.drawable.ic_icon_located,
@@ -29,24 +30,23 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Log.d("test","onCreateHOME");
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
-        app_adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        app_viewPager = findViewById(R.id.app_viewPager);
-        app_tabLayout = findViewById(R.id.app_tabLayout);
-        app_tabLayout.setupWithViewPager(app_viewPager);
-        app_adapter.addFrag(new HomeFragment(),"Trang chủ");
-        app_adapter.addFrag(new HomeFragment(),"Gần tôi");
-        app_adapter.addFrag(new HomeFragment(),"Danh mục");
+        appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        appViewPager = findViewById(R.id.app_viewPager);
+        appTabLayout = findViewById(R.id.app_tabLayout);
+        appTabLayout.setupWithViewPager(appViewPager);
+        appAdapter.addFrag(new HomeFragment(),"Trang chủ");
+        appAdapter.addFrag(new HomeFragment(),"Gần tôi");
+        appAdapter.addFrag(new CategoryFragment(),"Danh mục");
         token = loginViewModel.getPrefToken();
         if (token == null){
-            app_adapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
+            appAdapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
         } else {
-            app_adapter.addFrag(new PersonalFragment(),getString(R.string.personal));
+            appAdapter.addFrag(new PersonalFragment(),getString(R.string.personal));
         }
-        app_viewPager.setAdapter(app_adapter);
+        appViewPager.setAdapter(appAdapter);
         setupTabIcons();
-        app_tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        appTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getIcon().setTint(getResources().getColor(R.color.color_common));
@@ -65,33 +65,12 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-
-    @Override
-    protected void onRestart() {
-        Log.d("test","onRestart");
-        super.onRestart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d("test","onResume");
-
-
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("test","onDestroyHOME");
-       // UserViewModel.setPrefToken();
-    }
-
     private void setupTabIcons() {
 
-        app_tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        app_tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        app_tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-        app_tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        appTabLayout.getTabAt(0).setIcon(tabIcons[0]);
+//        app_tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.color_common));
+        appTabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        appTabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        appTabLayout.getTabAt(3).setIcon(tabIcons[3]);
     }
 }

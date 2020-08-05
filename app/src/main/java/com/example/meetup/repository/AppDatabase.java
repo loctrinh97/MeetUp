@@ -10,7 +10,7 @@ import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.dao.NewsDAO;
 import com.example.meetup.model.News;
 
-@Database(entities = {News.class},version = AppDatabase.DATABASE_VERSION )
+@Database(entities = {News.class},version = AppDatabase.DATABASE_VERSION,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase database=null;
     public static final int DATABASE_VERSION = 1;
@@ -23,6 +23,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase getInstance(){
         if(database == null){
             database= Room.databaseBuilder(MyApplication.getAppContext(),AppDatabase.class,DATABASE_NAME)
+                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();
         }
