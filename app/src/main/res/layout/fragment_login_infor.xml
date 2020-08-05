@@ -11,32 +11,29 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imgRectangle"
+                android:id="@+id/ivEmailLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/_10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.275"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.024"
                 app:srcCompat="@drawable/ic_rectangleinput">
 
             </ImageView>
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/ivEmailLogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
-                app:layout_constraintVertical_bias="0.523"
+                android:layout_marginStart="@dimen/_21dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivEmailLogin"
+                app:layout_constraintStart_toStartOf="@+id/ivEmailLogin"
+                app:layout_constraintTop_toTopOf="@+id/ivEmailLogin"
                 app:srcCompat="@drawable/ic_icon_email_filled" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvEmailLogin"
                 android:layout_width="68dp"
                 android:layout_height="17dp"
                 android:layout_marginStart="74dp"
@@ -45,17 +42,15 @@
                 android:textColor="#A8A2B2"
                 android:text="Email"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
-                app:layout_constraintVertical_bias="0.075" />
+                app:layout_constraintStart_toStartOf="@+id/ivEmailLogin"
+                app:layout_constraintTop_toTopOf="@+id/ivEmailLogin" />
 
             <EditText
                 android:id="@+id/edtEmailLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="3dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:focusable="auto"
@@ -64,32 +59,28 @@
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
+                app:layout_constraintStart_toStartOf="@+id/ivEmailLogin"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmailLogin"
          />
             <View
                 android:id="@+id/divider1"
-                android:layout_width="0.5dp"
+                android:layout_width="1dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="12dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle" />
+                app:layout_constraintStart_toStartOf="@+id/ivEmailLogin"
+                app:layout_constraintTop_toTopOf="@+id/ivEmailLogin" />
 
             <!--view 2-->
             <ImageView
-                android:layout_marginTop="65dp"
-                android:id="@+id/imgRectangle3"
+                android:layout_marginTop="@dimen/_15dp"
+                android:id="@+id/ivPasswordLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.275"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivEmailLogin"
                 app:srcCompat="@drawable/ic_rectangleinput">
             </ImageView>
 
@@ -97,10 +88,10 @@
                 android:id="@+id/imgLock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
+                android:layout_marginStart="21dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPasswordLogin"
+                app:layout_constraintStart_toStartOf="@+id/ivPasswordLogin"
+                app:layout_constraintTop_toTopOf="@+id/ivPasswordLogin"
                 app:layout_constraintVertical_bias="0.523"
                 app:srcCompat="@drawable/ic_icon_lock_filled" />
 
@@ -114,51 +105,15 @@
                 android:textColor="#A8A2B2"
                 android:text="Mật khẩu"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
-                app:layout_constraintVertical_bias="0.075" />
-
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/tvMessLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:text="Create account successful !"
-                android:textColor="#A50000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgRectangle3">
-            </TextView>
-
-            <Button
-                android:id="@+id/btnLoginConfirm"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="343:60"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="280dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_btn_disable"
-                android:fontFamily="sans-serif"
-                android:text="ĐĂNG NHẬP"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/ivPasswordLogin"
+                app:layout_constraintTop_toTopOf="@+id/ivPasswordLogin" />
 
             <EditText
-
                 android:id="@+id/edtPasswordLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="3dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:fontFamily="sans-serif"
@@ -166,16 +121,46 @@
                 android:inputType="textPassword"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
-                app:layout_constraintVertical_bias="0.851" />
+                app:layout_constraintStart_toStartOf="@+id/ivPasswordLogin"
+                app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvMessLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="Create account successful !"
+                android:textColor="@color/color_alert"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPasswordLogin">
+            </TextView>
+
+            <Button
+                android:id="@+id/btnLoginConfirm"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="343:60"
+                android:layout_marginTop="184dp"
+                android:background="@drawable/ic_btn_disable"
+                android:fontFamily="sans-serif"
+                android:text="ĐĂNG NHẬP"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPasswordLogin" />
+
+
 
             <TextView
                 android:fontFamily="sans-serif"
                 android:id="@+id/tvIgnoreLogin"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
                 android:textColor="#000000"
@@ -186,26 +171,26 @@
 
             <View
                 android:id="@+id/divider2"
-                android:layout_width="0.5dp"
+                android:layout_width="1dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="12dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3" />
+                app:layout_constraintStart_toStartOf="@+id/ivPasswordLogin"
+                app:layout_constraintTop_toTopOf="@+id/ivPasswordLogin" />
 
             <TextView
                 android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="250dp"
-                android:layout_marginTop="170dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/_15dp"
                 android:text="Quên mật khẩu"
                 android:textColor="#5D20CD"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivPasswordLogin" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,9 @@
-package com.example.meetup.view.login;
+package com.example.meetup.view.registerlogin.login;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.meetup.R;
-import com.example.meetup.ulti.Define;
 import com.example.meetup.view.home.HomeActivity;
-import com.example.meetup.viewmodel.UserViewModel;
+import com.example.meetup.view.registerlogin.resetpassword.ForgotPasswordFragment;
+import com.example.meetup.viewmodel.NewsViewModel;
 
 import java.util.Objects;
 
@@ -30,6 +30,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
     FragmentManager fragmentManager;
     EditText edtEmailLogin, edtPasswordLogin;
     Button btnLoginConfirm;
+    LoginViewModel loginViewModel;
 
 
     public InforLoginFragment() {
@@ -41,6 +42,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        loginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
         View view = inflater.inflate(R.layout.fragment_login_infor, container, false);
         tvForgotPassword = view.findViewById(R.id.tvForgotPassword);
         btnLoginConfirm = view.findViewById(R.id.btnLoginConfirm);
@@ -66,9 +68,10 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void afterTextChanged(Editable s) {
-                UserViewModel.checkEnableButtonLogin(edtEmailLogin, edtPasswordLogin, btnLoginConfirm);
+                loginViewModel.checkEnableButtonLogin(edtEmailLogin, edtPasswordLogin, btnLoginConfirm);
             }
         });
+
 
         edtPasswordLogin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,10 +86,9 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void afterTextChanged(Editable s) {
-                UserViewModel.checkEnableButtonLogin(edtEmailLogin, edtPasswordLogin, btnLoginConfirm);
+                loginViewModel.checkEnableButtonLogin(edtEmailLogin, edtPasswordLogin, btnLoginConfirm);
             }
         });
-
         return view;
     }
 
@@ -99,11 +101,11 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         if (v.equals(tvIgnoreLogin)) {
 
-         Intent intent = new Intent(getContext(),HomeActivity.class);
-         startActivity(intent);
+            Intent intent = new Intent(getContext(), HomeActivity.class);
+            startActivity(intent);
         }
 
-        if (v.equals(tvForgotPassword) ) {
+        if (v.equals(tvForgotPassword)) {
             // chuyen sang man hinh quen mat khau
             fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -112,27 +114,33 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
             fragmentTransaction.commit();
         }
 
-        if (v.equals(btnLoginConfirm) ) {
+        if (v.equals(btnLoginConfirm)) {
+            loginViewModel.messLogin.setValue("");
             String emailLogin = edtEmailLogin.getText().toString().trim();
             String passwordLogin = edtPasswordLogin.getText().toString().trim();
-            if (!UserViewModel.validateLogin(emailLogin, passwordLogin)) {
-                Toast.makeText(getActivity(), UserViewModel.messValidateLogin, Toast.LENGTH_SHORT).show();
+            if (!loginViewModel.validateLogin(emailLogin, passwordLogin)) {
+                Toast.makeText(getActivity(), loginViewModel.messValidateLogin, Toast.LENGTH_SHORT).show();
             } else {
-                UserViewModel.accountLogin(emailLogin, passwordLogin);
-
-                UserViewModel.messLogin.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
+                loginViewModel.accountLogin(emailLogin, passwordLogin);
+                //live data
+                loginViewModel.messLogin.observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
                     @Override
                     public void onChanged(String s) {
-                        tvMessLogin.setText(UserViewModel.messLogin.getValue());
-                        if (UserViewModel.messLogin.getValue().equals(R.string.login_success)) {
+                        tvMessLogin.setText(loginViewModel.messLogin.getValue());
+                        if (loginViewModel.messLogin.getValue().equals(getString(R.string.login_success))) {
                             tvMessLogin.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            Intent intent = new Intent(getActivity(), HomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        } else {
+                            tvMessLogin.setTextColor(getResources().getColor(R.color.color_alert));
                         }
                         tvMessLogin.setVisibility(View.VISIBLE);
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                        startActivity(intent);
                     }
                 });
             }
         }
     }
+
+
 }

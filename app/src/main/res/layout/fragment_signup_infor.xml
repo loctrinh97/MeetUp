@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--    view 1-->
+    <!--    view 1-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <!--view  name-->
             <ImageView
-                android:id="@+id/imgRectangle"
+                android:id="@+id/ivName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/_10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.275"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.024"
                 app:srcCompat="@drawable/ic_rectangleinput">
 
             </ImageView>
@@ -30,11 +30,10 @@
                 android:id="@+id/imgProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
-                app:layout_constraintVertical_bias="0.523"
+                android:layout_marginStart="@dimen/_21dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivName"
+                app:layout_constraintStart_toStartOf="@+id/ivName"
+                app:layout_constraintTop_toTopOf="@+id/ivName"
                 app:srcCompat="@drawable/ic_icon_profile_filled" />
 
             <TextView
@@ -44,13 +43,11 @@
                 android:layout_marginStart="74dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif"
-                android:textColor="#A8A2B2"
                 android:text="Họ và tên"
+                android:textColor="#A8A2B2"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
-                app:layout_constraintVertical_bias="0.075" />
+                app:layout_constraintStart_toStartOf="@+id/ivName"
+                app:layout_constraintTop_toTopOf="@+id/ivName" />
 
             <EditText
                 android:id="@+id/edtNameSignup"
@@ -64,37 +61,49 @@
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle"
-                app:layout_constraintVertical_bias="0.851" />
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="@+id/ivName"
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+ />
 
-            <!--view 2-->
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="@+id/ivName"
+                app:layout_constraintTop_toTopOf="@+id/ivName" />
+
+
+
+
+<!--            view email-->
+
             <ImageView
-                android:layout_marginTop="40dp"
-                android:id="@+id/imgRectangle2"
+                android:id="@+id/ivEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.275"
+                app:layout_constraintTop_toBottomOf="@id/ivName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_15dp"
                 app:srcCompat="@drawable/ic_rectangleinput">
 
             </ImageView>
+
 
             <ImageView
                 android:id="@+id/imgEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle2"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle2"
-                app:layout_constraintVertical_bias="0.523"
+                android:layout_marginStart="@dimen/_21dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivEmail"
+                app:layout_constraintStart_toStartOf="@+id/ivEmail"
+                app:layout_constraintTop_toTopOf="@+id/ivEmail"
                 app:srcCompat="@drawable/ic_icon_email_filled" />
+
 
             <TextView
                 android:id="@+id/tvEmail"
@@ -103,13 +112,12 @@
                 android:layout_marginStart="74dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif"
-                android:textColor="#A8A2B2"
                 android:text="Email"
+                android:textColor="#A8A2B2"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle2"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle2"
-                app:layout_constraintVertical_bias="0.075" />
+                app:layout_constraintStart_toStartOf="@+id/ivEmail"
+                app:layout_constraintTop_toTopOf="@+id/ivEmail" />
+
 
             <EditText
                 android:id="@+id/edtEmailSignup"
@@ -124,36 +132,55 @@
                 android:inputType="textEmailAddress"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle2"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle2"
-                app:layout_constraintVertical_bias="0.851" />
-            <!--    view 3-->
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="@+id/ivEmail"
+                app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="@+id/ivEmail"
+                app:layout_constraintTop_toTopOf="@+id/ivEmail" />
+
+
+
+<!--            view password-->
+
+
             <ImageView
-                android:layout_marginTop="120dp"
-                android:id="@+id/imgRectangle3"
+                android:id="@+id/ivPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/_15dp"
+                app:layout_constraintTop_toBottomOf="@id/ivEmail"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.275"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
                 app:srcCompat="@drawable/ic_rectangleinput">
-
             </ImageView>
 
             <ImageView
                 android:id="@+id/imgLock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
-                app:layout_constraintVertical_bias="0.523"
+                android:layout_marginStart="21dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPassword"
+                app:layout_constraintStart_toStartOf="@+id/ivPassword"
+                app:layout_constraintTop_toTopOf="@+id/ivPassword"
                 app:srcCompat="@drawable/ic_icon_lock_filled" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="12dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toStartOf="@+id/ivPassword"
+                app:layout_constraintTop_toTopOf="@+id/ivPassword" />
 
             <TextView
                 android:id="@+id/tvPassword"
@@ -162,16 +189,13 @@
                 android:layout_marginStart="74dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif"
-                android:textColor="#A8A2B2"
                 android:text="Mật khẩu"
+                android:textColor="#A8A2B2"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
-                app:layout_constraintVertical_bias="0.075" />
+                app:layout_constraintStart_toStartOf="@+id/ivPassword"
+                app:layout_constraintTop_toTopOf="@+id/ivPassword" />
 
             <EditText
-
                 android:id="@+id/edtPasswordSignup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,85 +208,62 @@
                 android:inputType="textPassword"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgRectangle3"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3"
-                app:layout_constraintVertical_bias="0.851" />
+                android:layout_marginTop="3dp"
+                app:layout_constraintTop_toBottomOf="@id/tvPassword"
+                app:layout_constraintStart_toStartOf="@+id/ivPassword"
+
+    />
+
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tvMessCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="70dp"
                 android:gravity="center"
-                android:textSize="14sp"
                 android:text="Create account successful !"
-                android:textColor="#A50000"
+                android:textColor="@color/color_alert"
+                android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgRectangle3">
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@id/ivPassword"></TextView>
+
+
+
 
             <Button
                 android:id="@+id/btnSignUpConfirm"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="343:60"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="280dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/ic_btn_disable"
                 android:fontFamily="sans-serif"
                 android:text="ĐĂNG KÝ"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
+                android:layout_marginTop="106dp"
+                app:layout_constraintDimensionRatio="343:60"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/ivPassword"/>
 
             <TextView
-                android:fontFamily="sans-serif"
                 android:id="@+id/tvIgnore"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
-                android:textSize="16sp"
-                android:textColor="#000000"
+                android:fontFamily="sans-serif"
                 android:text="Bỏ qua"
+                android:textColor="#000000"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnSignUpConfirm" />
 
-            <View
-                android:id="@+id/divider1"
-                android:layout_width="0.5dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="12dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle" />
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="0.5dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="12dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle2"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle2" />
 
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="0.5dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="12dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintStart_toStartOf="@+id/imgRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/imgRectangle3" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

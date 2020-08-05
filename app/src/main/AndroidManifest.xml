@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".view.home.HomeActivity" />
-        <activity android:name=".view.login.LoginActivity"
+        <activity android:name=".view.registerlogin.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".view.home.SplashActivity">
 

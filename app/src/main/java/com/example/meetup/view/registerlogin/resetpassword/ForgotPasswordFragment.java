@@ -1,5 +1,6 @@
-package com.example.meetup.view.login;
+package com.example.meetup.view.registerlogin.resetpassword;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,27 +19,30 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.meetup.R;
-import com.example.meetup.ulti.Define;
-import com.example.meetup.viewmodel.UserViewModel;
-
-import java.util.Objects;
+import com.example.meetup.view.home.HomeActivity;
+import com.example.meetup.view.registerlogin.LoginFragment;
+import com.example.meetup.view.registerlogin.login.LoginViewModel;
 
 public class ForgotPasswordFragment extends Fragment implements View.OnClickListener {
     EditText edtEmailForgot;
     Button btnResetPassword;
-    TextView tvMessForgot;
+    TextView tvMessForgot, tvIgnoreResetPw;
     ImageView imgBack;
+    ForgotPasswordViewModel forgotPasswordViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_forgot_password,container,false);
+        View view = inflater.inflate(R.layout.fragment_forgot_password, container, false);
         edtEmailForgot = view.findViewById(R.id.edtEmailForgot);
-        tvMessForgot= view.findViewById(R.id.tvMessForgot);
+        tvMessForgot = view.findViewById(R.id.tvMessForgot);
         btnResetPassword = view.findViewById(R.id.btnResetPassword);
+        tvIgnoreResetPw = view.findViewById(R.id.tvIgnoreResetPw);
         imgBack = view.findViewById(R.id.imgBack);
+        forgotPasswordViewModel = new ViewModelProvider(getActivity()).get(ForgotPasswordViewModel.class);
         imgBack.setOnClickListener(this);
         btnResetPassword.setOnClickListener(this);
         edtEmailForgot.addTextChangedListener(new TextWatcher() {
@@ -54,7 +58,7 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                UserViewModel.checkEnableButtonForgotPw(edtEmailForgot,btnResetPassword);
+                forgotPasswordViewModel.checkEnableButtonForgotPw(edtEmailForgot, btnResetPassword);
             }
         });
         return view;
@@ -63,24 +67,28 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v.equals(imgBack)){
+        if (v.equals(tvIgnoreResetPw)) {
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
+        }
+        if (v.equals(imgBack)) {
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new LoginFragment(), null);
             fragmentTransaction.commit();
         }
-        if (v.equals(btnResetPassword)){
+        if (v.equals(btnResetPassword)) {
             String emailForgot = edtEmailForgot.getText().toString().trim();
-            if (!UserViewModel.validateForgotPassword(emailForgot)){
-                Toast.makeText(getActivity(), UserViewModel.messValidateForgotPw, Toast.LENGTH_SHORT).show();
+            if (!forgotPasswordViewModel.validateForgotPassword(emailForgot)) {
+                Toast.makeText(getActivity(), forgotPasswordViewModel.messValidateForgotPw, Toast.LENGTH_SHORT).show();
             } else {
-                UserViewModel.resetPassword(emailForgot);
+                forgotPasswordViewModel.resetPassword(emailForgot);
 
-                UserViewModel.messResetPassword.observe(getViewLifecycleOwner(), new Observer<String>() {
+                forgotPasswordViewModel.messResetPassword.observe(getViewLifecycleOwner(), new Observer<String>() {
                     @Override
                     public void onChanged(String s) {
-                        tvMessForgot.setText(UserViewModel.messResetPassword.getValue());
-                        if (UserViewModel.messResetPassword.getValue().equals(R.string.login_success)) {
+                        tvMessForgot.setText(forgotPasswordViewModel.messResetPassword.getValue());
+                        if (forgotPasswordViewModel.messResetPassword.getValue().equals(R.string.login_success)) {
                             tvMessForgot.setTextColor(getResources().getColor(R.color.colorPrimary));
                         }
                         tvMessForgot.setVisibility(View.VISIBLE);

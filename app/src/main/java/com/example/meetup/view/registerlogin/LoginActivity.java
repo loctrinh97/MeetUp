@@ -1,14 +1,19 @@
-package com.example.meetup.view.login;
+package com.example.meetup.view.registerlogin;
 
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.meetup.R;
+import com.example.meetup.view.personal.login.PersonalLoginFragment;
+import com.example.meetup.view.registerlogin.login.InforLoginFragment;
+import com.example.meetup.view.registerlogin.register.InforSignupFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,9 +22,22 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("test","onCreateLOGIN");
+        // hide notification bar
+        requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_login);
         addFragmentLogin();
-        addFragmentSignupInfor();
+   //     addFragmentSignupInfor();
+
+        if (PersonalLoginFragment.personalLogin){
+            addFragmentLoginInfor();
+        }else {
+            addFragmentSignupInfor();
+        }
+
     }
 
     @Override
@@ -35,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.d("test","onDestroyLOGIN");
+        //UserViewModel.setPrefToken();
         super.onDestroy();
     }
 
@@ -50,6 +70,12 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container2, new InforSignupFragment(), null);
         fragmentTransaction.commit();
+    }
 
+    private void addFragmentLoginInfor(){
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container2, new InforLoginFragment(), null);
+        fragmentTransaction.commit();
     }
 }

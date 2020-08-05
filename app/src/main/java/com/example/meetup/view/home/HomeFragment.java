@@ -30,8 +30,8 @@ public class HomeFragment extends BaseFragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewpager_home);
         adapter_home = new ViewPagerAdapter(getChildFragmentManager());
-        adapter_home.addFrag(new NewsFragment(),"Tin tức");
-        adapter_home.addFrag(new EventsFragment(),"Sự kiện");
+        adapter_home.addFrag(new NewsFragment(),"TIN TỨC");
+        adapter_home.addFrag(new EventsFragment(),"SỰ KIỆN");
         viewpager_home.setAdapter(adapter_home);
         return view;
     }

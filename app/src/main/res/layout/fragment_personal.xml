@@ -1,60 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground">
-
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/header"
-        app:layout_constraintDimensionRatio="0.66"
+        android:id="@+id/ivHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/background"
+        app:layout_constraintDimensionRatio="0.66"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/background">
-    </ImageView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:text="@string/home"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/header"
-        app:layout_constraintStart_toStartOf="@id/header"
-        android:layout_marginTop="@dimen/_20dp"
-        android:layout_marginStart="@dimen/_16dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_16dp"
+        android:layout_marginTop="@dimen/_20dp"
+        android:text="@string/personal"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/ivHeader"
+        app:layout_constraintTop_toTopOf="@id/ivHeader" />
+
+    <ImageView
+        android:id="@+id/ivLogout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_logout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_20dp"
+        android:layout_marginRight="@dimen/_20dp">
+    </ImageView>
+
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_athome"
+        android:id="@+id/vp_personal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@id/tl_personal" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/tl_personal"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintTop_toBottomOf="@id/ivHeader"
         app:tabIndicator="@drawable/botron_indicator"
         app:tabIndicatorColor="@color/color_common"
         app:tabSelectedTextColor="@color/color_common"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         app:tabTextColor="@color/color_text_defaut">
-
 
     </com.google.android.material.tabs.TabLayout>
 

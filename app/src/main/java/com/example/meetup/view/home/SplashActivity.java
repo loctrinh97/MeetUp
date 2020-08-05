@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.meetup.R;
-import com.example.meetup.view.login.LoginActivity;
+import com.example.meetup.view.registerlogin.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -37,7 +37,7 @@ private Handler delay = new Handler();
                     ignored.printStackTrace();
                 }
             }
-        },2000);
+        },1000);
     }
 
 
