@@ -40,6 +40,7 @@ public class PersonalLoginFragment extends Fragment implements View.OnClickListe
         if (v == tvSignUpNow){
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
+            personalLogin = false;
         }
     }
 }

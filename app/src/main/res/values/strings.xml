@@ -30,4 +30,14 @@
     <string name="mypage">Trang chủ</string>
     <string name="category">Danh mục</string>
     <string name="search"> Tìm kiếm</string>
+    <string name="login">ĐĂNG NHẬP</string>
+    <string name="_time">Thời gian</string>
+    <string name="address">Địa điểm</string>
+    <string name="amount">Số lượng</string>
+    <string name="topic">Chủ đề</string>
+    <string name="contact">Liên hệ</string>
+    <string name="event_description">Mô tả sự kiện</string>
+    <string name="event_near">Sự kiện quanh đây</string>
+    <string name="join">SẼ THAM GIA</string>
+    <string name="joined">ĐÃ THAM GIA</string>
 </resources>
