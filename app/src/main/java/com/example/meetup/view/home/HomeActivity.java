@@ -1,15 +1,23 @@
 package com.example.meetup.view.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
+import com.example.meetup.view.category.CategoryFragment;
+import com.example.meetup.view.nearme.NearMeFragment;
+import com.example.meetup.view.personal.PersonalFragment;
+import com.example.meetup.view.personal.login.PersonalLoginFragment;
+import com.example.meetup.view.registerlogin.login.LoginViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeActivity extends AppCompatActivity {
+    String token;
+    LoginViewModel loginViewModel;
     ViewPagerAdapter appAdapter;
     ViewPager appViewPager;
     TabLayout appTabLayout;
@@ -23,14 +31,20 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         appViewPager = findViewById(R.id.app_viewPager);
         appTabLayout = findViewById(R.id.app_tabLayout);
         appTabLayout.setupWithViewPager(appViewPager);
         appAdapter.addFrag(new HomeFragment(),"Trang chủ");
-        appAdapter.addFrag(new HomeFragment(),"Gần tôi");
-        appAdapter.addFrag(new HomeFragment(),"Danh mục");
-        appAdapter.addFrag(new HomeFragment(),"Cá nhân");
+        appAdapter.addFrag(new NearMeFragment(),"Gần tôi");
+        appAdapter.addFrag(new CategoryFragment(),"Danh mục");
+        token = loginViewModel.getPrefToken();
+        if (token == null){
+            appAdapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
+        } else {
+            appAdapter.addFrag(new PersonalFragment(),getString(R.string.personal));
+        }
         appViewPager.setAdapter(appAdapter);
         setupTabIcons();
         appTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

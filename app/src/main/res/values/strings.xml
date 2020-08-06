@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MeetUp</string>
+    <string name="app_name">Meet Up</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="please_enter_your_name">Vui lòng nhập tên của bạn </string>
@@ -10,11 +10,41 @@
     <string name="account_exist">Tài khoản đã tồn tại</string>
     <string name="error_login">Sai tài khoản hoặc mật khẩu</string>
     <string name="login_success">Đăng nhập thành công</string>
-    <string name="error_network">Đã xảy ra lỗi</string>
+    <string name="error">Đã xảy ra lỗi</string>
     <string name="reset_password">Mật khẩu của bạn đã được cấp lại, vui lòng kiểm tra email</string>
     <string name="email_not_found">Tài khoản chưa đăng kí</string>
+    <string name="huongdan">Vui lòng nhập email để nhận hướng dẫn đặt lại mật khẩu</string>
+    <string name="personal">Cá nhân</string>
+    <string name="home">Trang chủ</string>
+    <string name="can_join">CÓ THỂ THAM GIA</string>
+    <string name="tv_personal_login_first">Bạn cần phải đăng nhập trước</string>
+    <string name="tv_personal_login_detail">Vui lòng đăng nhập để quản lý sự kiện của bạn</string>
+    <string name="btn_login">ĐĂNG NHẬP</string>
+    <string name="tv_dont_have_account">Chưa có tài khoản?</string>
+    <string name="tv_sign_up_now">Đăng kí ngay!</string>
+    <string name="end_today">KẾT THÚC HÔM NAY</string>
     <string name="_cause">Bởi </string>
     <string name="todo">TODO</string>
     <string name="_from">Từ </string>
     <string name="mypage">Trang chủ</string>
+    <string name="category">Danh mục</string>
+    <string name="search"> Tìm kiếm</string>
+    <string name="login">ĐĂNG NHẬP</string>
+    <string name="_time">Thời gian</string>
+    <string name="address">Địa điểm</string>
+    <string name="amount">Số lượng</string>
+    <string name="topic">Chủ đề</string>
+    <string name="contact">Liên hệ</string>
+    <string name="event_description">Mô tả sự kiện</string>
+    <string name="event_near">Sự kiện quanh đây</string>
+    <string name="join">SẼ THAM GIA</string>
+    <string name="joined">ĐÃ THAM GIA</string>
+    <string name="you_must_login">Bạn phải đăng nhập để sử dụng chức năng này.</string>
+    <string name="login_lowercase">Đăng nhập</string>
+    <string name="join_lowercase">Tham gia</string>
+    <string name="can_join_lowercase">Có thể tham gia</string>
+    <string name="not_join">Không tham gia</string>
+    <string name="near_me">Gần tôi</string>
+    <string name="google_map_key">AIzaSyDCRFaHK-Az5QNdVcw2fOMfAf8sEhz95Jo</string>
+
 </resources>

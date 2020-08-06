@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/ivHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        app:layout_constraintDimensionRatio="0.66"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_16dp"
+        android:layout_marginTop="@dimen/_20dp"
+        android:text="@string/near_me"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/ivHeader"
+        app:layout_constraintTop_toTopOf="@id/ivHeader" />
+
+
+<!--    <com.google.android.gms.maps.MapView-->
+<!--        android:id="@+id/map"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:layout_marginTop="@dimen/_40dp"-->
+<!--        />-->
+
+    <ImageView
+        android:id="@+id/ivNearBackground"
+        android:layout_marginHorizontal="@dimen/_16dp"
+        android:background="@drawable/ic_item_event_near_bg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/ivNearImg"
+        android:layout_width="140dp"
+        android:scaleType="centerCrop"
+        android:layout_height="@dimen/_0dp"
+        android:background="@drawable/stock2"
+        app:layout_constraintTop_toTopOf="@id/ivNearBackground"
+        app:layout_constraintStart_toStartOf="@id/ivNearBackground"
+        app:layout_constraintBottom_toBottomOf="@id/ivNearBackground"/>
+
+    <ImageView
+        android:id="@+id/ivNearCalender"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/ivNearImg"
+        app:layout_constraintTop_toTopOf="@id/ivNearBackground"
+        android:background="@drawable/ic_calender"
+        android:layout_marginTop="@dimen/_14dp"
+        android:layout_marginStart="@dimen/_15dp"/>
+
+    <TextView
+        android:id="@+id/tvNearTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thứ 4,2019/12/11"
+        android:textColor="#5D20CD"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/ivNearBackground"
+        app:layout_constraintStart_toEndOf="@id/ivNearCalender"
+        android:layout_marginTop="@dimen/_13dp"
+        android:layout_marginStart="@dimen/_7dp"/>
+
+    <TextView
+        android:id="@+id/tvNearAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40 sẽ tham gia"
+        android:textColor="#5D20CD"
+        app:layout_constraintTop_toBottomOf="@id/tvNearTime"
+        app:layout_constraintStart_toStartOf="@id/tvNearTime"
+        android:layout_marginTop="@dimen/_2dp"/>
+
+    <TextView
+        android:id="@+id/tvNearTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="UK ports ‘preparing to host EU customs checks’"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/ivNearCalender"
+        app:layout_constraintTop_toBottomOf="@id/tvNearAmount"
+        app:layout_constraintEnd_toEndOf="@id/ivNearBackground"
+        android:layout_marginTop="@dimen/_6dp"
+        android:layout_marginEnd="@dimen/_17dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

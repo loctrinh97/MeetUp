@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_dialog_background">
+
+    <ImageView
+        android:id="@+id/ivDialogJoin"
+        android:layout_width="0dp"
+        android:layout_height="152dp"
+        android:background="@drawable/ic_dialog_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivDialogLine"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_line"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogJoin"
+        app:layout_constraintStart_toStartOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogJoin" />
+
+    <ImageView
+        android:id="@+id/ivDialogLine2"
+        android:layout_width="@dimen/_0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_line"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogJoin"
+        app:layout_constraintStart_toStartOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogCanJoin" />
+
+    <ImageView
+        android:id="@+id/ivTickJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_16dp"
+        android:background="@drawable/ic_tick"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toTopOf="@id/ivDialogJoin" />
+
+    <ImageView
+        android:id="@+id/ivTickCanJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_16dp"
+        android:background="@drawable/ic_tick"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toBottomOf="@id/ivDialogLine" />
+
+    <ImageView
+        android:id="@+id/ivTickNotJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_16dp"
+        android:background="@drawable/ic_tick"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toBottomOf="@id/ivDialogLine2" />
+
+    <TextView
+        android:id="@+id/tvDialogCanJoin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_14dp"
+        android:paddingStart="@dimen/_16dp"
+        android:text="@string/can_join_lowercase"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toBottomOf="@id/ivDialogLine" />
+
+    <TextView
+        android:id="@+id/tvDialogJoin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_14dp"
+        android:paddingStart="@dimen/_16dp"
+        android:text="@string/join_lowercase"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toTopOf="@id/ivDialogJoin" />
+
+    <TextView
+        android:id="@+id/tvDialogNotJoin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_14dp"
+        android:paddingStart="@dimen/_16dp"
+        android:text="@string/not_join"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ivDialogJoin"
+        app:layout_constraintTop_toBottomOf="@id/ivDialogLine2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

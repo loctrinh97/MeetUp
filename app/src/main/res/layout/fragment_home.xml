@@ -6,26 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <FrameLayout
+
+    <ImageView
         android:id="@+id/header"
+        app:layout_constraintDimensionRatio="0.66"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/background">
+    </ImageView>
 
-        <TextView
+    <TextView
+        android:text="@string/home"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/header"
+        app:layout_constraintStart_toStartOf="@id/header"
+        android:layout_marginTop="@dimen/_20dp"
+        android:layout_marginStart="@dimen/_16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/_20dp"
-            android:text="@string/mypage"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/text_header"
-            android:textStyle="bold" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_athome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
-    </FrameLayout>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -38,23 +53,5 @@
         app:tabIndicatorColor="@color/color_common"
         app:tabSelectedTextColor="@color/color_common"
         app:tabTextColor="@color/color_text_defaut">
-        <com.google.android.material.tabs.TabItem
-            android:text="TIN TUC"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
     </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_athome"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       android:layout_marginTop="150dp"
-        android:layout_marginBottom="@dimen/_60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-         />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
