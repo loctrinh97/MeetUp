@@ -49,7 +49,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    compile ("com.github.bumptech.glide:recyclerview-integration:4.11.0") {
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.11.0") {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
@@ -75,6 +75,9 @@ dependencies {
 
 //  okhttp
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+//google services
+    implementation 'com.google.android.gms:play-services:12.0.1'
 
 }
 repositories {
