@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ic_dialog_background">
+<ImageView
+    android:id="@+id/ivDialogBackground"
+    android:layout_marginHorizontal="@dimen/_16dp"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_dialog_img"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="150dp"/>
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/you_must_login"
+        android:textSize="@dimen/_20sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/ivDialogBackground"
+        app:layout_constraintStart_toStartOf="@id/ivDialogBackground"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogBackground"
+        android:layout_marginHorizontal="@dimen/_60dp"
+        android:layout_marginTop="@dimen/_15dp"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/ivDialogLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_line"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
+        app:layout_constraintStart_toStartOf="@id/ivDialogBackground"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogBackground"
+        android:layout_marginTop="@dimen/_14dp"/>
+
+    <TextView
+        android:id="@+id/tvDialogLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_lowercase"
+        android:textColor="#5D20CD"
+        android:textSize="@dimen/_16sp"
+        android:layout_marginTop="@dimen/_14dp"
+        app:layout_constraintTop_toBottomOf="@id/ivDialogLine"
+        app:layout_constraintStart_toStartOf="@id/ivDialogBackground"
+        app:layout_constraintEnd_toEndOf="@id/ivDialogBackground"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

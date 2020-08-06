@@ -17,7 +17,6 @@
     <string name="personal">Cá nhân</string>
     <string name="home">Trang chủ</string>
     <string name="can_join">CÓ THỂ THAM GIA</string>
-    <string name="joined">ĐÃ THAM GIA</string>
     <string name="tv_personal_login_first">Bạn cần phải đăng nhập trước</string>
     <string name="tv_personal_login_detail">Vui lòng đăng nhập để quản lý sự kiện của bạn</string>
     <string name="btn_login">ĐĂNG NHẬP</string>
@@ -40,4 +39,12 @@
     <string name="event_near">Sự kiện quanh đây</string>
     <string name="join">SẼ THAM GIA</string>
     <string name="joined">ĐÃ THAM GIA</string>
+    <string name="you_must_login">Bạn phải đăng nhập để sử dụng chức năng này.</string>
+    <string name="login_lowercase">Đăng nhập</string>
+    <string name="join_lowercase">Tham gia</string>
+    <string name="can_join_lowercase">Có thể tham gia</string>
+    <string name="not_join">Không tham gia</string>
+    <string name="near_me">Gần tôi</string>
+    <string name="google_map_key">AIzaSyDCRFaHK-Az5QNdVcw2fOMfAf8sEhz95Jo</string>
+
 </resources>

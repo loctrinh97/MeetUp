@@ -9,6 +9,7 @@ import android.util.Log;
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.example.meetup.view.category.CategoryFragment;
+import com.example.meetup.view.nearme.NearMeFragment;
 import com.example.meetup.view.personal.PersonalFragment;
 import com.example.meetup.view.personal.login.PersonalLoginFragment;
 import com.example.meetup.view.registerlogin.login.LoginViewModel;
@@ -36,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         appTabLayout = findViewById(R.id.app_tabLayout);
         appTabLayout.setupWithViewPager(appViewPager);
         appAdapter.addFrag(new HomeFragment(),"Trang chủ");
-        appAdapter.addFrag(new HomeFragment(),"Gần tôi");
+        appAdapter.addFrag(new NearMeFragment(),"Gần tôi");
         appAdapter.addFrag(new CategoryFragment(),"Danh mục");
         token = loginViewModel.getPrefToken();
         if (token == null){
