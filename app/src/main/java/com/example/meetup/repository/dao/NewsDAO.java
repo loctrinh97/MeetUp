@@ -1,20 +1,16 @@
-package com.example.meetup.dao;
+package com.example.meetup.repository.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
-import com.example.meetup.model.News;
+import com.example.meetup.model.dataLocal.News;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.Flowable;
 @Dao
 public interface NewsDAO {
-    @Query("SELECT * from news order by publish_date desc limit :pageSize")
+    @Query("SELECT * from news limit :pageSize")
     List<News> getListNews(int pageSize);
 
     @Query("SELECT * from news where new_id = :id")

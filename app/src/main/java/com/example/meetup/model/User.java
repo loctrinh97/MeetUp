@@ -1,5 +1,6 @@
 package com.example.meetup.model;
 
+import com.example.meetup.model.response.UserResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

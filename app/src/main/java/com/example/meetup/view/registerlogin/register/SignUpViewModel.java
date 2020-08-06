@@ -20,12 +20,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpViewModel extends ViewModel {
+    ApiUtils apiUtils = new ApiUtils();
     public UserService mUserService;
     public int idMessValidateSignUp;
     public MutableLiveData<String> messCreateAccount = new MutableLiveData<>();
 
     public void createAccount(String name, String email, String password) {
-        mUserService = ApiUtils.getUserService();
+        mUserService = apiUtils.getUserService();
         mUserService.signUp(name, email, password).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

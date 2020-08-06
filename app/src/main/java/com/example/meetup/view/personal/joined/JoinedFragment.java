@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetup.R;
-import com.example.meetup.model.News;
+import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.view.adapter.JoinedAdapter;
 
 import java.util.ArrayList;

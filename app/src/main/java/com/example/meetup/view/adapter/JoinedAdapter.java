@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetup.R;
-import com.example.meetup.model.News;
+import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.view.personal.joined.JoinedFragment;
 
 import java.util.ArrayList;

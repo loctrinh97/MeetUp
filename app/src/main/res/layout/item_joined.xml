@@ -121,7 +121,7 @@
 <data>
 <variable
     name="joined"
-    type="com.example.meetup.model.News" />
+    type="com.example.meetup.model.dataLocal.News" />
 
 </data>
 </layout>

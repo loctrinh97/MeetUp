@@ -4,12 +4,10 @@
     <dimen name="_60dp">60dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <dimen name="text_header">24sp</dimen>
-    <dimen name="_20dp">20dp</dimen>
     <dimen name="_30dp">30dp</dimen>
     <dimen name="_12dp">12dp</dimen>
     <dimen name="_21dp">21dp</dimen>
     <dimen name="_15dp">15dp</dimen>
-    <dimen name="_16dp">16dp</dimen>
     <dimen name="_154dp">154dp</dimen>
     <dimen name="_14sp">14dp</dimen>
     <dimen name="_5dp">5dp</dimen>
@@ -30,4 +28,7 @@
     <dimen name="_6dp">6dp</dimen>
     <dimen name="_141dp">141dp</dimen>
     <dimen name="_40dp">40dp</dimen>
+    <dimen name="_3dp">3dp</dimen>
+    <dimen name="_20dp">20dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
 </resources>

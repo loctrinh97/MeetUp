@@ -17,12 +17,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ForgotPasswordViewModel extends ViewModel {
+    ApiUtils apiUtils = new ApiUtils();
     public  UserService mUserService;
     public  int messValidateForgotPw;
     public  MutableLiveData<String> messResetPassword = new MutableLiveData<>();
 
     public  void resetPassword(String emailForgot) {
-        mUserService = ApiUtils.getUserService();
+        mUserService = apiUtils.getUserService();
         mUserService.resetPassword(emailForgot).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

@@ -1,4 +1,4 @@
-package com.example.meetup.model;
+package com.example.meetup.model.dataLocal;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;

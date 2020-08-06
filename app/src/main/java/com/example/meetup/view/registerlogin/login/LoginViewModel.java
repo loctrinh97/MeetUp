@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
+    ApiUtils apiUtils = new ApiUtils();
     private UserService mUserService;
     public int messValidateLogin;
     public MutableLiveData<String> messLogin = new MutableLiveData<>();
@@ -31,7 +32,7 @@ public class LoginViewModel extends ViewModel {
     public SharedPreferences.Editor token = sharedPref.edit();
 
     public void accountLogin(String emailLogin, String passwordLogin) {
-        mUserService = ApiUtils.getUserService();
+        mUserService = apiUtils.getUserService();
         mUserService.login(emailLogin, passwordLogin).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentEventsBinding;
+import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.services.LoadInforWorker;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.viewmodel.NewsViewModel;
@@ -30,7 +31,6 @@ public class EventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -54,6 +54,13 @@ public class EventsFragment extends Fragment {
                 workRequest = myBuilder.build();
                 WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
 //                Log.d("TestDB", "onClick: "+newsViewModel.getNews(1).toString());
+            }
+        });
+        binding.countEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int x = EventsRepository.getInstance().getCountEvent();
+                Log.d("Event", "Count Event:  "+x);
             }
         });
         return binding.getRoot();
