@@ -8,20 +8,19 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.ObservableList;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.meetup.model.News;
+import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.view.adapter.NewsAdapter;
 import com.example.meetup.R;
 import com.example.meetup.databinding.NewsFragmentBinding;
@@ -30,18 +29,14 @@ import com.example.meetup.viewmodel.NewsViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class NewsFragment extends Fragment {
     private RecyclerView recyclerView;
-    NewsAdapter news_adapter;
+    NewsAdapter newsAdapter;
     NewsViewModel newsViewModel;
     List<News> newsList;
+    int pageSize;
     private NewsFragmentBinding binding;
     private final CompositeDisposable mDisposable  = new CompositeDisposable();
 
@@ -50,48 +45,68 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
     @Nullable Bundle savedInstanceState) {
-
+        newsList = new ArrayList<>();
+        pageSize = 10;
         binding = DataBindingUtil.inflate(inflater,R.layout.news_fragment,container,false);
         newsViewModel = new ViewModelProvider(getParentFragment()).get(NewsViewModel.class);
         recyclerView = binding.recyclerNews;
         setUpRecyclerView();
+        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(newsList.get(position).getDetailUrl()));
+                startActivity(browserIntent);
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_DRAGGING) {
+                   pageSize += 10;
+                   newsList = newsViewModel.getNewsList(pageSize);
+                   newsAdapter.setListNews(newsList);
+
+                }
+            }
+        });
         final Observer<List<News>> newsObserver = new Observer<List<News>>() {
             @Override
             public void onChanged(List<News> news) {
-                news_adapter.notifyDataSetChanged();
+                Log.d("List News Size", "onChanged: "+ news.size());
+                newsAdapter.setListNews(news);
             }
         };
         newsViewModel.getCurrentList().observe(getViewLifecycleOwner(),newsObserver);
         binding.setLifecycleOwner(this);
+        binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("News", "onRefresh: ");
+                newsList = newsViewModel.getNewsList(10);
+                binding.swipe.setRefreshing(false);
+            }
+
+        });
+
         return binding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-
     }
-
     @Override
     public void onStop() {
         super.onStop();
-
     }
-
     private void setUpRecyclerView(){
-        newsList = new ArrayList<>();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        newsList = newsViewModel.getNewsList(10);
-        news_adapter = new NewsAdapter(newsList,getContext());
-        recyclerView.setAdapter(news_adapter);
-        news_adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent browerIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(newsList.get(position).getDetailUrl()));
-                startActivity(browerIntent);
-            }
-        });
+        newsList = newsViewModel.getNewsList(pageSize);
+        newsAdapter = new NewsAdapter(newsList,getContext());
+        recyclerView.setAdapter(newsAdapter);
+
     }
 }

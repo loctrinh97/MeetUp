@@ -12,14 +12,14 @@
     tools:context=".view.home.EventsFragment">
 
    <Button
-       android:onClick="@{viewmodel::clearList}"
+
        android:layout_gravity="center"
        android:text="UPDATE LIST"
        android:layout_width="wrap_content"
        android:layout_height="50dp"/>
     <Button
-        android:onClick="@{viewmodel::fillList}"
-        android:text="FILL LIST"
+        android:id="@+id/count_event"
+        android:text="Count Event"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="50dp"/>

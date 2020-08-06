@@ -19,51 +19,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_20dp"
             android:text="@string/mypage"
             android:textColor="#ffffff"
             android:textSize="@dimen/text_header"
             android:textStyle="bold" />
+
     </FrameLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_athome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="@dimen/_10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:tabIndicator="@drawable/botron_indicator"
         app:tabIndicatorColor="@color/color_common"
         app:tabSelectedTextColor="@color/color_common"
-        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         app:tabTextColor="@color/color_text_defaut">
-
         <com.google.android.material.tabs.TabItem
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="TIN TỨC" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="SỰ KIỆN" />
-
+            android:text="TIN TUC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_athome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:layout_marginTop="150dp"
+        android:layout_marginBottom="@dimen/_60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

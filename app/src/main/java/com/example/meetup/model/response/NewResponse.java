@@ -1,13 +1,16 @@
-package com.example.meetup.model;
+package com.example.meetup.model.response;
 
+import com.example.meetup.model.dataLocal.News;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Response {
-    @SerializedName("news")
+public class NewResponse {
+    @SerializedName("status")
+    @Expose
+    private int status;
+    @SerializedName("response.news")
     @Expose
     List<News> news;
 
@@ -24,5 +27,13 @@ public class Response {
         return "Response{" +
                 "news=" + news +
                 '}';
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.meetup.model;
+package com.example.meetup.model.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

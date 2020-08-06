@@ -1,31 +1,42 @@
 package com.example.meetup.view.adapter;
 
 import android.content.Context;
+import android.graphics.Outline;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
-import androidx.lifecycle.LifecycleOwner;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.meetup.model.News;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.example.meetup.R;
+import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.databinding.ItemNewsBinding;
-import com.example.meetup.ulti.MyApplication;
 
 
 import java.util.List;
 
-import io.reactivex.Flowable;
+import static com.example.meetup.R.*;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     List<News> listNews;
     public OnItemClickListener listener;
+    ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
+        @Override
+        public void getOutline(View view, Outline outline) {
+            outline.setRoundRect(0,0,view.getWidth(),view.getHeight()+90,90F);
+        }
+    };
     Context context;
     public NewsAdapter(List<News> NewsList,Context context) {
         this.listNews = NewsList;
@@ -42,18 +53,42 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final NewsAdapter.ViewHolder holder, int position) {
         News news = listNews.get(position);
+
         if(news.getThumb()!=null){
             Glide.with(context)
                     .load(news.getThumb())
-                    .override(343,200)
+                    .placeholder(drawable.error)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+
+                            return false;
+                        }
+                    })
                     .into(holder.binding.thumbnail);
+            ImageView image = holder.binding.thumbnail;
+            image.setOutlineProvider(viewOutlineProvider);
+            image.setClipToOutline(true);
+        }
+        else{
+            holder.binding.thumbnail.setVisibility(View.GONE);
         }
 
         holder.bind(news);
 
 
+    }
+    public void setListNews(List<News> news){
+        this.listNews = news;
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {

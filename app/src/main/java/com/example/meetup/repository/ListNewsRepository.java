@@ -1,14 +1,9 @@
 package com.example.meetup.repository;
 
-import com.example.meetup.dao.NewsDAO;
-import com.example.meetup.model.News;
-import com.example.meetup.ulti.MyApplication;
+import com.example.meetup.repository.dao.NewsDAO;
+import com.example.meetup.model.dataLocal.News;
 
-import java.util.Arrays;
 import java.util.List;
-
-import io.reactivex.Completable;
-import io.reactivex.Flowable;
 
 public class ListNewsRepository{
 

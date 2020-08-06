@@ -27,6 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserViewModel extends ViewModel {
+    private static ApiUtils apiUtils = new ApiUtils();
     public static UserService mUserService;
     public static int idMessValidateSignUp;
     public static int messValidateLogin;
@@ -42,7 +43,7 @@ public class UserViewModel extends ViewModel {
 
 
     public static void createAccount(String name, String email, String password) {
-        mUserService = ApiUtils.getUserService();
+        mUserService = apiUtils.getUserService();
         mUserService.signUp(name, email, password).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -64,7 +65,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public static void accountLogin(String emailLogin, String passwordLogin) {
-        mUserService = ApiUtils.getUserService();
+        mUserService = apiUtils.getUserService();
         mUserService.login(emailLogin, passwordLogin).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -93,7 +94,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public static void resetPassword(String emailForgot) {
-        mUserService = ApiUtils.getUserService();
+        mUserService = apiUtils.getUserService();
         mUserService.resetPassword(emailForgot).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
