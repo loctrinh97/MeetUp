@@ -1,12 +1,8 @@
 package com.example.meetup.services;
 
-import com.example.meetup.model.User;
-import com.google.gson.JsonObject;
+import com.example.meetup.model.response.User;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 

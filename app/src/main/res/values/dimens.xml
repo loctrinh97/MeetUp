@@ -31,4 +31,11 @@
     <dimen name="_3dp">3dp</dimen>
     <dimen name="_20dp">20dp</dimen>
     <dimen name="_16dp">16dp</dimen>
+    <dimen name="_160dp">160dp</dimen>
+    <dimen name="_35dp">35dp</dimen>
+    <dimen name="text_size_header">24sp</dimen>
+    <dimen name="margin_bottom_recyclerview">100dp</dimen>
+    <dimen name="_18dp">18dp</dimen>
+    <dimen name="text_size_category">18sp</dimen>
+    <dimen name="_140dp">140dp</dimen>
 </resources>

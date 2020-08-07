@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
@@ -20,8 +20,8 @@
 
     <TextView
         android:text="@string/home"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
+        android:textSize="@dimen/text_size_header"
+        android:textColor="@color/color_text_header"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/header"
         app:layout_constraintStart_toStartOf="@id/header"
@@ -34,8 +34,8 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_athome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="@dimen/_35dp"
         android:layout_marginTop="@dimen/_10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -52,6 +52,6 @@
         app:tabIndicator="@drawable/botron_indicator"
         app:tabIndicatorColor="@color/color_common"
         app:tabSelectedTextColor="@color/color_common"
-        app:tabTextColor="@color/color_text_defaut">
+        app:tabTextColor="@color/color_text_default">
     </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

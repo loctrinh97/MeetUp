@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/ivItemNearBackground"
         android:background="@drawable/ic_item_event_near_bg"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/_0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -14,8 +14,9 @@
       />
 
     <ImageView
+        android:adjustViewBounds="true"
         android:id="@+id/ivItemNearImg"
-        android:layout_width="140dp"
+        android:layout_width="@dimen/_140dp"
         android:scaleType="centerCrop"
         android:layout_height="@dimen/_0dp"
         android:background="@drawable/stock2"
@@ -38,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thứ 4,2019/12/11"
-        android:textColor="#5D20CD"
+        android:textColor="@color/color_common"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/ivItemNearBackground"
         app:layout_constraintStart_toEndOf="@id/ivItemNearCalender"

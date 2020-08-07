@@ -20,16 +20,16 @@
         android:layout_marginLeft="@dimen/_16dp"
         android:layout_marginTop="@dimen/_20dp"
         android:text="@string/personal"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textColor="@color/color_text_header"
+        android:textSize="@dimen/text_size_header"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/ivHeader"
         app:layout_constraintTop_toTopOf="@id/ivHeader" />
 
     <ImageView
         android:id="@+id/ivLogout"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/_30dp"
+        android:layout_height="@dimen/_30dp"
         android:background="@drawable/ic_logout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
         app:tabIndicatorColor="@color/color_common"
         app:tabSelectedTextColor="@color/color_common"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-        app:tabTextColor="@color/color_text_defaut">
+        app:tabTextColor="@color/color_text_default">
 
     </com.google.android.material.tabs.TabLayout>
 
