@@ -37,7 +37,7 @@ private Handler delay = new Handler();
                     ignored.printStackTrace();
                 }
             }
-        },1000);
+        },100);
     }
 
 

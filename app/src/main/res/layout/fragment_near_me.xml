@@ -4,6 +4,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/_40dp"
+        />
+
     <ImageView
         android:id="@+id/ivHeader"
         android:layout_width="match_parent"
@@ -27,16 +39,16 @@
         app:layout_constraintTop_toTopOf="@id/ivHeader" />
 
 
-<!--    <com.google.android.gms.maps.MapView-->
-<!--        android:id="@+id/map"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_width="match_parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        android:layout_marginTop="@dimen/_40dp"-->
-<!--        />-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNearMe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     <ImageView
         android:id="@+id/ivNearBackground"
@@ -44,21 +56,20 @@
         android:background="@drawable/ic_item_event_near_bg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <ImageView
-        android:id="@+id/ivNearImg"
-        android:layout_width="140dp"
-        android:scaleType="centerCrop"
-        android:layout_height="@dimen/_0dp"
-        android:background="@drawable/stock2"
-        app:layout_constraintTop_toTopOf="@id/ivNearBackground"
-        app:layout_constraintStart_toStartOf="@id/ivNearBackground"
-        app:layout_constraintBottom_toBottomOf="@id/ivNearBackground"/>
+        <ImageView
+            android:id="@+id/ivNearImg"
+            android:layout_width="120dp"
+            android:layout_height="107dp"
+            android:background="@drawable/stock2"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/ivNearBackground"
+            app:layout_constraintStart_toStartOf="@id/ivNearBackground"
+            app:layout_constraintTop_toTopOf="@id/ivNearBackground" />
 
     <ImageView
         android:id="@+id/ivNearCalender"
@@ -104,4 +115,5 @@
         app:layout_constraintEnd_toEndOf="@id/ivNearBackground"
         android:layout_marginTop="@dimen/_6dp"
         android:layout_marginEnd="@dimen/_17dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
