@@ -49,10 +49,10 @@ public class LoadInforWorker extends Worker {
             public void onResponse(@NotNull Call<EventResponse> call, @NotNull Response<EventResponse> response) {
                 if (response.body() != null) {
                     List<EventGetFromApi> eventGetFromApis;
-                    eventGetFromApis = response.body().getEvents();
+                    eventGetFromApis = response.body().getResponse().getEvents();
                     List<Event> eventList = new ArrayList<>();
                     for (EventGetFromApi e : eventGetFromApis) {
-                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), e.getGoingCount(), e.getWentCount(), e.getDescriptionRaw(), e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
+                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), 0,e.getGoingCount(), e.getWentCount(), e.getDescriptionRaw(), e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
                         eventList.add(event);
                     }
                     EventsRepository eventsRepository = EventsRepository.getInstance();

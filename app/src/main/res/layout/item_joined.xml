@@ -4,7 +4,7 @@
     <data>
         <variable
             name="joined"
-            type="com.example.meetup.model.dataLocal.News" />
+            type="com.example.meetup.model.dataLocal.Event" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/item_joined"
@@ -38,9 +38,10 @@
         app:layout_constraintTop_toBottomOf="@id/btnViewEndTime">
 
         <ImageView
+            android:id="@+id/ivPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/stock_photo" />
+            android:src="@{joined.photo}" />
 
         <ImageView
             android:layout_marginStart="210dp"
@@ -70,7 +71,7 @@
         app:layout_constraintStart_toEndOf="@id/ivCalender"
         android:textSize="@dimen/_14sp"
         android:textColor="#5D20CD"
-        android:text="Thứ 4,2019/12/11"
+        android:text="@{joined.scheduleStartDate}"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -93,7 +94,7 @@
         app:layout_constraintStart_toEndOf="@id/ivDot"
         android:textSize="@dimen/_14sp"
         android:textColor="#5D20CD"
-        android:text="40 người tham gia"
+        android:text="@{joined.goingCount}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -102,7 +103,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:text="UK ports preparing to host EU customs checks"
+        android:text="@{joined.name}"
         android:textColor="#000000"
         android:textSize="@dimen/_16dp"
         android:textStyle="bold"
@@ -114,13 +115,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:text="When someone has a burn injury, skin is used as a natural plaster to help healing. It help stop ...."
+        android:text="@{joined.descriptionHtml}"
         android:textColor="#A8A2B2"
         android:textSize="@dimen/_14sp"
         app:layout_constraintEnd_toEndOf="@id/cvImgEvent"
         app:layout_constraintStart_toStartOf="@id/ivCalender"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
