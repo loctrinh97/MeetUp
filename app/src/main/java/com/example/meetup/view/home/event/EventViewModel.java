@@ -1,12 +1,9 @@
-package com.example.meetup.viewmodel;
+package com.example.meetup.view.home.event;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.meetup.model.dataLocal.Event;
-import com.example.meetup.model.dataLocal.News;
-import com.example.meetup.repository.EventsRepository;
-import com.example.meetup.repository.ListNewsRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ public class EventViewModel extends ViewModel{
 
     public List<Event> getEventList(int pageSize) {
         eventList = eventsRepository.getListEvent(pageSize);
-        list.setValue(eventList);
+        list.postValue(eventList);
         return eventList;
     }
 }

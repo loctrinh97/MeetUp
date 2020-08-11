@@ -13,11 +13,9 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.example.meetup.R;
-import com.example.meetup.model.dataLocal.Event;
-import com.example.meetup.repository.EventsRepository;
+import com.example.meetup.view.home.event.EventsRepository;
 import com.example.meetup.services.LoadInforWorker;
 import com.example.meetup.ulti.MyApplication;
-import com.example.meetup.view.registerlogin.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {

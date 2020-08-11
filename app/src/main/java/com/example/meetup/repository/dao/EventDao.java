@@ -10,7 +10,7 @@ import com.example.meetup.model.dataLocal.Event;
 import java.util.List;
 @Dao
 public interface EventDao {
-    @Query("select * from events limit :pageSize")
+    @Query("select * from events  order by going_count desc limit :pageSize")
     List<Event> getListEvents(int pageSize);
     @Query("select count(id) from events")
     int getCountEvent();

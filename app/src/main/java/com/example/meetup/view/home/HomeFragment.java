@@ -5,13 +5,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
+import com.example.meetup.view.home.event.EventsFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {

@@ -1,5 +1,6 @@
-package com.example.meetup.repository;
+package com.example.meetup.view.home.event;
 
+import com.example.meetup.repository.AppDatabase;
 import com.example.meetup.repository.dao.EventDao;
 import com.example.meetup.model.dataLocal.Event;
 

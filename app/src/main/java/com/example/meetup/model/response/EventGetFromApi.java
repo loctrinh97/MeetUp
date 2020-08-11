@@ -26,8 +26,10 @@ public class EventGetFromApi {
     @SerializedName("went_count")
     @Expose
     private int wentCount;
+    @SerializedName("description_raw")
     @Expose
     private String descriptionRaw;
+    @SerializedName("description_html")
     @Expose
     private  String descriptionHtml;
     @SerializedName("schedule_permanent")

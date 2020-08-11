@@ -1,4 +1,4 @@
-package com.example.meetup.view.adapter;
+package com.example.meetup.view.home.event;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,17 +17,23 @@ import com.example.meetup.databinding.ItemEventBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.ulti.Define;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
     List<Event> eventList ;
     OnItemClickListener listener;
     Context context;
     Date currentTime = Calendar.getInstance().getTime();
+    Locale locale = new Locale("vi");
+    @SuppressLint("SimpleDateFormat")
+    DateFormat dateFormat = new SimpleDateFormat("E, yyyy-mm-dd",locale);
+
 
     ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
         @Override
@@ -90,10 +96,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
 
                 Date startDate = simpleDateFormat.parse(event.getScheduleStartDate());
                 Date endDate = simpleDateFormat.parse(event.getScheduleEndDate());
+
                 if(currentTime.compareTo(startDate)<0){
-                    return startDate.toString();
+                    return dateFormat.format(startDate);
                 }
-                else return endDate.toString();
+                else return dateFormat.format(endDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
