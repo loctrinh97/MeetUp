@@ -37,8 +37,8 @@ public class LoadInforWorker extends Worker {
     @Override
     public Result doWork() {
         loadNewsFromApi();
-        loadEventsFromApi();
-        loadCategories();
+//        loadEventsFromApi();
+//        loadCategories();
         return Result.success();
     }
 
@@ -75,7 +75,7 @@ public class LoadInforWorker extends Worker {
             @Override
             public void onResponse(@NonNull Call<NewResponse> call, @NotNull Response<NewResponse> response) {
                 if (response.body() != null) {
-                    List<News> list = response.body().getNews();
+                    List<News> list = response.body().getResponse().getNews();
                     ListNewsRepository.getInstance().clearList();
                     ListNewsRepository.getInstance().insertNews(list);
                 }
