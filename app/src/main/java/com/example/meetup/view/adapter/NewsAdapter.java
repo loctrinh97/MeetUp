@@ -24,6 +24,7 @@ import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.databinding.ItemNewsBinding;
 
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static com.example.meetup.R.*;
@@ -59,17 +60,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         if(news.getThumb()!=null){
             Glide.with(context)
                     .load(news.getThumb())
-                    .placeholder(drawable.error)
+//                    .placeholder(drawable.error)
+
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-
+                          holder.binding.thumbnail.setVisibility(View.GONE);
                             return false;
                         }
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-
                             return false;
                         }
                     })
@@ -81,7 +82,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         else{
             holder.binding.thumbnail.setVisibility(View.GONE);
         }
-
+        if(news.getAuthor()==null){
+            holder.binding.textBoi.setVisibility(View.GONE);
+        }
+        String date = news.getPublishDate().substring(0,9);
+        news.setPublishDate(date);
         holder.bind(news);
 
 
@@ -105,7 +110,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    Log.d("Adapter", "onClick: "+ position);
                     listener.onItemClick(position);
                 }
             });

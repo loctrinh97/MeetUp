@@ -4,12 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.WorkRequest;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.example.meetup.model.dataLocal.Category;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.News;
+import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.model.response.CategoryResponse;
 import com.example.meetup.model.response.EventGetFromApi;
 import com.example.meetup.model.response.EventResponse;
@@ -17,6 +19,8 @@ import com.example.meetup.model.response.NewResponse;
 import com.example.meetup.repository.CategoryRepository;
 import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.repository.ListNewsRepository;
+import com.example.meetup.repository.VenueRepository;
+import com.example.meetup.ulti.Define;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,9 +40,9 @@ public class LoadInforWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        loadNewsFromApi();
+//        loadNewsFromApi();
         loadEventsFromApi();
-        loadCategories();
+//        loadCategories();
         return Result.success();
     }
 
@@ -48,14 +52,19 @@ public class LoadInforWorker extends Worker {
             @Override
             public void onResponse(@NotNull Call<EventResponse> call, @NotNull Response<EventResponse> response) {
                 if (response.body() != null) {
+                    EventsRepository eventsRepository = EventsRepository.getInstance();
+                    VenueRepository venueRepository = VenueRepository.getInstance();
                     List<EventGetFromApi> eventGetFromApis;
-                    eventGetFromApis = response.body().getEvents();
+                    eventGetFromApis = response.body().getResponse().getEvents();
                     List<Event> eventList = new ArrayList<>();
                     for (EventGetFromApi e : eventGetFromApis) {
-                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), e.getGoingCount(), e.getWentCount(), e.getDescriptionRaw(), e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
+//                        String desRaw = e.getDescriptionRaw().replaceAll("<p>","").replaceAll("</p>","");
+                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), e.getDescriptionRaw(), e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
+                        Venue venue = e.getVenue();
+                        venueRepository.insertVenue(venue);
                         eventList.add(event);
                     }
-                    EventsRepository eventsRepository = EventsRepository.getInstance();
+
                     eventsRepository.deleteEvents();
                     eventsRepository.insertEvent(eventList);
                 }
@@ -75,7 +84,7 @@ public class LoadInforWorker extends Worker {
             @Override
             public void onResponse(@NonNull Call<NewResponse> call, @NotNull Response<NewResponse> response) {
                 if (response.body() != null) {
-                    List<News> list = response.body().getNews();
+                    List<News> list = response.body().getResponse().getNews();
                     ListNewsRepository.getInstance().clearList();
                     ListNewsRepository.getInstance().insertNews(list);
                 }

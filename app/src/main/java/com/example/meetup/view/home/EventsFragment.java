@@ -4,7 +4,10 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
@@ -18,16 +21,30 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentEventsBinding;
+import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.repository.EventsRepository;
+import com.example.meetup.repository.VenueRepository;
 import com.example.meetup.services.LoadInforWorker;
+import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
+import com.example.meetup.view.adapter.EventAdapter;
+import com.example.meetup.viewmodel.EventViewModel;
 import com.example.meetup.viewmodel.NewsViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 
 public class EventsFragment extends Fragment {
-    NewsViewModel newsViewModel;
-    OneTimeWorkRequest workRequest;
-    private  FragmentEventsBinding binding;
+    private RecyclerView recyclerView;
+    EventViewModel eventViewModel;
+    List<Event> eventList;
+    EventAdapter adapter;
+    int pageSize;
+    private FragmentEventsBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,34 +53,30 @@ public class EventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       binding = DataBindingUtil.inflate(inflater,R.layout.fragment_events,container,false);
-       newsViewModel = new ViewModelProvider(getActivity()).get(NewsViewModel.class);
-       binding.setViewmodel(newsViewModel);
-       binding.setLifecycleOwner(this);
-//        // Inflate the layout for this fragment
-//        inflater.inflate(R.layout.fragment_events, container, false);
+        eventList = new ArrayList<Event>();
+        pageSize = Define.PAGE_SIZE_DEFAULT;
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false);
+        eventViewModel = new ViewModelProvider(getActivity()).get(EventViewModel.class);
 
-
-        binding.testApi.setOnClickListener(new View.OnClickListener() {
+        recyclerView = binding.recyclerEvents;
+        setUpRecyclerView();
+        final Observer<List<Event>> eventObserver = new Observer<List<Event>>() {
             @Override
-            public void onClick(View view) {
-
-                Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-                OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
-                myBuilder.setConstraints(constraints);
-                workRequest = myBuilder.build();
-                WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
-//                Log.d("TestDB", "onClick: "+newsViewModel.getNews(1).toString());
+            public void onChanged(List<Event> eventList) {
+                adapter.setEventList(eventList);
             }
-        });
-        binding.countEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int x = EventsRepository.getInstance().getCountEvent();
-                Log.d("Event", "Count Event:  "+x);
-            }
-        });
+        };
+        eventViewModel.getList().observe(getViewLifecycleOwner(),eventObserver);
+        binding.setLifecycleOwner(this);
         return binding.getRoot();
+    }
+
+    private void setUpRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+       eventList = eventViewModel.getEventList(pageSize);
+        adapter = new EventAdapter(eventList,getContext());
+        recyclerView.setAdapter(adapter);
     }
 
 }

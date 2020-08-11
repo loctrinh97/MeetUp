@@ -10,22 +10,22 @@ public class NewResponse {
     @SerializedName("status")
     @Expose
     private int status;
-    @SerializedName("response.news")
+   @SerializedName("response")
     @Expose
-    List<News> news;
+   private Response response;
 
-    public List<News> getNews() {
-        return news;
+    public Response getResponse() {
+        return response;
     }
 
-    public void setNews(List<News> news) {
-        this.news = news;
+    public void setResponse(Response response) {
+        this.response = response;
     }
 
     @Override
     public String toString() {
         return "Response{" +
-                "news=" + news +
+                "response=" + response +
                 '}';
     }
 
@@ -35,5 +35,19 @@ public class NewResponse {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+    public static class Response{
+        public List<News> getNews;
+        @SerializedName("news")
+        @Expose
+        List<News> news;
+
+        public List<News> getNews() {
+            return news;
+        }
+
+        public void setNews(List<News> news) {
+            this.news = news;
+        }
     }
 }

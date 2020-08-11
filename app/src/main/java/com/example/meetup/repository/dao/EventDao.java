@@ -10,8 +10,8 @@ import com.example.meetup.model.dataLocal.Event;
 import java.util.List;
 @Dao
 public interface EventDao {
-    @Query("select * from events")
-    List<Event> getListEvents();
+    @Query("select * from events limit :pageSize")
+    List<Event> getListEvents(int pageSize);
     @Query("select count(id) from events")
     int getCountEvent();
     @Insert(onConflict = OnConflictStrategy.REPLACE)

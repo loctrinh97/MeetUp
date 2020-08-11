@@ -29,7 +29,7 @@
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@color/color_common"
         app:tabTextAppearance="@style/CustomTextAppearanceTab"
-        app:tabTextColor="@color/color_text_defaut">
+        app:tabTextColor="@color/color_text_default">
 
     </com.google.android.material.tabs.TabLayout>
 

@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.example.meetup.viewmodel.NewsViewModel" />
-    </data>
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.home.EventsFragment">
 
-   <Button
-
-       android:layout_gravity="center"
-       android:text="UPDATE LIST"
-       android:layout_width="wrap_content"
-       android:layout_height="50dp"/>
-    <Button
-        android:id="@+id/count_event"
-        android:text="Count Event"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
-
-    <Button
-        android:id="@+id/test_api"
-        android:text="Test Api"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
-    <ImageView
-        android:layout_marginTop="100dp"
-        android:id="@+id/imageTest"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/margin_bottom_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingLeft="@dimen/_16dp"
+            android:paddingRight="@dimen/_16dp"
+            android:id="@+id/recycler_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_event"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</FrameLayout>
+
+
 </layout>

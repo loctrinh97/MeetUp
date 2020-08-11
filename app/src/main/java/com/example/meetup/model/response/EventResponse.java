@@ -9,22 +9,22 @@ public class EventResponse {
     @SerializedName("status")
     @Expose
     private int status;
-    @SerializedName("response.events")
+    @SerializedName("response")
     @Expose
-    List<EventGetFromApi> events;
+    private Response response;
 
-    public List<EventGetFromApi> getEvents() {
-        return events;
+    public Response getResponse() {
+        return response;
     }
 
-    public void setEvents(List<EventGetFromApi> events) {
-        this.events = events;
+    public void setResponse(Response response) {
+        this.response = response;
     }
 
     @Override
     public String toString() {
         return "EventResponse{" +
-                "events=" + events +
+                "response=" + response +
                 '}';
     }
 
@@ -34,5 +34,22 @@ public class EventResponse {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+
+
+    public static class Response{
+        @SerializedName("events")
+        @Expose
+        List<EventGetFromApi> events;
+
+        public List<EventGetFromApi> getEvents() {
+                return events;
+        }
+
+        public void setEvents(List<EventGetFromApi> events) {
+            this.events = events;
+        }
+
     }
 }
