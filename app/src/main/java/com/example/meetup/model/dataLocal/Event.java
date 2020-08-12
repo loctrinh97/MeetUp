@@ -26,6 +26,8 @@ public class Event {
     private String name;
     @ColumnInfo(name = "link")
     private String link;
+    @ColumnInfo(name = "my_status")
+    private int myStatus;
     @ColumnInfo(name = "going_count")
     private int goingCount;
     @ColumnInfo(name = "went_count")
@@ -56,11 +58,12 @@ public class Event {
     @ColumnInfo(name = "venue_id")
     private int venueId;
     @Ignore
-    public Event(int id, String photo, String name, String link, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId) {
+    public Event(int id, String photo, String name, String link, int myStatus, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId) {
         this.id = id;
         this.photo = photo;
         this.name = name;
         this.link = link;
+        this.myStatus = myStatus;
         this.goingCount = goingCount;
         this.wentCount = wentCount;
         this.descriptionRaw = descriptionRaw;
@@ -221,5 +224,13 @@ public class Event {
 
     public void setVenueId(int venueId) {
         this.venueId = venueId;
+    }
+
+    public int getMyStatus() {
+        return myStatus;
+    }
+
+    public void setMyStatus(int myStatus) {
+        this.myStatus = myStatus;
     }
 }

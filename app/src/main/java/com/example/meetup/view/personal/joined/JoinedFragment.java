@@ -61,7 +61,7 @@ public class JoinedFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_DRAGGING) {
                     pageSize += 10;
-                    joinedList = joinedViewModel.getUserEventList(pageSize);
+                    joinedList = joinedViewModel.getUserEventList();
                     joinedAdapter.setListUsersEvent(joinedList);
                 }
             }
@@ -74,7 +74,7 @@ public class JoinedFragment extends Fragment {
     private void setUpRecyclerDisplay() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(fragmentPersonalJoinedBinding.getRoot().getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        joinedList = joinedViewModel.getUserEventList(pageSize);
+        joinedList = joinedViewModel.getUserEventList();
         joinedAdapter = new JoinedAdapter(joinedList,getContext());
         recyclerView.setAdapter(joinedAdapter);
     }
