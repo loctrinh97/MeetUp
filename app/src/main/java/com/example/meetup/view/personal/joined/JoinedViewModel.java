@@ -29,5 +29,4 @@ public class JoinedViewModel extends ViewModel {
         // TODO: 8/11/2020  
         personalJoinedList.postValue(usersEvents);
         return usersEvents;
-    }
-}
+    }}
