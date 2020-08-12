@@ -2,6 +2,7 @@ package com.example.meetup.services;
 
 public class ApiUtils {
     private  UserService userService;
+    private EventJoinedServices eventJoinedServices;
     private  EventService eventService;
     private NewsService newsService;
     private CategoryService categoryService;
@@ -34,5 +35,12 @@ public class ApiUtils {
            newsService = RetrofitClient.getClient(BASE_URL).create(NewsService.class);
         }
         return newsService;
+    }
+
+    public EventJoinedServices getEventJoinedServices(){
+        if (eventJoinedServices == null) {
+            eventJoinedServices = RetrofitClient.getClient(BASE_URL).create(EventJoinedServices.class);
+        }
+        return eventJoinedServices;
     }
 }

@@ -32,6 +32,7 @@ import retrofit2.Response;
 
 public class LoadInforWorker extends Worker {
     ApiUtils apiUtils = new ApiUtils();
+
     public LoadInforWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -58,7 +59,7 @@ public class LoadInforWorker extends Worker {
                     List<Event> eventList = new ArrayList<>();
                     for (EventGetFromApi e : eventGetFromApis) {
                         String desRaw = null;
-                        if(e.getDescriptionRaw()!=null) {
+                        if (e.getDescriptionRaw() != null) {
                             desRaw = e.getDescriptionRaw().replaceAll("<p>", "").replaceAll("</p>", "");
                         }
                         Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
@@ -66,7 +67,6 @@ public class LoadInforWorker extends Worker {
                         venueRepository.insertVenue(venue);
                         eventList.add(event);
                     }
-
                     eventsRepository.deleteEvents();
                     eventsRepository.insertEvent(eventList);
                 }
@@ -79,7 +79,7 @@ public class LoadInforWorker extends Worker {
         });
     }
 
-    private void loadNewsFromApi(){
+    private void loadNewsFromApi() {
         NewsService newsService = apiUtils.getNewsService();
         newsService.getListNews().enqueue(new Callback<NewResponse>() {
 
@@ -99,12 +99,12 @@ public class LoadInforWorker extends Worker {
         });
     }
 
-    private void loadCategories(){
+    private void loadCategories() {
         CategoryService categoryService = apiUtils.getCategoryService();
         categoryService.getListCategories().enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
-                if(response.body()!=null) {
+                if (response.body() != null) {
                     List<Category> list = response.body().getCategories();
                     CategoryRepository categoryRepository = CategoryRepository.getInstance();
                     categoryRepository.deleteCaregories();

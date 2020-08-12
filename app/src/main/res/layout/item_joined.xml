@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="joined"
+            type="com.example.meetup.model.dataLocal.Event" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/item_joined"
     android:layout_width="match_parent"
@@ -33,9 +38,10 @@
         app:layout_constraintTop_toBottomOf="@id/btnViewEndTime">
 
         <ImageView
+            android:id="@+id/ivPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/stock_photo" />
+            android:src="@{joined.photo}" />
 
         <ImageView
             android:layout_marginStart="210dp"
@@ -54,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/ic_calender"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="@dimen/_33dp"
         android:layout_marginTop="@dimen/_20dp" />
 
     <TextView
@@ -64,8 +70,8 @@
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toEndOf="@id/ivCalender"
         android:textSize="@dimen/_14sp"
+        android:text="@{joined.scheduleStartDate}"
         android:textColor="@color/color_common"
-        android:text="Thứ 4,2019/12/11"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -87,8 +93,8 @@
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toEndOf="@id/ivDot"
         android:textSize="@dimen/_14sp"
+        android:text="@{joined.goingCount}"
         android:textColor="@color/color_common"
-        android:text="40 người tham gia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -96,8 +102,8 @@
         android:id="@+id/tvTitle"
         android:layout_width="@dimen/_0dp"
         android:layout_height="wrap_content"
+        android:text="@{joined.name}"
         android:layout_marginTop="@dimen/_3dp"
-        android:text="UK ports preparing to host EU customs checks"
         android:textColor="@color/black"
         android:textSize="@dimen/_16dp"
         android:textStyle="bold"
@@ -109,19 +115,12 @@
         android:layout_width="@dimen/_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_3dp"
-        android:text="When someone has a burn injury, skin is used as a natural plaster to help healing. It help stop ...."
         android:textColor="@color/color_text_default"
+        android:text="@{joined.descriptionHtml}"
         android:textSize="@dimen/_14sp"
         app:layout_constraintEnd_toEndOf="@id/cvImgEvent"
         app:layout_constraintStart_toStartOf="@id/ivCalender"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-<data>
-<variable
-    name="joined"
-    type="com.example.meetup.model.dataLocal.News" />
-
-</data>
 </layout>

@@ -17,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
-
         android:id="@+id/app_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60dp"
@@ -30,7 +29,6 @@
         app:tabSelectedTextColor="@color/color_common"
         app:tabTextAppearance="@style/CustomTextAppearanceTab"
         app:tabTextColor="@color/color_text_default">
-
     </com.google.android.material.tabs.TabLayout>
 
 

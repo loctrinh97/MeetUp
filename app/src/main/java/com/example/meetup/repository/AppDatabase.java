@@ -13,6 +13,7 @@ import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.EventsCategories;
 import com.example.meetup.model.dataLocal.UsersEvents;
 import com.example.meetup.model.dataLocal.Venue;
+import com.example.meetup.repository.dao.UserEventDao;
 import com.example.meetup.repository.dao.VenueDao;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.repository.dao.NewsDAO;
@@ -28,6 +29,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao getCategoryDao();
     public abstract NewsDAO getNewsDao();
     public abstract EventDao getEventDao();
+    public abstract UserEventDao getUserEventDao();
     public static AppDatabase getInstance(){
         if(database == null){
             database= Room.databaseBuilder(MyApplication.getAppContext(),AppDatabase.class,DATABASE_NAME)

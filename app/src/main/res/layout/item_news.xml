@@ -118,7 +118,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
-
         <variable
             name="news"
             type="com.example.meetup.model.dataLocal.News" />
