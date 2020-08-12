@@ -65,7 +65,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
         holder.binding.thumbnail.setOutlineProvider(viewOutlineProvider);
         holder.binding.thumbnail.setClipToOutline(true);
         if(event.getMyStatus()==Define.STATUS_DEFAULT){
-            holder.binding.imageJoin.setVisibility(View.GONE);
+            Glide.with(context)
+                    .load(R.drawable.ic_join)
+                    .into(holder.binding.imageJoin);
         }
         else if(event.getMyStatus()==Define.STATUS_GOING){
             Glide.with(context)

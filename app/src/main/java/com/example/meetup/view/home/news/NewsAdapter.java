@@ -1,9 +1,8 @@
-package com.example.meetup.view.adapter;
+package com.example.meetup.view.home.news;
 
 import android.content.Context;
 import android.graphics.Outline;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +18,11 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.meetup.R;
 import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.databinding.ItemNewsBinding;
 
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-
-import static com.example.meetup.R.*;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     List<News> listNews;
@@ -82,8 +77,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         else{
             holder.binding.thumbnail.setVisibility(View.GONE);
         }
-        if(news.getAuthor()==null){
+        if(news.getAuthor().isEmpty()){
             holder.binding.textBoi.setVisibility(View.GONE);
+        }
+        else{
+            holder.binding.textBoi.setVisibility(View.VISIBLE);
         }
         String date = news.getPublishDate().substring(0,9);
         news.setPublishDate(date);

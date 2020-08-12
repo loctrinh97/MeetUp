@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setupTabIcons() {
 
         appTabLayout.getTabAt(0).setIcon(tabIcons[0]);
-//        app_tabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.color_common));
+        appTabLayout.getTabAt(0).getIcon().setTint(getResources().getColor(R.color.color_common));
         appTabLayout.getTabAt(1).setIcon(tabIcons[1]);
         appTabLayout.getTabAt(2).setIcon(tabIcons[2]);
         appTabLayout.getTabAt(3).setIcon(tabIcons[3]);

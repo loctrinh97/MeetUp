@@ -1,8 +1,6 @@
 package com.example.meetup.view.personal.joined;
 
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentPersonalJoinedBinding;
-import com.example.meetup.databinding.ItemJoinedBinding;
-import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.model.dataLocal.UsersEvents;
-import com.example.meetup.ulti.Define;
 import com.example.meetup.view.adapter.JoinedAdapter;
-import com.example.meetup.view.adapter.NewsAdapter;
-import com.example.meetup.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

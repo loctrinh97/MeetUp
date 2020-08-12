@@ -1,4 +1,4 @@
-package com.example.meetup.view.home;
+package com.example.meetup.view.home.news;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -22,15 +22,11 @@ import android.view.ViewGroup;
 
 import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.ulti.Define;
-import com.example.meetup.view.adapter.NewsAdapter;
 import com.example.meetup.R;
 import com.example.meetup.databinding.NewsFragmentBinding;
-import com.example.meetup.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.disposables.CompositeDisposable;
 
 public class NewsFragment extends Fragment {
     private RecyclerView recyclerView;

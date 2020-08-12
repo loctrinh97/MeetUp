@@ -1,9 +1,13 @@
 package com.example.meetup.services;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.Html;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.text.HtmlCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -49,6 +53,7 @@ public class LoadInforWorker extends Worker {
     private void loadEventsFromApi() {
         EventService eventService = apiUtils.getEventService();
         eventService.getListPopularEvents().enqueue(new Callback<EventResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(@NotNull Call<EventResponse> call, @NotNull Response<EventResponse> response) {
                 if (response.body() != null) {
@@ -59,8 +64,8 @@ public class LoadInforWorker extends Worker {
                     List<Event> eventList = new ArrayList<>();
                     for (EventGetFromApi e : eventGetFromApis) {
                         String desRaw = null;
-                        if (e.getDescriptionRaw() != null) {
-                            desRaw = e.getDescriptionRaw().replaceAll("<p>", "").replaceAll("</p>", "");
+                        if(e.getDescriptionHtml()!=null) {
+                            desRaw = String.valueOf(Html.fromHtml(e.getDescriptionHtml(), Html.FROM_HTML_MODE_COMPACT));
                         }
                         Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
                         Venue venue = e.getVenue();
