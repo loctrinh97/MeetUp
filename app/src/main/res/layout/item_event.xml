@@ -6,8 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13dp"
-        android:background="#ffffff"
-        android:paddingBottom="13dp">
+        android:background="@color/colorBackground">
 
 
         <ImageView
@@ -26,7 +25,8 @@
             android:id="@+id/image_join"
             android:drawablePadding="@dimen/_10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_height="@dimen/_26dp"
             android:layout_marginTop="@dimen/_14dp"
             android:layout_marginEnd="@dimen/_16dp"
             android:src="@drawable/ic_join"
@@ -95,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvEventDescription"
             android:ellipsize="end"
             android:text="@{event.descriptionRaw}"
             android:maxLines="2"

@@ -233,4 +233,18 @@ public class Event {
     public void setMyStatus(int myStatus) {
         this.myStatus = myStatus;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", photo='" + photo + '\'' +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
+                ", myStatus=" + myStatus +
+                ", goingCount=" + goingCount +
+                ", descriptionRaw='" + descriptionRaw + '\'' +
+                ", venueId=" + venueId +
+                '}';
+    }
 }

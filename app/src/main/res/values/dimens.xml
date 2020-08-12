@@ -38,4 +38,5 @@
     <dimen name="_18dp">18dp</dimen>
     <dimen name="text_size_category">18sp</dimen>
     <dimen name="_140dp">140dp</dimen>
+    <dimen name="_26dp">26dp</dimen>
 </resources>

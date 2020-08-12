@@ -32,7 +32,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
     Date currentTime = Calendar.getInstance().getTime();
     Locale locale = new Locale("vi");
     @SuppressLint("SimpleDateFormat")
-    DateFormat dateFormat = new SimpleDateFormat("E, yyyy-mm-dd",locale);
+    DateFormat dateFormat = new SimpleDateFormat("E, yyyy-MM-dd",locale);
 
 
     ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
@@ -80,6 +80,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
         String date = checkDate(event);
         holder.binding.eventDate.setText(date);
         holder.binding.goingCount.setText(event.getGoingCount()+"");
+//        holder.binding.eventName.setText(event.getName());
+//        holder.binding.tvEventDescription.setText(event.getDescriptionRaw());
         holder.bind(event);
 
     }
@@ -87,13 +89,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
         if(event.getSchedulePermanent()== null){
             @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-
-//                String sDate = event.getScheduleEndDate().replace("-","/");
-//                String eDate = event.getScheduleEndDate().replace("-","/");
-
-//                String sDate1="31/12/1998";
-//                Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-
                 Date startDate = simpleDateFormat.parse(event.getScheduleStartDate());
                 Date endDate = simpleDateFormat.parse(event.getScheduleEndDate());
 

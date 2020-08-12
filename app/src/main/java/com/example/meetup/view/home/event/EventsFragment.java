@@ -58,7 +58,8 @@ public class EventsFragment extends Fragment {
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getContext(),position+"",Toast.LENGTH_SHORT).show();
+                String test = eventList.get(position).toString();
+                Log.d("Event", "onItemClick: "+ test);
             }
         });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
