@@ -1,4 +1,4 @@
-package com.example.meetup.viewmodel;
+package com.example.meetup.view.home.news;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

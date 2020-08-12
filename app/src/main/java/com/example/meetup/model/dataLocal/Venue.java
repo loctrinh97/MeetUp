@@ -6,15 +6,20 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 
 @Entity(tableName = "venues")
 public class Venue {
-
+    @Expose
     @PrimaryKey
     @ColumnInfo(name = "id")
     private  int id;
+    @Expose
     @ColumnInfo(name = "name")
     private String name;
+    @Expose
     @ColumnInfo(name = "type")
     private int type;
     @ColumnInfo(name = "description")
@@ -25,10 +30,16 @@ public class Venue {
     private String contactPhone;
     @ColumnInfo(name = "contact_address")
     private String contactAddress;
+    @SerializedName("geo_area")
+    @Expose
     @ColumnInfo(name = "geo_area")
     private String geoArea;
+    @SerializedName("geo_long")
+    @Expose
     @ColumnInfo(name = "geo_long")
     private String geoLong;
+    @SerializedName("geo_lat")
+    @Expose
     @ColumnInfo(name = "geo_lat")
     private String geoLat;
     public Venue(){

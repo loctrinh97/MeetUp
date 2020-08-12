@@ -1,6 +1,5 @@
 package com.example.meetup.model.response;
 
-import com.example.meetup.model.dataLocal.News;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -22,7 +21,6 @@ public class EventResponse {
         this.response = response;
     }
 
-
     @Override
     public String toString() {
         return "EventResponse{" +
@@ -37,19 +35,21 @@ public class EventResponse {
     public void setStatus(int status) {
         this.status = status;
     }
+
+
+
     public static class Response{
         @SerializedName("events")
         @Expose
         List<EventGetFromApi> events;
 
         public List<EventGetFromApi> getEvents() {
-            return events;
+                return events;
         }
 
         public void setEvents(List<EventGetFromApi> events) {
             this.events = events;
         }
+
     }
-
-
 }

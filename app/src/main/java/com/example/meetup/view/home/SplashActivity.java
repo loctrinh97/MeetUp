@@ -13,25 +13,28 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.example.meetup.R;
+import com.example.meetup.view.home.event.EventsRepository;
 import com.example.meetup.services.LoadInforWorker;
-import com.example.meetup.services.LoadPersonalWorker;
+//import com.example.meetup.services.LoadPersonalWorker;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.view.registerlogin.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
-    private Handler delay = new Handler();
-    OneTimeWorkRequest workRequest;
-
+private Handler delay = new Handler();
+OneTimeWorkRequest workRequest;
+EventsRepository repository = EventsRepository.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //worker
-        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-        OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadPersonalWorker.class);
-        myBuilder.setConstraints(constraints);
-        workRequest = myBuilder.build();
-        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+        int event = repository.getCountEvent();
+        if(event==0) {
+            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+            OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
+            myBuilder.setConstraints(constraints);
+            workRequest = myBuilder.build();
+            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+        }
         // hide notification bar
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -51,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
                     ignored.printStackTrace();
                 }
             }
-        }, 100);
+        },1000);
     }
 
 

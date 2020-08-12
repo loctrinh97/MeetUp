@@ -3,7 +3,6 @@ package com.example.meetup.view.registerlogin.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.meetup.R;
-import com.example.meetup.model.User;
+import com.example.meetup.model.response.User;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
 import com.example.meetup.ulti.Define;

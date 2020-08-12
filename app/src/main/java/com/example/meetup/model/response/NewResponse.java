@@ -1,7 +1,5 @@
 package com.example.meetup.model.response;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.meetup.model.dataLocal.News;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -12,9 +10,9 @@ public class NewResponse {
     @SerializedName("status")
     @Expose
     private int status;
-    @SerializedName("response")
+   @SerializedName("response")
     @Expose
-    private Response response;
+   private Response response;
 
     public Response getResponse() {
         return response;
@@ -27,7 +25,7 @@ public class NewResponse {
     @Override
     public String toString() {
         return "Response{" +
-                "news=" + response +
+                "response=" + response +
                 '}';
     }
 
@@ -38,8 +36,8 @@ public class NewResponse {
     public void setStatus(int status) {
         this.status = status;
     }
-
     public static class Response{
+        public List<News> getNews;
         @SerializedName("news")
         @Expose
         List<News> news;

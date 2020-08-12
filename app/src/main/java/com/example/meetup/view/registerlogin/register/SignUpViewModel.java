@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.meetup.R;
-import com.example.meetup.model.User;
+import com.example.meetup.model.response.User;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
 import com.example.meetup.ulti.Define;

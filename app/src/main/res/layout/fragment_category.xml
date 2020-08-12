@@ -21,8 +21,8 @@
         android:layout_marginLeft="@dimen/_16dp"
         android:layout_marginTop="@dimen/_20dp"
         android:text="@string/category"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textColor="@color/color_text_header"
+        android:textSize="@dimen/text_size_header"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/ivHeader"
         app:layout_constraintTop_toTopOf="@id/ivHeader" />
@@ -41,7 +41,7 @@
     <EditText
         android:visibility="gone"
         android:id="@+id/edtCategorySearch"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/_0dp"
         android:textSize="16sp"
         android:textColor="#000000"
         android:textColorHint="#A8A2B2"

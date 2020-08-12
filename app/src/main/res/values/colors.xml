@@ -5,9 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="color_common">#5D20CD</color>
-    <color name="color_text_defaut">#A8A2B2</color>
-    <color name="color_backgound_home">#E5E5E5</color>
+    <color name="color_text_default">#A8A2B2</color>
+    <color name="color_background_home">#E5E5E5</color>
     <color name="color_icon_default">#A8A2B3</color>
     <color name="color_alert">#91152B</color>
     <color name="black">#000000</color>
+    <color name="color_text_header">#FFFFFF</color>
 </resources>

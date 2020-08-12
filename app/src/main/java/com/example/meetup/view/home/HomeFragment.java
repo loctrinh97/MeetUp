@@ -2,19 +2,20 @@ package com.example.meetup.view.home;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.meetup.base.BaseFragment;
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
+import com.example.meetup.view.home.event.EventsFragment;
+import com.example.meetup.view.home.news.NewsFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends Fragment {
     ViewPagerAdapter adapter_home;
     ViewPager viewpager_home;
     TabLayout tabLayout;
@@ -36,8 +37,5 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-    }
+
 }

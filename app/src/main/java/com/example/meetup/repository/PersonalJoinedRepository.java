@@ -1,10 +1,10 @@
 package com.example.meetup.repository;
 
-import com.example.meetup.model.dataLocal.UsersEvents;
-import com.example.meetup.repository.dao.NewsDAO;
+import android.widget.Toast;
+
 import com.example.meetup.repository.dao.UserEventDao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PersonalJoinedRepository {
     private static PersonalJoinedRepository personalJoinedRepository;
@@ -21,7 +21,23 @@ public class PersonalJoinedRepository {
         this.userEventDao = userEventDao;
     }
 
-    public List<UsersEvents> getJoinedList() {
-        return userEventDao.getListEventsJoined();
+    public void deleteUsersEvents() {
+        userEventDao.deleteUsersEvents();
+    }
+
+    public void updateUsersEvents(ArrayList listIdJoined, long status) {
+//        userEventDao.updateUsersEvent(listIdJoined,status);
+        for (int i =0 ; i < listIdJoined.size(); i++){
+            int listId = (int) listIdJoined.get(i);
+            userEventDao.updateUsersEvent(listId,status);
+        }
+
+    }
+
+    public void getEventStatus(ArrayList listIdJoined) {
+        for (int i =0 ; i < listIdJoined.size(); i++) {
+            int idStatus = (int) listIdJoined.get(i);
+           userEventDao.getUserEventStatus(idStatus);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.meetup.view.home;
+package com.example.meetup.view.home.news;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -21,15 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.meetup.model.dataLocal.News;
-import com.example.meetup.view.adapter.NewsAdapter;
+import com.example.meetup.ulti.Define;
 import com.example.meetup.R;
 import com.example.meetup.databinding.NewsFragmentBinding;
-import com.example.meetup.viewmodel.NewsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.disposables.CompositeDisposable;
 
 public class NewsFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -38,7 +35,7 @@ public class NewsFragment extends Fragment {
     List<News> newsList;
     int pageSize;
     private NewsFragmentBinding binding;
-    private final CompositeDisposable mDisposable  = new CompositeDisposable();
+
 
 
 
@@ -46,7 +43,7 @@ public class NewsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
     @Nullable Bundle savedInstanceState) {
         newsList = new ArrayList<>();
-        pageSize = 10;
+        pageSize = Define.PAGE_SIZE_DEFAULT;
         binding = DataBindingUtil.inflate(inflater,R.layout.news_fragment,container,false);
         newsViewModel = new ViewModelProvider(getParentFragment()).get(NewsViewModel.class);
         recyclerView = binding.recyclerNews;
@@ -73,7 +70,6 @@ public class NewsFragment extends Fragment {
         final Observer<List<News>> newsObserver = new Observer<List<News>>() {
             @Override
             public void onChanged(List<News> news) {
-                Log.d("List News Size", "onChanged: "+ news.size());
                 newsAdapter.setListNews(news);
             }
         };

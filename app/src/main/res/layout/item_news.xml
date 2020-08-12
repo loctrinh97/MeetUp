@@ -59,7 +59,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="3dp"
             android:text="@string/_cause"
-            android:textColor="@color/color_text_defaut"
+            android:textColor="@color/color_text_default"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/news_title" />
@@ -71,7 +71,7 @@
             android:layout_marginStart="@dimen/_5dp"
             android:layout_marginTop="3dp"
             android:text="@{news.author}"
-            android:textColor="@color/color_text_defaut"
+            android:textColor="@color/color_text_default"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/text_boi"
@@ -98,7 +98,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="3dp"
             android:text="@string/_from"
-            android:textColor="@color/color_text_defaut"
+            android:textColor="@color/color_text_default"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/author"
             app:layout_constraintTop_toBottomOf="@id/news_title" />
@@ -110,7 +110,7 @@
             android:layout_marginStart="@dimen/_5dp"
             android:layout_marginTop="3dp"
             android:text="@{news.feed}"
-            android:textColor="@color/color_text_defaut"
+            android:textColor="@color/color_text_default"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/text_tu"
             app:layout_constraintTop_toBottomOf="@id/news_title" />

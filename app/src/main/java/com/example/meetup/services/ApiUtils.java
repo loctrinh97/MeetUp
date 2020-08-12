@@ -8,7 +8,6 @@ public class ApiUtils {
     private CategoryService categoryService;
     public static final String BASE_URL = "http://meetup.rikkei.org/api/v0/";
     public ApiUtils(){
-
     }
 
     public CategoryService getCategoryService(){

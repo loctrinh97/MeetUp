@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.meetup.R;
 import com.example.meetup.view.home.HomeActivity;
 import com.example.meetup.view.registerlogin.resetpassword.ForgotPasswordFragment;
-import com.example.meetup.viewmodel.NewsViewModel;
 
 import java.util.Objects;
 

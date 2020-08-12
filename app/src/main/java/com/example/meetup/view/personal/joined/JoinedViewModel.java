@@ -3,7 +3,6 @@ package com.example.meetup.view.personal.joined;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.meetup.model.dataLocal.News;
 import com.example.meetup.model.dataLocal.UsersEvents;
 import com.example.meetup.repository.PersonalJoinedRepository;
 

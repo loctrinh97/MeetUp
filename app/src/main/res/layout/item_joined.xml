@@ -60,25 +60,25 @@
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/ic_calender"
-        android:layout_marginLeft="33dp"
+        android:layout_marginStart="@dimen/_33dp"
         android:layout_marginTop="@dimen/_20dp" />
 
     <TextView
         android:id="@+id/tvEventTime"
-        android:layout_marginLeft="@dimen/_10dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_18dp"
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toEndOf="@id/ivCalender"
         android:textSize="@dimen/_14sp"
-        android:textColor="#5D20CD"
         android:text="@{joined.scheduleStartDate}"
+        android:textColor="@color/color_common"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <ImageView
         android:id="@+id/ivDot"
-        android:layout_marginLeft="@dimen/_5dp"
+        android:layout_marginStart="@dimen/_5dp"
         android:layout_marginTop="@dimen/_27dp"
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toEndOf="@id/tvEventTime"
@@ -88,23 +88,23 @@
 
     <TextView
         android:id="@+id/tvPeopleJoin"
-        android:layout_marginLeft="@dimen/_10dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_18dp"
         app:layout_constraintTop_toBottomOf="@id/cvImgEvent"
         app:layout_constraintStart_toEndOf="@id/ivDot"
         android:textSize="@dimen/_14sp"
-        android:textColor="#5D20CD"
         android:text="@{joined.goingCount}"
+        android:textColor="@color/color_common"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
         android:text="@{joined.name}"
-        android:textColor="#000000"
+        android:layout_marginTop="@dimen/_3dp"
+        android:textColor="@color/black"
         android:textSize="@dimen/_16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/ivCalender"
@@ -112,11 +112,11 @@
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="@dimen/_3dp"
+        android:textColor="@color/color_text_default"
         android:text="@{joined.descriptionHtml}"
-        android:textColor="#A8A2B2"
         android:textSize="@dimen/_14sp"
         app:layout_constraintEnd_toEndOf="@id/cvImgEvent"
         app:layout_constraintStart_toStartOf="@id/ivCalender"

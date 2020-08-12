@@ -1,5 +1,6 @@
-package com.example.meetup.repository;
+package com.example.meetup.view.home.event;
 
+import com.example.meetup.repository.AppDatabase;
 import com.example.meetup.repository.dao.EventDao;
 import com.example.meetup.model.dataLocal.Event;
 
@@ -18,8 +19,8 @@ public class EventsRepository {
         this.dao = dao;
     }
 
-    public List<Event> getListEvent(){
-        return dao.getListEvents();
+    public List<Event> getListEvent(int pageSize){
+        return dao.getListEvents(pageSize);
     }
     public int getCountEvent(){
         return dao.getCountEvent();
