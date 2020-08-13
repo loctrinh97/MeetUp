@@ -13,6 +13,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.example.meetup.R;
+import com.example.meetup.services.LoadPersonalWorker;
 import com.example.meetup.view.home.event.EventsRepository;
 import com.example.meetup.services.LoadInforWorker;
 //import com.example.meetup.services.LoadPersonalWorker;
@@ -21,15 +22,16 @@ import com.example.meetup.view.registerlogin.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
-private Handler delay = new Handler();
-OneTimeWorkRequest workRequest;
-EventsRepository repository = EventsRepository.getInstance();
+    private Handler delay = new Handler();
+    OneTimeWorkRequest workRequest;
+    EventsRepository repository = EventsRepository.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int event = repository.getCountEvent();
-        if(event==0) {
-            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+        if (event == 0) {
             OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
             myBuilder.setConstraints(constraints);
             workRequest = myBuilder.build();
@@ -54,7 +56,7 @@ EventsRepository repository = EventsRepository.getInstance();
                     ignored.printStackTrace();
                 }
             }
-        },1000);
+        }, 1000);
     }
 
 
