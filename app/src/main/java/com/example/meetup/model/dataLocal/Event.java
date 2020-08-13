@@ -14,7 +14,7 @@ import io.reactivex.annotations.NonNull;
 
 @Entity(tableName = "events",indices =@Index("venue_id") ,foreignKeys = @ForeignKey(entity = Venue.class,parentColumns = "id",
                                                                             childColumns = "venue_id",
-                                                                            onDelete = ForeignKey.CASCADE) )
+                                                                            onDelete = ForeignKey.CASCADE))
 public class Event {
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -54,9 +54,10 @@ public class Event {
     private String scheduleOneDayEvent;
     @ColumnInfo(name = "schedule_extra")
     private String scheduleExtra;
-
     @ColumnInfo(name = "venue_id")
     private int venueId;
+    @ColumnInfo(name = "category_id")
+    private int categoryId;
     @Ignore
     public Event(int id, String photo, String name, String link, int myStatus, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId) {
         this.id = id;
@@ -78,6 +79,8 @@ public class Event {
         this.scheduleOneDayEvent = scheduleOneDayEvent;
         this.scheduleExtra = scheduleExtra;
         this.venueId = venueId;
+        categoryId = 0;
+
     }
     public Event(){
 
@@ -234,17 +237,11 @@ public class Event {
         this.myStatus = myStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", photo='" + photo + '\'' +
-                ", name='" + name + '\'' +
-                ", link='" + link + '\'' +
-                ", myStatus=" + myStatus +
-                ", goingCount=" + goingCount +
-                ", descriptionRaw='" + descriptionRaw + '\'' +
-                ", venueId=" + venueId +
-                '}';
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

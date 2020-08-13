@@ -22,7 +22,7 @@ import com.example.meetup.model.dataLocal.News;
 @Database(entities = {News.class, Event.class, Category.class, Venue.class, EventsCategories.class, UsersEvents.class},version = AppDatabase.DATABASE_VERSION,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase database=null;
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "Meetup_database";
 
     public abstract VenueDao getVenueDao();

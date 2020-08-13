@@ -16,6 +16,8 @@ public interface EventDao {
     int getCountEvent();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertEvents(List<Event> events);
+    @Query("update events set my_status = :myStatus where id = :eventId")
+    void updateEvent(int myStatus,int eventId);
     @Query("delete from events")
     void deleteEvents();
 }

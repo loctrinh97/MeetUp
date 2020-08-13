@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="category"
+            type="com.example.meetup.model.dataLocal.Category" />
+        <variable
+            name="venue"
+            type="com.example.meetup.model.dataLocal.Venue" />
+        <variable
+            name="event"
+            type="com.example.meetup.model.dataLocal.Event" />
+    </data>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -200,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16dp"
                 android:layout_marginTop="@dimen/_17dp"
-                android:text="UK ports preparing to host EU custom checks"
+                android:text="@{event.name}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_20sp"
                 android:textStyle="bold"
@@ -227,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_24dp"
                 android:layout_marginTop="@dimen/_11dp"
-                android:text="Thứ 4, 2019/11/11"
+
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sp"
                 app:layout_constraintStart_toEndOf="@id/tvTextTime"
@@ -251,7 +260,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16dp"
-                android:text="Rikkeisoft Hà Nội"
+                android:text="@{venue.name}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sp"
                 app:layout_constraintStart_toStartOf="@id/tvTime"
@@ -263,7 +272,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5dp"
                 android:layout_marginEnd="@dimen/_16dp"
-                android:text="Tầng 15, tòa nhà Sông Đà, Mễ Trì, Nam Từ Liêm, Hà Nội"
+                android:text="@{venue.description}"
                 android:textColor="#A8A2B2"
                 android:textSize="@dimen/_16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -314,7 +323,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16dp"
-                android:text="Công nghệ, IT"
+                android:text="@{category.name}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sp"
                 app:layout_constraintStart_toStartOf="@id/tvTime"
@@ -383,7 +392,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="The BBC is reporting that plans are underway for EU border checks in Britain for trade bound for Northern Ireland. The BBC has learned that freight could be diverted through ports with space for inspections such as Liverpool and Stranraer, despite the government denying checks will be necessary, reports the media outlet."
+                android:text="@{event.descriptionRaw}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16dp"
                 android:id="@+id/tvEventDescription"
@@ -408,4 +417,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

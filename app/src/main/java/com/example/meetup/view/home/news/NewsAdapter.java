@@ -30,11 +30,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
         @Override
         public void getOutline(View view, Outline outline) {
-            outline.setRoundRect(0,0,view.getWidth(),view.getHeight()+90,90F);
+            outline.setRoundRect(0, 0, view.getWidth(), view.getHeight() + 90, 90F);
         }
     };
     Context context;
-    public NewsAdapter(List<News> NewsList,Context context) {
+
+    public NewsAdapter(List<News> NewsList, Context context) {
         this.listNews = NewsList;
         this.context = context;
     }
@@ -52,7 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final NewsAdapter.ViewHolder holder, int position) {
         News news = listNews.get(position);
 
-        if(news.getThumb()!=null){
+        if (news.getThumb() != null) {
             Glide.with(context)
                     .load(news.getThumb())
 //                    .placeholder(drawable.error)
@@ -60,7 +61,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                          holder.binding.thumbnail.setVisibility(View.GONE);
+                            holder.binding.thumbnail.setVisibility(View.GONE);
                             return false;
                         }
 
@@ -73,26 +74,26 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             ImageView image = holder.binding.thumbnail;
             image.setOutlineProvider(viewOutlineProvider);
             image.setClipToOutline(true);
-        }
-        else{
+        } else {
             holder.binding.thumbnail.setVisibility(View.GONE);
         }
-        if(news.getAuthor().isEmpty()){
+        if (news.getAuthor().isEmpty()) {
             holder.binding.textBoi.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             holder.binding.textBoi.setVisibility(View.VISIBLE);
         }
-        String date = news.getPublishDate().substring(0,9);
+        String date = news.getPublishDate().substring(0, 10);
         news.setPublishDate(date);
         holder.bind(news);
 
 
     }
-    public void setListNews(List<News> news){
+
+    public void setListNews(List<News> news) {
         this.listNews = news;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         return listNews.size();
@@ -122,11 +123,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 

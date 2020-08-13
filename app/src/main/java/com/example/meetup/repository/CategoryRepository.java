@@ -24,8 +24,11 @@ public class CategoryRepository {
     public void insertCategories(List<Category> categories){
         dao.insertCategories(categories);
     }
-    public void deleteCaregories(){
+    public void deleteCategories(){
         dao.deleteCategories();
+    }
+    public int getCountCategories(){
+        return dao.getCountCategories();
     }
 
 }
