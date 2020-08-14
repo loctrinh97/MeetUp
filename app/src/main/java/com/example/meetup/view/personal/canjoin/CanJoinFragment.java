@@ -1,9 +1,11 @@
 package com.example.meetup.view.personal.canjoin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.view.personal.joined.JoinedAdapter;
 import com.example.meetup.view.personal.joined.JoinedViewModel;
+import com.example.meetup.view.registerlogin.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +65,7 @@ public class CanJoinFragment extends Fragment {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_DRAGGING) {
-                    pageSize += 10;
+                    pageSize += Define.PAGE_SIZE_DEFAULT;
                     canJoinList = joinedViewModel.getUserCanJoin(pageSize,Define.STATUS_GOING);
                     joinedAdapter.setListEvent(canJoinList);
                 }

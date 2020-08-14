@@ -43,14 +43,14 @@ public class LoadPersonalWorker extends Worker {
         return Result.success();
     }
 
-    private void loadEventJoinedFromApi(String token, final long status) {
+    private void loadEventJoinedFromApi( String token, final long status) {
     mEventJoinedServices = apiUtils.getEventJoinedServices();
     mEventJoinedServices.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
         @Override
         public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
             if (response.isSuccessful()){
                 if(response.body().getStatus() == 0 ){
-
+                    sharedPref.edit().putString("token",null);
                 }else {
                     List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                     List<Integer> listIdJoined = new ArrayList<>();
@@ -81,7 +81,7 @@ public class LoadPersonalWorker extends Worker {
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()){
                     if(response.body().getStatus() == 0 ){
-
+                        sharedPref.edit().putString("token",null);
                     }else {
                         List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                         ArrayList listIdCanJoin = new ArrayList();

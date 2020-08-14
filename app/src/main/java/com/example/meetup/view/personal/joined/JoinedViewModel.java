@@ -17,17 +17,11 @@ public class JoinedViewModel extends ViewModel {
     private MutableLiveData<List<Event>> personalJoinedList = new MutableLiveData<>();
     private MutableLiveData<List<Event>> personalCanJoinList = new MutableLiveData<>();
 
-
     public MutableLiveData<List<Event>> getList() {
         return personalJoinedList;
     }
     public MutableLiveData<List<Event>> getCanJoinList() {
         return personalCanJoinList;
-    }
-
-    public MutableLiveData<List<Event>> getCurrentList(){
-        personalJoinedList.setValue(events);
-        return personalJoinedList;
     }
 
     public JoinedViewModel(){

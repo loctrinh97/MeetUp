@@ -151,11 +151,11 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
             Date endDate = formatter.parse(event.getScheduleEndDate());
             long endDatelong = endDate.getTime();
             if (currentDate == endDatelong) {
-                notification = "Kết thúc hôm nay";
+                notification = mContext.getString(R.string.end_to_day);
             } else if (currentDate > endDatelong) {
-                notification = "Đã kết thúc";
+                notification = mContext.getString(R.string.finish);
             } else {
-                notification = "Sắp diễn ra";
+                notification = mContext.getString(R.string.upcoming);
             }
         } catch (ParseException e) {
             e.printStackTrace();

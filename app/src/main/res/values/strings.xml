@@ -49,5 +49,8 @@
     <string name="google_map_key">AIzaSyDCRFaHK-Az5QNdVcw2fOMfAf8sEhz95Jo</string>
     <string name="going_count">sẽ tham gia</string>
     <string name="_reset_pw">ĐĂT LẠI MẬT KHẨU</string>
+    <string name="end_to_day">Kết thúc hôm nay</string>
+    <string name="finish">Đã kết thúc</string>
+    <string name="upcoming">Sắp diễn ra</string>
 
 </resources>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="nearMe"
+            type="com.example.meetup.model.dataLocal.Event" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -85,7 +91,7 @@
         android:id="@+id/tvNearTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thứ 4,2019/12/11"
+        android:text="@{nearMe.scheduleStartTime}"
         android:textColor="#5D20CD"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/ivNearBackground"
@@ -97,7 +103,7 @@
         android:id="@+id/tvNearAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="40 sẽ tham gia"
+        android:text="@{nearMe.goingCount}"
         android:textColor="#5D20CD"
         app:layout_constraintTop_toBottomOf="@id/tvNearTime"
         app:layout_constraintStart_toStartOf="@id/tvNearTime"
@@ -107,7 +113,7 @@
         android:id="@+id/tvNearTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="UK ports ‘preparing to host EU customs checks’"
+        android:text="@{nearMe.name}"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/ivNearCalender"
@@ -117,3 +123,4 @@
         android:layout_marginEnd="@dimen/_17dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

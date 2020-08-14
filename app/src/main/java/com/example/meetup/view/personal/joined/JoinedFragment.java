@@ -1,10 +1,12 @@
 package com.example.meetup.view.personal.joined;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +21,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentPersonalJoinedBinding;
 import com.example.meetup.model.dataLocal.Event;
+import com.example.meetup.services.LoadPersonalWorker;
 import com.example.meetup.ulti.Define;
+import com.example.meetup.view.registerlogin.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +45,12 @@ public class JoinedFragment extends Fragment {
         joinedViewModel = new ViewModelProvider(getParentFragment()).get(JoinedViewModel.class);
         recyclerView = fragmentPersonalJoinedBinding.rvJoined;
         setUpRecyclerDisplay();
-
         final Observer<List<Event>> joinedObserver = new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> joinedList) {
                 joinedAdapter.setListEvent(joinedList);
             }
         };
-
         // test click item
 //        joinedAdapter.setOnItemClickListener(new JoinedAdapter.OnItemClickListener() {
 //            @Override
@@ -61,13 +63,12 @@ public class JoinedFragment extends Fragment {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_DRAGGING) {
-                    pageSize += 10;
+                    pageSize += Define.PAGE_SIZE_DEFAULT;
                     joinedList = joinedViewModel.getUserEventList(pageSize,Define.STATUS_WENT);
                     joinedAdapter.setListEvent(joinedList);
                 }
             }
         });
-
         joinedViewModel.getList().observe(getViewLifecycleOwner(),joinedObserver);
         fragmentPersonalJoinedBinding.setLifecycleOwner(this);
         fragmentPersonalJoinedBinding.srlPersonalJoinedSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
