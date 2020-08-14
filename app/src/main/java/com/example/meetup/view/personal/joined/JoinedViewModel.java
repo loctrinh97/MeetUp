@@ -45,8 +45,3 @@ public class JoinedViewModel extends ViewModel {
         personalCanJoinList.postValue(events);
         return events;
     }}
-//    public List<Event> getEventList(int pageSize) {
-//        eventList = eventsRepository.getListEvent(pageSize);
-//        list.postValue(eventList);
-//        return eventList;
-//    }

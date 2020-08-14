@@ -6,6 +6,7 @@ public class ApiUtils {
     private  EventService eventService;
     private NewsService newsService;
     private CategoryService categoryService;
+    private VenueServices venueServices;
     public static final String BASE_URL = "http://meetup.rikkei.org/api/v0/";
     public ApiUtils(){
     }
@@ -42,5 +43,12 @@ public class ApiUtils {
             eventJoinedServices = RetrofitClient.getClient(BASE_URL).create(EventJoinedServices.class);
         }
         return eventJoinedServices;
+    }
+
+    public VenueServices getVenueServices(){
+        if (venueServices == null){
+            venueServices = RetrofitClient.getClient(BASE_URL).create(VenueServices.class);
+        }
+        return venueServices;
     }
 }

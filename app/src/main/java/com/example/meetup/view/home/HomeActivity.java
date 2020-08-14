@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.example.meetup.R;
 import com.example.meetup.services.LoadPersonalWorker;
+import com.example.meetup.services.LoadVenueWoker;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.example.meetup.view.category.CategoryFragment;
@@ -46,6 +47,12 @@ public class HomeActivity extends AppCompatActivity {
         mBuider.setConstraints(constraints);
         oneTimeWorkRequest = mBuider.build();
         WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
+
+        OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
+        mBuiderLoadVenue.setConstraints(constraints);
+        oneTimeWorkRequest = mBuiderLoadVenue.build();
+        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
+
 
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());

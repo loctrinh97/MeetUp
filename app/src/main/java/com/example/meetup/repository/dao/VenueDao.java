@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.meetup.model.dataLocal.Venue;
+
+import java.util.List;
+
 @Dao
 public interface VenueDao {
     @Query("select count(id) from venues")

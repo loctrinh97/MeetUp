@@ -22,6 +22,7 @@ import com.example.meetup.ulti.MyApplication;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +32,7 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
     private Context mContext;
     private List<Event> listEvent;
     private String notification;
+    private List<String> noti = new ArrayList<>();
 
     Locale locale = new Locale("vi");
     @SuppressLint("SimpleDateFormat")
@@ -66,7 +68,6 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         holder.itemJoinedBinding.ivPhoto.setOutlineProvider(viewOutlineProvider);
         holder.itemJoinedBinding.ivPhoto.setClipToOutline(true);
         String date = checkDate(event);
-        checkEndDay(event);
         if (event.getMyStatus() == 1) {
             Glide.with(mContext)
                     .load(R.drawable.ic_can_join)
@@ -76,17 +77,18 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
                     .load(R.drawable.ic_joined)
                     .into(holder.itemJoinedBinding.ivStatus);
         }
-        ;
+        checkEndDay(event);
+        noti.add(notification);
+        if (position >= 1 && noti.size() > position && notification.equals(noti.get(position - 1))) {
+            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
+        }else {
+            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
+        }
         holder.itemJoinedBinding.btnViewEndTime.setText(notification);
         holder.itemJoinedBinding.tvEventTime.setText(date);
-//      holder.itemJoinedBinding.tvEventTime.setText(event.getScheduleStartDate());
         holder.itemJoinedBinding.tvPeopleJoin.setText(event.getGoingCount() + " " + MyApplication.getAppContext().getString(R.string.will_join));
         holder.itemJoinedBinding.tvDescription.setText(Html.fromHtml(event.getDescriptionHtml().substring(0, 110) + "..."));
         holder.bind(event);
-    }
-
-    private void checkVisibility(int position) {
-
     }
 
 

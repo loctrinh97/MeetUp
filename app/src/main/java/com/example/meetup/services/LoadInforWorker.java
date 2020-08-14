@@ -65,7 +65,11 @@ public class LoadInforWorker extends Worker {
                     for (EventGetFromApi e : eventGetFromApis) {
                         String desRaw = null;
                         if(e.getDescriptionHtml()!=null) {
-                            desRaw = String.valueOf(Html.fromHtml(e.getDescriptionHtml(), Html.FROM_HTML_MODE_COMPACT));
+                            if (((int)Build.VERSION.SDK_INT) >= 24){
+                                desRaw = String.valueOf(Html.fromHtml(e.getDescriptionHtml(), Html.FROM_HTML_MODE_COMPACT));
+                            } else {
+                                desRaw = String.valueOf(Html.fromHtml(e.getDescriptionHtml())) ;
+                            }
                         }
                         Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
                         Venue venue = e.getVenue();

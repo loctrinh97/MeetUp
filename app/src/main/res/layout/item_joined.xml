@@ -13,11 +13,9 @@
 
     <Button
         android:id="@+id/btnViewEndTime"
-        android:paddingLeft="@dimen/_20dp"
-        android:paddingRight="@dimen/_20dp"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="@dimen/_15dp"
+        android:layout_marginTop="@dimen/_10dp"
         android:background="@drawable/ic_btn_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_154dp"
             android:layout_marginLeft="@dimen/_16dp"
-            android:layout_marginTop="@dimen/_15dp"
+            android:layout_marginTop="@dimen/_10dp"
             android:layout_marginRight="@dimen/_16dp"
             android:background="@color/black"
             app:layout_constraintDimensionRatio="2.22"
@@ -112,7 +110,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_3dp"
         android:textColor="@color/color_text_default"
-
         android:textSize="@dimen/_14sp"
         app:layout_constraintEnd_toEndOf="@id/ivPhoto"
         app:layout_constraintStart_toStartOf="@id/ivCalender"
