@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/ivItemNearBackground"
         android:background="@drawable/ic_item_event_near_bg"
@@ -57,7 +61,7 @@
         android:layout_marginTop="@dimen/_2dp"/>
 
     <TextView
-        android:id="@+id/ItemNearTitle"
+        android:id="@+id/tvItemNearTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="UK ports ‘preparing to host EU customs checks’"
@@ -70,3 +74,5 @@
         android:layout_marginEnd="@dimen/_17dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

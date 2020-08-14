@@ -17,7 +17,9 @@ public class CategoryRepository {
     public CategoryRepository(CategoryDao dao){
         this.dao = dao;
     }
-
+    public Category getCategory(int categoryId){
+        return dao.getCategory(categoryId);
+    }
     public List<Category> getCategories(){
         return dao.getListCategories();
     }

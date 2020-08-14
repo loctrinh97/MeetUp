@@ -19,6 +19,9 @@ public class VenueRepository {
         this.dao = dao;
     }
 
+    public Venue getVenue(int venueId){
+        return dao.getVenue(venueId);
+    }
     public void insertVenue(Venue venue) {
         dao.insertVenue(venue);
     }

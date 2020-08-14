@@ -56,7 +56,7 @@ CategoryRepository repository = CategoryRepository.getInstance();
                     ignored.printStackTrace();
                 }
             }
-        },4000);
+        },1000);
     }
 
 

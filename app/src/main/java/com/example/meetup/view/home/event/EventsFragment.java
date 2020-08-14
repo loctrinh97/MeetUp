@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +33,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class EventsFragment extends Fragment{
@@ -44,7 +47,7 @@ public class EventsFragment extends Fragment{
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     CategoryRepository repository = CategoryRepository.getInstance();
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         eventList = new ArrayList<>();
@@ -62,7 +65,12 @@ public class EventsFragment extends Fragment{
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                FragmentManager fm  = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                EventDetailFragment fragment = new EventDetailFragment(eventList.get(position),getContext());
+                fragmentTransaction.replace(R.id.activity,fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
 
             @Override
@@ -94,12 +102,14 @@ public class EventsFragment extends Fragment{
         });
         return binding.getRoot();
     }
-// TODO set lai su kien joinCheck
+
     private void joinCheck(final int position) {
         String token = sharedPref.getString("token", "null");
         if (token.equalsIgnoreCase("null")) {
-//            DialogLogin dialogLogin = new DialogLogin();
-//            dialogLogin.showDialog(getActivity());
+            DialogLogin dialogLogin = new DialogLogin();
+            dialogLogin.showDialog(getActivity());
+
+        } else {
             BottomDialogFragment bottomDialog = new BottomDialogFragment(eventList.get(position).getMyStatus());
             bottomDialog.show(getChildFragmentManager(),"");
             bottomDialog.setBottomListener(new BottomDialogFragment.BottomListener() {
@@ -110,8 +120,6 @@ public class EventsFragment extends Fragment{
                     adapter.setEventList(eventList);
                 }
             });
-        } else {
-
         }
 
     }

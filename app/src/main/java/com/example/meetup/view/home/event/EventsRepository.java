@@ -31,6 +31,9 @@ public class EventsRepository {
     public void deleteEvents(){
         dao.deleteEvents();
     }
+    public Event getEvent(int eventId){
+        return dao.getEvent(eventId);
+    }
     public void updateEvent(int myStatus, int eventId){
         dao.updateEvent(myStatus,eventId);
     }

@@ -12,6 +12,8 @@ import java.util.List;
 public interface CategoryDao {
     @Query("select * from categories")
     List<Category> getListCategories();
+    @Query("select * from categories where id = :id")
+    Category getCategory(int id);
     @Query("select count(id) from categories")
     int getCountCategories();
     @Query("delete from categories")

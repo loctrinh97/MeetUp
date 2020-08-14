@@ -12,6 +12,8 @@ import java.util.List;
 public interface EventDao {
     @Query("select * from events  order by going_count desc limit :pageSize")
     List<Event> getListEvents(int pageSize);
+    @Query("select * from events where id = :eventId")
+    Event getEvent(int eventId);
     @Query("select count(id) from events")
     int getCountEvent();
     @Insert(onConflict = OnConflictStrategy.REPLACE)

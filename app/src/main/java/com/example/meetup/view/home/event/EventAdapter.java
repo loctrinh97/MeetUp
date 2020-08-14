@@ -33,17 +33,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.meetup.ulti.Define.checkDate;
+
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
     private List<Event> eventList;
     OnItemClickListener listener;
-
     private Context context;
-    private Date currentTime = Calendar.getInstance().getTime();
-    private Locale locale = new Locale("vi");
-    @SuppressLint("SimpleDateFormat")
-    private DateFormat dateFormat = new SimpleDateFormat("E, yyyy-MM-dd", locale);
-
-
     private ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
         @Override
         public void getOutline(View view, Outline outline) {
@@ -110,27 +105,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     }
 
-    private String checkDate(Event event) {
-        if (event.getSchedulePermanent() == null) {
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date startDate = simpleDateFormat.parse(event.getScheduleStartDate());
-                Date endDate = simpleDateFormat.parse(event.getScheduleEndDate());
-
-                if (currentTime.compareTo(startDate) < 0) {
-                    return dateFormat.format(startDate);
-                } else return dateFormat.format(endDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return null;
-
-        } else {
-            return Define.EVENT_STATUS_PERMANENT;
-        }
-
-
-    }
 
     @Override
     public int getItemCount() {
