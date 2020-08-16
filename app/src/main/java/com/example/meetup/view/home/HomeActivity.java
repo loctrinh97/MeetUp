@@ -8,7 +8,10 @@ import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.meetup.R;
@@ -52,8 +55,6 @@ public class HomeActivity extends AppCompatActivity {
         mBuiderLoadVenue.setConstraints(constraints);
         oneTimeWorkRequest = mBuiderLoadVenue.build();
         WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
-
-
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         appViewPager = findViewById(R.id.app_viewPager);
@@ -63,6 +64,9 @@ public class HomeActivity extends AppCompatActivity {
         appAdapter.addFrag(new NearMeFragment(),"Gần tôi");
         appAdapter.addFrag(new CategoryFragment(),"Danh mục");
         token = loginViewModel.getPrefToken();
+        SharedPreferences sharedPref = this.getSharedPreferences("tokenPref",MODE_PRIVATE);
+        sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+
         if (token == null){
             appAdapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
         } else {
@@ -98,4 +102,14 @@ public class HomeActivity extends AppCompatActivity {
         appTabLayout.getTabAt(3).setIcon(tabIcons[3]);
         appTabLayout.setTabRippleColor(null);
     }
+    SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPref, String key) {
+            if (key.equals("token")){
+                // Write your code here
+                 token = sharedPref.getString("token",null);
+            }
+        }
+    };
+
 }

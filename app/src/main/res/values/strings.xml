@@ -52,5 +52,6 @@
     <string name="end_to_day">Kết thúc hôm nay</string>
     <string name="finish">Đã kết thúc</string>
     <string name="upcoming">Sắp diễn ra</string>
+    <string name="api_error">Không thể tải về</string>
 
 </resources>

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.example.meetup.R;
 import com.example.meetup.model.response.EventGetFromApi;
 import com.example.meetup.model.response.EventResponse;
 import com.example.meetup.repository.PersonalJoinedRepository;
@@ -43,14 +44,15 @@ public class LoadPersonalWorker extends Worker {
         return Result.success();
     }
 
-    private void loadEventJoinedFromApi( String token, final long status) {
+    private void loadEventJoinedFromApi(final String token, final long status) {
     mEventJoinedServices = apiUtils.getEventJoinedServices();
     mEventJoinedServices.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
         @Override
         public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
             if (response.isSuccessful()){
                 if(response.body().getStatus() == 0 ){
-                    sharedPref.edit().putString("token",null);
+                    sharedPref.edit().clear();
+                    sharedPref.edit().apply();
                 }else {
                     List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                     List<Integer> listIdJoined = new ArrayList<>();
@@ -67,7 +69,7 @@ public class LoadPersonalWorker extends Worker {
 
         @Override
         public void onFailure(Call<EventResponse> call, Throwable t) {
-
+            Toast.makeText(MyApplication.getAppContext(), R.string.api_error, Toast.LENGTH_LONG);
         }
     });
 
@@ -81,7 +83,8 @@ public class LoadPersonalWorker extends Worker {
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()){
                     if(response.body().getStatus() == 0 ){
-                        sharedPref.edit().putString("token",null);
+                        sharedPref.edit().clear();
+                        sharedPref.edit().apply();
                     }else {
                         List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                         ArrayList listIdCanJoin = new ArrayList();
@@ -98,7 +101,7 @@ public class LoadPersonalWorker extends Worker {
 
             @Override
             public void onFailure(Call<EventResponse> call, Throwable t) {
-
+                Toast.makeText(MyApplication.getAppContext(), R.string.api_error, Toast.LENGTH_LONG);
             }
         });
 
