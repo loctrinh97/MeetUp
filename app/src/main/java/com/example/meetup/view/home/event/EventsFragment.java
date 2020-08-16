@@ -132,8 +132,4 @@ public class EventsFragment extends Fragment{
         recyclerView.setAdapter(adapter);
     }
 
-//    @Override
-//    public void onBottonItemClicked(int position) {
-//        Log.d("Bottom", "onBottonItemClicked: "+position);
-//    }
 }
