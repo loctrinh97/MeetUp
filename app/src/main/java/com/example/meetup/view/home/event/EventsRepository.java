@@ -31,4 +31,10 @@ public class EventsRepository {
     public void deleteEvents(){
         dao.deleteEvents();
     }
+
+    public void getEventById(List<Integer> listEventNearId) {
+        for (int i = 0; i < listEventNearId.size();i++){
+            dao.getEventById(listEventNearId.get(i));
+        }
+    }
 }

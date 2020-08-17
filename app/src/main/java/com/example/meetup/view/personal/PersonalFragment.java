@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import com.example.meetup.R;
+import com.example.meetup.ulti.Define;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.example.meetup.view.personal.canjoin.CanJoinFragment;
 import com.example.meetup.view.personal.joined.JoinedFragment;

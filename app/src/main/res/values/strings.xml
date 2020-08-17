@@ -8,6 +8,7 @@
     <string name="please_enter_password">Mật khẩu cần có 6–16 kí tự</string>
     <string name="create_account_success">Tạo tài khoản thành công</string>
     <string name="account_exist">Tài khoản đã tồn tại</string>
+    <string name="will_join"> sẽ tham gia</string>
     <string name="error_login">Sai tài khoản hoặc mật khẩu</string>
     <string name="login_success">Đăng nhập thành công</string>
     <string name="error">Đã xảy ra lỗi</string>
@@ -48,5 +49,9 @@
     <string name="google_map_key">AIzaSyDCRFaHK-Az5QNdVcw2fOMfAf8sEhz95Jo</string>
     <string name="going_count">sẽ tham gia</string>
     <string name="_reset_pw">ĐĂT LẠI MẬT KHẨU</string>
+    <string name="end_to_day">Kết thúc hôm nay</string>
+    <string name="finish">Đã kết thúc</string>
+    <string name="upcoming">Sắp diễn ra</string>
+    <string name="api_error">Không thể tải về</string>
 
 </resources>
