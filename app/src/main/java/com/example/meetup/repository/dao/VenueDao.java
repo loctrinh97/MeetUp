@@ -6,6 +6,9 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.meetup.model.dataLocal.Venue;
+
+import java.util.List;
+
 @Dao
 public interface VenueDao {
     @Query("Select * from venues where id=:venueId")

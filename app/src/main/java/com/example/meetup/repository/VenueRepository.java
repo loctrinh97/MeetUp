@@ -3,6 +3,8 @@ package com.example.meetup.repository;
 import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.repository.dao.VenueDao;
 
+import java.util.List;
+
 public class VenueRepository {
     private static VenueRepository venueRepository;
 
@@ -29,6 +31,4 @@ public class VenueRepository {
     public int getCountVenues() {
         return dao.getCountVenues();
     }
-
-
 }

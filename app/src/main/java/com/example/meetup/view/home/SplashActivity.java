@@ -17,6 +17,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.example.meetup.R;
+import com.example.meetup.services.LoadPersonalWorker;
 import com.example.meetup.repository.CategoryRepository;
 import com.example.meetup.view.home.event.EventsRepository;
 import com.example.meetup.services.LoadInforWorker;
@@ -26,16 +27,16 @@ import com.example.meetup.view.registerlogin.LoginActivity;
 
 
 public class SplashActivity extends AppCompatActivity {
-private Handler delay = new Handler();
-OneTimeWorkRequest workRequest;
-CategoryRepository repository = CategoryRepository.getInstance();
+    private Handler delay = new Handler();
+    OneTimeWorkRequest workRequest;
+    CategoryRepository repository = CategoryRepository.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int event = repository.getCountCategories();
-        Log.d("Category", "Size: "+event);
-//            load();
+        Log.d("Category", "Size: " + event);
+        load();
 
         // hide notification bar
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
@@ -56,7 +57,7 @@ CategoryRepository repository = CategoryRepository.getInstance();
                     ignored.printStackTrace();
                 }
             }
-        },1000);
+        }, 1000);
     }
 
 
@@ -66,7 +67,7 @@ CategoryRepository repository = CategoryRepository.getInstance();
         delay.removeCallbacksAndMessages(null);
     }
 
-    public void load(){
+    public void load() {
         Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
         OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
         myBuilder.setConstraints(constraints);

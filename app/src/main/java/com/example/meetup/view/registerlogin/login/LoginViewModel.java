@@ -3,6 +3,7 @@ package com.example.meetup.view.registerlogin.login;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,8 +39,10 @@ public class LoginViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus() == Define.STATUS_CODE_SUCCESS) {
                         // save token
-                        token.putString("token", response.body().getResponse().getToken());
-                        token.commit();
+                      String testToken = response.body().getResponse().getToken();
+                      token.putString("token",testToken);
+                      token.apply();
+                      getPrefToken();
                         messLogin.setValue(MyApplication.getAppContext().getString(R.string.login_success));
                     } else {
                         messLogin.setValue(MyApplication.getAppContext().getString(R.string.error_login));

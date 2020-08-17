@@ -3,14 +3,22 @@ package com.example.meetup.view.home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.meetup.R;
+import com.example.meetup.services.LoadPersonalWorker;
+import com.example.meetup.services.LoadVenueWoker;
+import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.example.meetup.view.category.CategoryFragment;
@@ -29,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     ViewPager appViewPager;
     TabLayout appTabLayout;
 
+    OneTimeWorkRequest oneTimeWorkRequest;
+
     private int[] tabIcons = {
             R.drawable.ic_icon_home,
             R.drawable.ic_icon_located,
@@ -39,6 +49,17 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //worker
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+        OneTimeWorkRequest.Builder mBuider = new OneTimeWorkRequest.Builder(LoadPersonalWorker.class);
+        mBuider.setConstraints(constraints);
+        oneTimeWorkRequest = mBuider.build();
+        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
+
+        OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
+        mBuiderLoadVenue.setConstraints(constraints);
+        oneTimeWorkRequest = mBuiderLoadVenue.build();
+        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         appViewPager = findViewById(R.id.app_viewPager);
@@ -48,6 +69,9 @@ public class HomeActivity extends AppCompatActivity {
         appAdapter.addFrag(new NearMeFragment(),"Gần tôi");
         appAdapter.addFrag(new CategoryFragment(),"Danh mục");
         token = loginViewModel.getPrefToken();
+        SharedPreferences sharedPref = this.getSharedPreferences("tokenPref",MODE_PRIVATE);
+        sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+
         if (token == null){
             appAdapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
         } else {
@@ -72,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
     }
     private void setupTabIcons() {
 
@@ -82,4 +107,14 @@ public class HomeActivity extends AppCompatActivity {
         Objects.requireNonNull(appTabLayout.getTabAt(3)).setIcon(tabIcons[3]);
         appTabLayout.setTabRippleColor(null);
     }
+    SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPref, String key) {
+            if (key.equals("token")){
+                // Write your code here
+                 token = sharedPref.getString("token",null);
+            }
+        }
+    };
+
 }

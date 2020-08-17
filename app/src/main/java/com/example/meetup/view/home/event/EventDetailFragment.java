@@ -96,7 +96,7 @@ public class EventDetailFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Joined",Toast.LENGTH_SHORT).show();
-                status = Define.STATUS_WENt;
+                status = Define.STATUS_WENT;
                 viewModel.eventsRepository.updateEvent(status,event.getId());
                 setWithStatus(status);
             }
@@ -135,7 +135,7 @@ public class EventDetailFragment extends Fragment {
             buttonCanJoin.setEnabled(false);
             buttonJoined.setSelected(true);
             buttonJoined.setEnabled(true);
-        } else if (status == Define.STATUS_WENt) {
+        } else if (status == Define.STATUS_WENT) {
             buttonCanJoin.setSelected(false);
             buttonJoined.setSelected(false);
             buttonCanJoin.setEnabled(false);
