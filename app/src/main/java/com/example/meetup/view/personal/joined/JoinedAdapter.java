@@ -55,7 +55,6 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
     public JoinedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ItemJoinedBinding itemJoinedBinding = ItemJoinedBinding.inflate(inflater, parent, false);
-
         return new ViewHolder(itemJoinedBinding);
     }
 

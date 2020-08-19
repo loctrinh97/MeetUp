@@ -35,7 +35,7 @@ public class Event{
     @ColumnInfo(name = "description_raw")
     private String descriptionRaw;
     @ColumnInfo(name = "description_html")
-    private  String descriptionHtml;
+    private String descriptionHtml;
     @ColumnInfo(name = "schedule_permanent")
     private String schedulePermanent;
     @ColumnInfo(name = "schedule_date_warning")
@@ -58,8 +58,11 @@ public class Event{
     private int venueId;
     @ColumnInfo(name = "category_id")
     private int categoryId;
+    @ColumnInfo(name = "distance")
+    private double distance;
+
     @Ignore
-    public Event(int id, String photo, String name, String link, int myStatus, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId) {
+    public Event(int id, String photo, String name, String link, int myStatus, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId, double distance) {
         this.id = id;
         this.photo = photo;
         this.name = name;
@@ -80,11 +83,21 @@ public class Event{
         this.scheduleExtra = scheduleExtra;
         this.venueId = venueId;
         categoryId = 0;
+        distance = 0;
+    }
+
+    public Event() {
 
     }
-    public Event(){
 
+    public double getDistance() {
+        return distance;
     }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public int getId() {
         return id;
     }
@@ -244,6 +257,4 @@ public class Event{
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
-
-
 }
