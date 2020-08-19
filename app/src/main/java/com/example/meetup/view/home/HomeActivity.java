@@ -38,6 +38,8 @@ public class HomeActivity extends AppCompatActivity {
     TabLayout appTabLayout;
 
     OneTimeWorkRequest oneTimeWorkRequest;
+    OneTimeWorkRequest workRequest;
+
 
     private int[] tabIcons = {
             R.drawable.ic_icon_home,
@@ -58,8 +60,8 @@ public class HomeActivity extends AppCompatActivity {
 
         OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
         mBuiderLoadVenue.setConstraints(constraints);
-        oneTimeWorkRequest = mBuiderLoadVenue.build();
-        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
+        workRequest = mBuiderLoadVenue.build();
+        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         appViewPager = findViewById(R.id.app_viewPager);

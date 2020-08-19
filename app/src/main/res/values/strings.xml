@@ -53,5 +53,6 @@
     <string name="finish">Đã kết thúc</string>
     <string name="upcoming">Sắp diễn ra</string>
     <string name="api_error">Không thể tải về</string>
+    <string name="happenning">Đang diễn ra</string>
 
 </resources>

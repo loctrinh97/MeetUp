@@ -70,7 +70,7 @@ public class LoadInforWorker extends Worker {
                                 desRaw = String.valueOf(Html.fromHtml(e.getDescriptionHtml())) ;
                             }
                         }
-                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
+                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId(), e.getDistance());
                         Venue venue = e.getVenue();
 
                         venueRepository.insertVenue(venue);

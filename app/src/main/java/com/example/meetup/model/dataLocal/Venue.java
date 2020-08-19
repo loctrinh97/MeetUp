@@ -1,5 +1,6 @@
 package com.example.meetup.model.dataLocal;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
