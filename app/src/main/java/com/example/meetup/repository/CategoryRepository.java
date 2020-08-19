@@ -17,15 +17,20 @@ public class CategoryRepository {
     public CategoryRepository(CategoryDao dao){
         this.dao = dao;
     }
-
+    public Category getCategory(int categoryId){
+        return dao.getCategory(categoryId);
+    }
     public List<Category> getCategories(){
         return dao.getListCategories();
     }
     public void insertCategories(List<Category> categories){
         dao.insertCategories(categories);
     }
-    public void deleteCaregories(){
+    public void deleteCategories(){
         dao.deleteCategories();
+    }
+    public int getCountCategories(){
+        return dao.getCountCategories();
     }
 
 }

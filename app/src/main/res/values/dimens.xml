@@ -40,4 +40,7 @@
     <dimen name="_140dp">140dp</dimen>
     <dimen name="_26dp">26dp</dimen>
     <dimen name="_33dp">33dp</dimen>
+    <dimen name="_64dp">64dp</dimen>
+    <dimen name="_37dp">37dp</dimen>
+    <dimen name="height_bottom_item">50dp</dimen>
 </resources>

@@ -11,6 +11,8 @@ import java.util.List;
 
 @Dao
 public interface VenueDao {
+    @Query("Select * from venues where id=:venueId")
+    Venue getVenue(int venueId);
     @Query("select count(id) from venues")
     int getCountVenues();
     @Insert(onConflict = OnConflictStrategy.REPLACE)

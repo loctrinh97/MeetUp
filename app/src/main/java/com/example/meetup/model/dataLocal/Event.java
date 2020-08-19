@@ -12,9 +12,9 @@ import java.util.List;
 
 import io.reactivex.annotations.NonNull;
 
-@Entity(tableName = "events",indices =@Index("venue_id") ,foreignKeys = @ForeignKey(entity = Venue.class,parentColumns = "id",
-                                                                            childColumns = "venue_id",
-                                                                            onDelete = ForeignKey.CASCADE) )
+@Entity(tableName = "events", indices = @Index("venue_id"), foreignKeys = @ForeignKey(entity = Venue.class, parentColumns = "id",
+        childColumns = "venue_id",
+        onDelete = ForeignKey.CASCADE))
 public class Event {
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -35,7 +35,7 @@ public class Event {
     @ColumnInfo(name = "description_raw")
     private String descriptionRaw;
     @ColumnInfo(name = "description_html")
-    private  String descriptionHtml;
+    private String descriptionHtml;
     @ColumnInfo(name = "schedule_permanent")
     private String schedulePermanent;
     @ColumnInfo(name = "schedule_date_warning")
@@ -54,11 +54,15 @@ public class Event {
     private String scheduleOneDayEvent;
     @ColumnInfo(name = "schedule_extra")
     private String scheduleExtra;
-
     @ColumnInfo(name = "venue_id")
     private int venueId;
+    @ColumnInfo(name = "category_id")
+    private int categoryId;
+    @ColumnInfo(name = "distance")
+    private double distance;
+
     @Ignore
-    public Event(int id, String photo, String name, String link, int myStatus, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId) {
+    public Event(int id, String photo, String name, String link, int myStatus, int goingCount, int wentCount, String descriptionRaw, String descriptionHtml, String schedulePermanent, String scheduleDateWarning, String scheduleTimeAlert, String scheduleStartDate, String scheduleStartTime, String scheduleEndDate, String scheduleEndTime, String scheduleOneDayEvent, String scheduleExtra, int venueId, double distance) {
         this.id = id;
         this.photo = photo;
         this.name = name;
@@ -78,10 +82,22 @@ public class Event {
         this.scheduleOneDayEvent = scheduleOneDayEvent;
         this.scheduleExtra = scheduleExtra;
         this.venueId = venueId;
+        categoryId = 0;
+        this.distance = distance;
     }
-    public Event(){
+
+    public Event() {
 
     }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public int getId() {
         return id;
     }
@@ -234,17 +250,11 @@ public class Event {
         this.myStatus = myStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", photo='" + photo + '\'' +
-                ", name='" + name + '\'' +
-                ", link='" + link + '\'' +
-                ", myStatus=" + myStatus +
-                ", goingCount=" + goingCount +
-                ", descriptionRaw='" + descriptionRaw + '\'' +
-                ", venueId=" + venueId +
-                '}';
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

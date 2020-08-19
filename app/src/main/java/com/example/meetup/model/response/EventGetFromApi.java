@@ -12,6 +12,7 @@ import io.reactivex.annotations.NonNull;
 
 public class EventGetFromApi {
 
+
     @Expose
     private int id;
     @Expose
@@ -63,6 +64,17 @@ public class EventGetFromApi {
     private Venue venue;
     @Expose
     private Category category;
+    @SerializedName("distance")
+    @Expose
+    private double distance;
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
     public int getId() {
         return id;

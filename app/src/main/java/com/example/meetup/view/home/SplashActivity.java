@@ -1,10 +1,14 @@
 package com.example.meetup.view.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Constraints;
@@ -14,6 +18,7 @@ import androidx.work.WorkManager;
 
 import com.example.meetup.R;
 import com.example.meetup.services.LoadPersonalWorker;
+import com.example.meetup.repository.CategoryRepository;
 import com.example.meetup.view.home.event.EventsRepository;
 import com.example.meetup.services.LoadInforWorker;
 //import com.example.meetup.services.LoadPersonalWorker;
@@ -24,19 +29,15 @@ import com.example.meetup.view.registerlogin.LoginActivity;
 public class SplashActivity extends AppCompatActivity {
     private Handler delay = new Handler();
     OneTimeWorkRequest workRequest;
-    EventsRepository repository = EventsRepository.getInstance();
+    CategoryRepository repository = CategoryRepository.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int event = repository.getCountEvent();
-        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-        if (event == 0) {
-            OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
-            myBuilder.setConstraints(constraints);
-            workRequest = myBuilder.build();
-            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
-        }
+        int event = repository.getCountCategories();
+        Log.d("Category", "Size: " + event);
+        load();
+
         // hide notification bar
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -48,7 +49,6 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-
                     Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -64,5 +64,13 @@ public class SplashActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         delay.removeCallbacksAndMessages(null);
+    }
+
+    public void load() {
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+        OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
+        myBuilder.setConstraints(constraints);
+        workRequest = myBuilder.build();
+        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
     }
 }

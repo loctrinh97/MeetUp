@@ -7,7 +7,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.core.text.HtmlCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -46,7 +45,7 @@ public class LoadInforWorker extends Worker {
     public Result doWork() {
         loadNewsFromApi();
         loadEventsFromApi();
-//        loadCategories();
+        loadCategories();
         return Result.success();
     }
 
@@ -71,8 +70,9 @@ public class LoadInforWorker extends Worker {
                                 desRaw = String.valueOf(Html.fromHtml(e.getDescriptionHtml())) ;
                             }
                         }
-                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId());
+                        Event event = new Event(e.getId(), e.getPhoto(), e.getName(), e.getLink(), Define.STATUS_DEFAULT, e.getGoingCount(), e.getWentCount(), desRaw, e.getDescriptionHtml(), e.getSchedulePermanent(), e.getScheduleDateWarning(), e.getScheduleTimeAlert(), e.getScheduleStartDate(), e.getScheduleStartTime(), e.getScheduleEndDate(), e.getScheduleEndTime(), e.getScheduleOneDayEvent(), e.getScheduleExtra(), e.getVenue().getId(), e.getDistance());
                         Venue venue = e.getVenue();
+
                         venueRepository.insertVenue(venue);
                         eventList.add(event);
                     }
@@ -114,9 +114,9 @@ public class LoadInforWorker extends Worker {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.body() != null) {
-                    List<Category> list = response.body().getCategories();
+                    List<Category> list = response.body().getResponse().getCategories();
                     CategoryRepository categoryRepository = CategoryRepository.getInstance();
-                    categoryRepository.deleteCaregories();
+                    categoryRepository.deleteCategories();
                     categoryRepository.insertCategories(list);
                 }
             }

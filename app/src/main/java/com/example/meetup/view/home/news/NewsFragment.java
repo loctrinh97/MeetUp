@@ -36,15 +36,12 @@ public class NewsFragment extends Fragment {
     int pageSize;
     private NewsFragmentBinding binding;
 
-
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-    @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         newsList = new ArrayList<>();
         pageSize = Define.PAGE_SIZE_DEFAULT;
-        binding = DataBindingUtil.inflate(inflater,R.layout.news_fragment,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.news_fragment, container, false);
         newsViewModel = new ViewModelProvider(getParentFragment()).get(NewsViewModel.class);
         recyclerView = binding.recyclerNews;
         setUpRecyclerView();
@@ -59,10 +56,10 @@ public class NewsFragment extends Fragment {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_DRAGGING) {
-                   pageSize += 10;
-                   newsList = newsViewModel.getNewsList(pageSize);
-                   newsAdapter.setListNews(newsList);
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    pageSize += 10;
+                    newsList = newsViewModel.getNewsList(pageSize);
+                    newsAdapter.setListNews(newsList);
 
                 }
             }
@@ -73,7 +70,7 @@ public class NewsFragment extends Fragment {
                 newsAdapter.setListNews(news);
             }
         };
-        newsViewModel.getCurrentList().observe(getViewLifecycleOwner(),newsObserver);
+        newsViewModel.getCurrentList().observe(getViewLifecycleOwner(), newsObserver);
         binding.setLifecycleOwner(this);
         binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -88,20 +85,12 @@ public class NewsFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-    private void setUpRecyclerView(){
+    private void setUpRecyclerView() {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         newsList = newsViewModel.getNewsList(pageSize);
-        newsAdapter = new NewsAdapter(newsList,getContext());
+        newsAdapter = new NewsAdapter(newsList, getContext());
         recyclerView.setAdapter(newsAdapter);
 
     }

@@ -23,6 +23,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -60,6 +62,15 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull JoinedAdapter.ViewHolder holder, int position) {
+//        Collections.sort(listEvent, new Comparator<Event>() {
+//            @Override
+//            public int compare(Event o1, Event o2) {
+//                if (o1.getScheduleStartDate() == null || o1.getScheduleEndDate() == null){
+//                    return 0;
+//                }
+//                return o1.getScheduleStartDate().compareTo(o2.getScheduleStartDate());
+//            }
+//        });
         Event event = listEvent.get(position);
         Glide.with(mContext)
                 .load(event.getPhoto())
@@ -79,11 +90,11 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         }
         checkEndDay(event);
         noti.add(notification);
-        if (position >= 1 && noti.size() > position && notification.equals(noti.get(position - 1))) {
-            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
-        }else {
-            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
-        }
+//        if (position >= 1 && noti.size() > position && notification.equals(noti.get(position - 1))) {
+//            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
+//        } else {
+//            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
+//        }
         holder.itemJoinedBinding.btnViewEndTime.setText(notification);
         holder.itemJoinedBinding.tvEventTime.setText(date);
         holder.itemJoinedBinding.tvPeopleJoin.setText(event.getGoingCount() + " " + MyApplication.getAppContext().getString(R.string.will_join));
@@ -149,13 +160,20 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         long currentDate = date.getTime();
         try {
             Date endDate = formatter.parse(event.getScheduleEndDate());
+            Date startDate = formatter.parse(event.getScheduleStartDate());
             long endDatelong = endDate.getTime();
+            long startDatelong = startDate.getTime();
             if (currentDate == endDatelong) {
                 notification = mContext.getString(R.string.end_to_day);
-            } else if (currentDate > endDatelong) {
+            }
+            else if (currentDate > endDatelong) {
                 notification = mContext.getString(R.string.finish);
-            } else {
+            }
+            else if (currentDate < endDatelong) {
                 notification = mContext.getString(R.string.upcoming);
+            }
+            else if (currentDate < endDatelong && currentDate > startDatelong) {
+                notification = mContext.getString(R.string.happenning);
             }
         } catch (ParseException e) {
             e.printStackTrace();

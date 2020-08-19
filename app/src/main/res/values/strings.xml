@@ -42,7 +42,7 @@
     <string name="joined">ĐÃ THAM GIA</string>
     <string name="you_must_login">Bạn phải đăng nhập để sử dụng chức năng này.</string>
     <string name="login_lowercase">Đăng nhập</string>
-    <string name="join_lowercase">Tham gia</string>
+    <string name="join_lowercase">Đã tham gia</string>
     <string name="can_join_lowercase">Có thể tham gia</string>
     <string name="not_join">Không tham gia</string>
     <string name="near_me">Gần tôi</string>
@@ -53,5 +53,11 @@
     <string name="finish">Đã kết thúc</string>
     <string name="upcoming">Sắp diễn ra</string>
     <string name="api_error">Không thể tải về</string>
+    <string name="happenning">Đang diễn ra</string>
+    <string name="permission_ask">Ứng dụng cần quyền lấy vị trí của bạn để thực hiện tác vụ này. Vui lòng cấp quyền cho ứng dụng bằng cách</string>
+    <string name="permission_setting"><![CDATA[Cài đặt.\n\nChọn quyền -> Cấp quyền]]></string>
+    <string name="manual_access">Cấp quyền thủ công</string>
+    <string name="cancel">Hủy</string>
+    <string name="granted_permissions_success">Đã cấp quyền cho ứng dụng</string>
 
 </resources>

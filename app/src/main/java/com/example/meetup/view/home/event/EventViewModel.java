@@ -27,4 +27,10 @@ public class EventViewModel extends ViewModel{
         list.postValue(eventList);
         return eventList;
     }
+    public void updateEvent(int myStatus, int eventId){
+        eventsRepository.updateEvent(myStatus,eventId);
+    }
+    public int getCount(){
+        return eventsRepository.getCountEvent();
+    }
 }
