@@ -1,6 +1,5 @@
-package com.example.meetup.view.home.event;
+package com.example.meetup.repository;
 
-import com.example.meetup.repository.AppDatabase;
 import com.example.meetup.repository.dao.EventDao;
 import com.example.meetup.model.dataLocal.Event;
 
@@ -43,4 +42,14 @@ public class EventsRepository {
     public void updateEvent(int myStatus, int eventId){
         dao.updateEvent(myStatus,eventId);
     }
+    public void updateEventCategory(int category_id,int eventID){
+        dao.updateEventCategory(category_id,eventID);
+    }
+    public List<Event> getEventByCategory(int pageSize,int categoryId){
+        return dao.getListEventByCategory(pageSize,categoryId);
+    }
+    public  int getCountEventByCategory(int categoryId ){
+        return dao.getCountEventByCategory(categoryId);
+    }
+
 }

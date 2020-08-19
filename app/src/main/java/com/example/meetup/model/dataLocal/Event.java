@@ -15,7 +15,7 @@ import io.reactivex.annotations.NonNull;
 @Entity(tableName = "events",indices =@Index("venue_id") ,foreignKeys = @ForeignKey(entity = Venue.class,parentColumns = "id",
                                                                             childColumns = "venue_id",
                                                                             onDelete = ForeignKey.CASCADE))
-public class Event {
+public class Event{
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -244,4 +244,6 @@ public class Event {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
+
 }

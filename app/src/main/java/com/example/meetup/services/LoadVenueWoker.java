@@ -7,12 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.model.response.EventGetFromApi;
 import com.example.meetup.model.response.EventResponse;
-import com.example.meetup.repository.VenueRepository;
 import com.example.meetup.ulti.MyApplication;
-import com.example.meetup.view.home.event.EventsRepository;
+import com.example.meetup.repository.EventsRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,21 +40,19 @@ import java.util.Objects;
 
 public class EventsFragment extends Fragment{
     private RecyclerView recyclerView;
-    EventViewModel eventViewModel;
+    public EventViewModel eventViewModel;
     List<Event> eventList;
     EventAdapter adapter;
     int pageSize;
     private FragmentEventsBinding binding;
     public SharedPreferences sharedPref = MyApplication.getAppContext()
-            .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
-    CategoryRepository repository = CategoryRepository.getInstance();
+            .getSharedPreferences(Define.PRE_TOKEN, Context.MODE_PRIVATE);
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false);
         eventList = new ArrayList<>();
         pageSize = Define.PAGE_SIZE_DEFAULT;
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false);
         eventViewModel = new ViewModelProvider(getParentFragment()).get(EventViewModel.class);
         recyclerView = binding.recyclerEvents;
         setUpRecyclerView();
@@ -65,12 +65,7 @@ public class EventsFragment extends Fragment{
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                FragmentManager fm  = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                EventDetailFragment fragment = new EventDetailFragment(eventList.get(position),getContext());
-                fragmentTransaction.replace(R.id.activity,fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                showDetailEvent(position);
             }
 
             @Override
@@ -84,11 +79,8 @@ public class EventsFragment extends Fragment{
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    pageSize += 10;
-                    eventList = eventViewModel.getEventList(pageSize);
-                    adapter.setEventList(eventList);
-
-                }
+                    pageSize += Define.PAGE_SIZE_DEFAULT;
+                    eventList = eventViewModel.getEventList(pageSize); }
             }
         });
         eventViewModel.getList().observe(getViewLifecycleOwner(), eventObserver);
@@ -103,9 +95,18 @@ public class EventsFragment extends Fragment{
         return binding.getRoot();
     }
 
+    private void showDetailEvent(int position) {
+        FragmentManager fm  = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        EventDetailFragment fragment = new EventDetailFragment(eventList.get(position),getContext(),eventViewModel);
+        fragmentTransaction.replace(R.id.activity,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     private void joinCheck(final int position) {
-        String token = sharedPref.getString("token", "null");
-        if (token.equalsIgnoreCase("null")) {
+        String token = sharedPref.getString(Define.TOKEN, "");
+        if (token.isEmpty()) {
             DialogLogin dialogLogin = new DialogLogin();
             dialogLogin.showDialog(getActivity());
 

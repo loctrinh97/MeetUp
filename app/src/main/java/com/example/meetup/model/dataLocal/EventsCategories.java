@@ -14,7 +14,6 @@ public class EventsCategories {
     @ColumnInfo(name = "category_id")
     private int categoryId;
     public EventsCategories(){
-
     }
     @Ignore
     public EventsCategories(int eventID, int categoryId) {

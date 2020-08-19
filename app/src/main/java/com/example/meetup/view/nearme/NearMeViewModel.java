@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.meetup.model.dataLocal.Event;
-import com.example.meetup.view.home.event.EventsRepository;
+import com.example.meetup.repository.EventsRepository;
 
 import java.util.List;
 

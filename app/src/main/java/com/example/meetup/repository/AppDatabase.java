@@ -12,6 +12,7 @@ import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.EventsCategories;
 import com.example.meetup.model.dataLocal.UsersEvents;
 import com.example.meetup.model.dataLocal.Venue;
+import com.example.meetup.repository.dao.EventsCategoriesDao;
 import com.example.meetup.repository.dao.UserEventDao;
 import com.example.meetup.repository.dao.VenueDao;
 import com.example.meetup.ulti.MyApplication;
@@ -24,6 +25,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "Meetup_database";
 
+    public abstract EventsCategoriesDao getEventsCategoriesDao();
     public abstract VenueDao getVenueDao();
     public abstract CategoryDao getCategoryDao();
     public abstract NewsDAO getNewsDao();

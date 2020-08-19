@@ -22,9 +22,13 @@ public interface EventDao {
 
     @Query("update events set my_status = :myStatus where id = :eventId")
     void updateEvent(int myStatus,int eventId);
+    @Query("update events set category_id = :category_id where id = :eventId")
+    void updateEventCategory(int category_id,int eventId);
     @Query("delete from events")
     void deleteEvents();
 
-//    @Query("select e.id, e.my_status,e.went_count,e.venue_id, e.photo, e.name,e.schedule_start_date, e.going_count, v.name, v.contact_address, v.geo_long, v.geo_lat from events e, venues v where e.id =:eventNearId and e.venue_id == v.id ")
-//    List<Event> getEventById(int eventNearId);
+    @Query("select * from events where category_id = :categoryId Order by going_count desc limit :pageSize")
+    List<Event> getListEventByCategory(int pageSize,int categoryId);
+    @Query("select count(*) from events where category_id = :categoryId")
+    int getCountEventByCategory(int categoryId);
 }
