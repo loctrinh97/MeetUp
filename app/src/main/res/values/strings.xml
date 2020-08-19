@@ -54,5 +54,10 @@
     <string name="upcoming">Sắp diễn ra</string>
     <string name="api_error">Không thể tải về</string>
     <string name="happenning">Đang diễn ra</string>
+    <string name="permission_ask">Ứng dụng cần quyền lấy vị trí của bạn để thực hiện tác vụ này. Vui lòng cấp quyền cho ứng dụng bằng cách</string>
+    <string name="permission_setting"><![CDATA[Cài đặt.\n\nChọn quyền -> Cấp quyền]]></string>
+    <string name="manual_access">Cấp quyền thủ công</string>
+    <string name="cancel">Hủy</string>
+    <string name="granted_permissions_success">Đã cấp quyền cho ứng dụng</string>
 
 </resources>

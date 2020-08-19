@@ -98,8 +98,6 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
 
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
                 .PERMISSION_GRANTED) {
-            //You can show permission rationale if shouldShowRequestPermissionRationale() returns true.
-            //I will skip it for this demo
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (PermissionUtils.neverAskAgainSelected(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
                     displayNeverAskAgainDialog();
@@ -126,10 +124,10 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
 
     private void displayNeverAskAgainDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("We need to send SMS for performing necessary task. Please permit the permission through "
-                + "Settings screen.\n\nSelect Permissions -> Enable permission");
+        builder.setMessage(getString(R.string.permission_ask)
+                + getString(R.string.permission_setting));
         builder.setCancelable(false);
-        builder.setPositiveButton("Permit Manually", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.manual_access, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -140,7 +138,7 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                 startActivity(intent);
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(R.string.cancel, null);
         builder.show();
     }
 
@@ -149,7 +147,7 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
             grantResults) {
         if (REQUEST_CODE_GPS_PERMISSION == requestCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getContext(), "Permission granted successfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.granted_permissions_success, Toast.LENGTH_LONG).show();
             } else {
                 PermissionUtils.setShouldShowStatus(getContext(), Manifest.permission.SEND_SMS);
             }
