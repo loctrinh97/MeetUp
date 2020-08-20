@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Outline;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,32 +18,36 @@ import com.bumptech.glide.Glide;
 import com.example.meetup.R;
 import com.example.meetup.databinding.ItemJoinedBinding;
 import com.example.meetup.model.dataLocal.Event;
+import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder> {
+    public static final String GOING = " sẽ tham gia";
+    Locale locale = new Locale("vi");
     private OnItemClickListener listener;
     private Context mContext;
     private List<Event> listEvent;
-    private String notification;
-    private List<String> noti = new ArrayList<>();
-
-    Locale locale = new Locale("vi");
-    @SuppressLint("SimpleDateFormat")
-    DateFormat dateFormat = new SimpleDateFormat("E, yyyy-MM-dd", locale);
+    private static Date currentTime = Calendar.getInstance().getTime();
+    private String[] timeStamp = {"HÔM NAY", "NGÀY MAI", "CUỐI TUẦN NÀY", "TUẦN TỚI", "CUỐI THÁNG NÀY", "THÁNG SAU TRỞ ĐI", "VĨNH VIỄN"};
+    private int[] flag = new int[7];
+    private static final int EMPTY = -1;
 
     public JoinedAdapter(List<Event> event, Context context) {
         this.listEvent = event;
         this.mContext = context;
+        sort();
     }
 
     @NonNull
@@ -60,17 +65,9 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         }
     };
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull JoinedAdapter.ViewHolder holder, int position) {
-//        Collections.sort(listEvent, new Comparator<Event>() {
-//            @Override
-//            public int compare(Event o1, Event o2) {
-//                if (o1.getScheduleStartDate() == null || o1.getScheduleEndDate() == null){
-//                    return 0;
-//                }
-//                return o1.getScheduleStartDate().compareTo(o2.getScheduleStartDate());
-//            }
-//        });
         Event event = listEvent.get(position);
         Glide.with(mContext)
                 .load(event.getPhoto())
@@ -78,7 +75,7 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
                 .into(holder.itemJoinedBinding.ivPhoto);
         holder.itemJoinedBinding.ivPhoto.setOutlineProvider(viewOutlineProvider);
         holder.itemJoinedBinding.ivPhoto.setClipToOutline(true);
-        String date = checkDate(event);
+
         if (event.getMyStatus() == 1) {
             Glide.with(mContext)
                     .load(R.drawable.ic_can_join)
@@ -88,17 +85,28 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
                     .load(R.drawable.ic_joined)
                     .into(holder.itemJoinedBinding.ivStatus);
         }
-        checkEndDay(event);
-        noti.add(notification);
-//        if (position >= 1 && noti.size() > position && notification.equals(noti.get(position - 1))) {
-//            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
-//        } else {
-//            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
-//        }
-        holder.itemJoinedBinding.btnViewEndTime.setText(notification);
+
+        for (int i = Define.TODAY; i <= Define.PERMANENT; i++) {
+            if (flag[i] == position) {
+                holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
+                holder.itemJoinedBinding.btnViewEndTime.setText(timeStamp[i]);
+                break;
+            } else {
+                holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
+            }
+        }
+        String date = Define.checkDate(event);
         holder.itemJoinedBinding.tvEventTime.setText(date);
-        holder.itemJoinedBinding.tvPeopleJoin.setText(event.getGoingCount() + " " + MyApplication.getAppContext().getString(R.string.will_join));
-        holder.itemJoinedBinding.tvDescription.setText(Html.fromHtml(event.getDescriptionHtml().substring(0, 110) + "..."));
+        if (event.getGoingCount() == 0) {
+            holder.itemJoinedBinding.ivDot.setVisibility(View.GONE);
+            holder.itemJoinedBinding.tvPeopleJoin.setVisibility(View.GONE);
+        } else {
+            holder.itemJoinedBinding.ivDot.setVisibility(View.VISIBLE);
+            holder.itemJoinedBinding.tvPeopleJoin.setVisibility(View.VISIBLE);
+            holder.itemJoinedBinding.tvPeopleJoin.setText(event.getGoingCount() + GOING);
+        }
+
+        holder.itemJoinedBinding.tvDescription.setText(event.getDescriptionRaw());
         holder.bind(event);
     }
 
@@ -132,6 +140,7 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
 
     public void setListEvent(List<Event> event) {
         this.listEvent = event;
+        sort();
         notifyDataSetChanged();
     }
 
@@ -143,41 +152,91 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         this.listener = listener;
     }
 
-    private String checkDate(Event event) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date startDate = simpleDateFormat.parse(event.getScheduleStartDate());
-            return dateFormat.format(startDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+    private void clear() {
+        for (int i = 0; i < 7; i++) {
+            flag[i] = EMPTY;
         }
-        return null;
     }
 
-    public void checkEndDay(Event event) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        long currentDate = date.getTime();
-        try {
-            Date endDate = formatter.parse(event.getScheduleEndDate());
-            Date startDate = formatter.parse(event.getScheduleStartDate());
-            long endDatelong = endDate.getTime();
-            long startDatelong = startDate.getTime();
-            if (currentDate == endDatelong) {
-                notification = mContext.getString(R.string.end_to_day);
+    private void sort() {
+        clear();
+        Collections.sort(listEvent, comparator);
+        for (int i = 0; i < listEvent.size(); i++) {
+            Event e = listEvent.get(i);
+            if (e.getSchedulePermanent() == null) {
+                check(e, i);
+            } else {
+                if (flag[Define.PERMANENT] == EMPTY)
+                    flag[Define.PERMANENT] = i;
             }
-            else if (currentDate > endDatelong) {
-                notification = mContext.getString(R.string.finish);
-            }
-            else if (currentDate < endDatelong) {
-                notification = mContext.getString(R.string.upcoming);
-            }
-            else if (currentDate < endDatelong && currentDate > startDatelong) {
-                notification = mContext.getString(R.string.happenning);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
-
     }
+
+    private void check(Event e, int position) {
+
+        try {
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, yyyy-MM-dd", locale);
+            Date date = simpleDateFormat.parse(Objects.requireNonNull(Define.checkDate(e)));
+            Calendar calendar = Calendar.getInstance();
+            Calendar eventCalendar = Calendar.getInstance();
+            eventCalendar.setTime(Objects.requireNonNull(date));
+            calendar.setTime(currentTime);
+            int currentDay = calendar.get(Calendar.DAY_OF_YEAR);
+            int currentMonth = calendar.get(Calendar.MONTH);
+            int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+            int eventDay = eventCalendar.get(Calendar.DAY_OF_YEAR);
+            int eventWeek = eventCalendar.get(Calendar.WEEK_OF_YEAR);
+            int eventMonth = eventCalendar.get(Calendar.MONTH);
+            if (eventDay < currentDay) {
+                // do nothing
+                Log.d("DAY", "check: ");
+            } else if (eventDay == currentDay) {
+                if (flag[Define.TODAY] == EMPTY) {
+                    flag[Define.TODAY] = position;
+                }
+            } else if (eventDay == currentDay + 1) {
+                if (flag[Define.TOMORROW] == EMPTY) {
+                    flag[Define.TOMORROW] = position;
+                }
+            } else if (eventWeek == currentWeek) {
+                if (flag[Define.SAME_WEEK] == EMPTY) {
+                    flag[Define.SAME_WEEK] = position;
+                }
+            } else if (eventWeek == currentWeek + 1) {
+                if (flag[Define.NEXT_WEEK] == EMPTY) {
+                    flag[Define.NEXT_WEEK] = position;
+                }
+            } else if (eventMonth == currentMonth) {
+                if (flag[Define.SAME_MONTH] == EMPTY) {
+                    flag[Define.SAME_MONTH] = position;
+                }
+            } else {
+                if (flag[Define.NEXT_MONTH] == EMPTY) {
+                    flag[Define.NEXT_MONTH] = position;
+                }
+            }
+
+
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    Comparator<Event> comparator = new Comparator<Event>() {
+        @Override
+        public int compare(Event event, Event t1) {
+
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, yyyy-MM-dd", locale);
+            try {
+                Date eventDate = simpleDateFormat.parse(Objects.requireNonNull(Define.checkDate(event)));
+                Date t1Date = simpleDateFormat.parse(Objects.requireNonNull(Define.checkDate(t1)));
+                return eventDate.compareTo(t1Date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return 0;
+
+        }
+    };
 }

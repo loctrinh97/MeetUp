@@ -1,4 +1,4 @@
-package com.example.meetup.view.home.event;
+package com.example.meetup.view.category;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,16 +9,15 @@ import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.repository.CategoryRepository;
 import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.repository.VenueRepository;
+import com.example.meetup.view.home.event.EventViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventViewModel extends ViewModel{
-    CategoryRepository categoryRepository = CategoryRepository.getInstance();
-    VenueRepository venueRepository = VenueRepository.getInstance();
+public class PopularViewModel extends EventViewModel {
     EventsRepository eventsRepository = EventsRepository.getInstance();
     List<Event> eventList;
-   int page  = 0;
+    int page  = 0;
 
     private MutableLiveData<List<Event>> list = new MutableLiveData<>();
 
@@ -26,13 +25,13 @@ public class EventViewModel extends ViewModel{
         return list;
     }
 
-    public EventViewModel(){
+    public PopularViewModel(){
         eventList = new ArrayList<>();
     }
 
-    public List<Event> getEventList(int pageSize) {
+    public List<Event> getEventList(int pageSize,int categoryID) {
         page = pageSize;
-        eventList = eventsRepository.getListEvent(pageSize);
+        eventList = eventsRepository.getEventByCategory(pageSize,categoryID);
         list.postValue(eventList);
         return eventList;
     }
@@ -50,10 +49,5 @@ public class EventViewModel extends ViewModel{
         // Fake data
         return eventsRepository.getListEvent(5);
     }
-    public Category getCategory(int categoryId){
-        return categoryRepository.getCategory(categoryId);
-    };
-    public Venue getVenue(int venueId){
-        return venueRepository.getVenue(venueId);
-    }
+
 }

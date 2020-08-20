@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.model.response.EventVenue;
-import com.example.meetup.view.home.event.EventsRepository;
+import com.example.meetup.repository.EventsRepository;
 
 import java.util.List;
 

@@ -19,7 +19,7 @@ import com.example.meetup.model.response.EventGetFromApi;
 import com.example.meetup.model.response.EventResponse;
 import com.example.meetup.model.response.NewResponse;
 import com.example.meetup.repository.CategoryRepository;
-import com.example.meetup.view.home.event.EventsRepository;
+import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.repository.ListNewsRepository;
 import com.example.meetup.repository.VenueRepository;
 import com.example.meetup.ulti.Define;
@@ -43,9 +43,10 @@ public class LoadInforWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        loadNewsFromApi();
-        loadEventsFromApi();
-        loadCategories();
+//        loadNewsFromApi();
+//        loadEventsFromApi();
+//        loadCategories();
+        loadEventsCategories();
         return Result.success();
     }
 
@@ -107,7 +108,30 @@ public class LoadInforWorker extends Worker {
             }
         });
     }
+    private void loadEventsCategories(){
+        CategoryRepository categoryRepository = CategoryRepository.getInstance();
+        final EventsRepository eventsRepository = EventsRepository.getInstance();
+        EventService eventService = apiUtils.getEventService();
+        List<Category> categories = categoryRepository.getCategories();
+        for(final Category category : categories){
+            eventService.getListEventsByCategory(category.getId()).enqueue(new Callback<EventResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<EventResponse> call, @NotNull Response<EventResponse> response) {
+                    if(response.body() != null){
+                        List<EventGetFromApi> list = response.body().getResponse().getEvents();
+                        for(EventGetFromApi e : list){
+                            eventsRepository.updateEventCategory(category.getId(),e.getId());
+                        }
+                    }
+                }
 
+                @Override
+                public void onFailure(@NotNull Call<EventResponse> call, Throwable t) {
+
+                }
+            });
+        }
+    }
     private void loadCategories() {
         CategoryService categoryService = apiUtils.getCategoryService();
         categoryService.getListCategories().enqueue(new Callback<CategoryResponse>() {

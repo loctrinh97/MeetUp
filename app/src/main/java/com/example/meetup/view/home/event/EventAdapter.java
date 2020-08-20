@@ -36,6 +36,7 @@ import java.util.Locale;
 import static com.example.meetup.ulti.Define.checkDate;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
+    public static final String GOING = " sẽ tham gia";
     private List<Event> eventList;
     OnItemClickListener listener;
     private Context context;
@@ -99,7 +100,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         } else {
             holder.binding.imgDot.setVisibility(View.VISIBLE);
             holder.binding.tvGoingCount.setVisibility(View.VISIBLE);
-            holder.binding.tvGoingCount.setText(event.getGoingCount() + " sẽ tham gia");
+            holder.binding.tvGoingCount.setText(event.getGoingCount() + GOING);
         }
         holder.bind(event);
 

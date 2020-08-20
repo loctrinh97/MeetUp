@@ -29,6 +29,7 @@ import java.util.Locale;
 import static com.example.meetup.ulti.Define.checkDate;
 
 public class NearEventAdapter extends RecyclerView.Adapter<NearEventAdapter.ViewHolder> {
+    public static final String GOING = " sẽ tham gia";
     Context context;
     private OnItemClickListener listener;
     List<Event> eventList;
@@ -52,6 +53,7 @@ public class NearEventAdapter extends RecyclerView.Adapter<NearEventAdapter.View
         return new ViewHolder(binding);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Event event = eventList.get(position);
@@ -64,7 +66,7 @@ public class NearEventAdapter extends RecyclerView.Adapter<NearEventAdapter.View
             holder.binding.tvItemNearAmount.setVisibility(View.GONE);
         } else {
             holder.binding.tvItemNearAmount.setVisibility(View.VISIBLE);
-            holder.binding.tvItemNearAmount.setText(event.getGoingCount() + " sẽ tham gia");
+            holder.binding.tvItemNearAmount.setText(event.getGoingCount() +GOING);
         }
         holder.binding.tvItemNearTitle.setText(event.getName());
         String date = checkDate(event);

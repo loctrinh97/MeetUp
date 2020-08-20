@@ -41,12 +41,13 @@ public class EventDetailFragment extends Fragment {
     List<Event> nearList;
     int status;
     private FragmentDetailEventBinding binding;
-    EventDetailViewModel viewModel;
+    public EventViewModel viewModel;
     Context context;
 
-    public EventDetailFragment(Event event, Context context) {
+    public EventDetailFragment(Event event, Context context,EventViewModel eventViewModel) {
         this.context = context;
         this.event = event;
+        viewModel = eventViewModel;
 
     }
 
@@ -56,7 +57,6 @@ public class EventDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_event, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
-        viewModel = new EventDetailViewModel();
         status = event.getMyStatus();
 
         this.category = viewModel.getCategory(event.getCategoryId());
@@ -77,7 +77,7 @@ public class EventDetailFragment extends Fragment {
                 FragmentManager fm;
                 fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                EventDetailFragment fragment = new EventDetailFragment(nearList.get(position), context);
+                EventDetailFragment fragment = new EventDetailFragment(nearList.get(position), context,viewModel);
                 fragmentTransaction.replace(R.id.activity, fragment);
                 fragmentTransaction.addToBackStack("");
                 fragmentTransaction.commit();
@@ -86,6 +86,7 @@ public class EventDetailFragment extends Fragment {
         binding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewModel.refresh();
                 Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
             }
         });
@@ -95,9 +96,8 @@ public class EventDetailFragment extends Fragment {
         buttonJoined.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Joined",Toast.LENGTH_SHORT).show();
                 status = Define.STATUS_WENT;
-                viewModel.eventsRepository.updateEvent(status,event.getId());
+                viewModel.updateEvent(status,event.getId());
                 setWithStatus(status);
             }
         });
@@ -105,9 +105,8 @@ public class EventDetailFragment extends Fragment {
         buttonCanJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Can Join",Toast.LENGTH_SHORT).show();
                 status = Define.STATUS_GOING;
-                viewModel.eventsRepository.updateEvent(status,event.getId());
+                viewModel.updateEvent(status,event.getId());
                 setWithStatus(status);
             }
         });
@@ -131,20 +130,29 @@ public class EventDetailFragment extends Fragment {
     @SuppressLint("ResourceAsColor")
     private void setWithStatus(int status){
         if (status == Define.STATUS_GOING) {
-            buttonCanJoin.setSelected(false);
-            buttonCanJoin.setEnabled(false);
-            buttonJoined.setSelected(true);
-            buttonJoined.setEnabled(true);
+            setWithGoing();
         } else if (status == Define.STATUS_WENT) {
-            buttonCanJoin.setSelected(false);
-            buttonJoined.setSelected(false);
-            buttonCanJoin.setEnabled(false);
-            buttonJoined.setEnabled(false);
+            setWent();
         } else {
-            buttonCanJoin.setSelected(true);
-            buttonJoined.setSelected(false);
-            buttonCanJoin.setEnabled(true);
-            buttonJoined.setEnabled(false);
+           setNoJoin();
         }
+    }
+    private void setWithGoing(){
+        buttonCanJoin.setSelected(false);
+        buttonCanJoin.setEnabled(false);
+        buttonJoined.setSelected(true);
+        buttonJoined.setEnabled(true);
+    }
+    private void setWent(){
+        buttonCanJoin.setSelected(false);
+        buttonJoined.setSelected(false);
+        buttonCanJoin.setEnabled(false);
+        buttonJoined.setEnabled(false);
+    }
+    private void setNoJoin(){
+        buttonCanJoin.setSelected(true);
+        buttonJoined.setSelected(false);
+        buttonCanJoin.setEnabled(true);
+        buttonJoined.setEnabled(false);
     }
 }
