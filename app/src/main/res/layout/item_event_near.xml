@@ -6,27 +6,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="107dp">
+
     <ImageView
         android:id="@+id/ivItemNearBackground"
-        android:background="@drawable/ic_item_event_near_bg"
-        android:layout_width="@dimen/_0dp"
-        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
       />
 
     <ImageView
-        android:adjustViewBounds="true"
         android:id="@+id/ivItemNearImg"
         android:layout_width="@dimen/_140dp"
-        android:scaleType="centerCrop"
-        android:layout_height="@dimen/_0dp"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
         android:background="@drawable/stock2"
-        app:layout_constraintTop_toTopOf="@id/ivItemNearBackground"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/ivItemNearBackground"
         app:layout_constraintStart_toStartOf="@id/ivItemNearBackground"
-        app:layout_constraintBottom_toBottomOf="@id/ivItemNearBackground"/>
+        app:layout_constraintTop_toTopOf="@id/ivItemNearBackground" />
 
     <ImageView
         android:id="@+id/ivItemNearCalender"
@@ -35,7 +36,7 @@
         app:layout_constraintStart_toEndOf="@id/ivItemNearImg"
         app:layout_constraintTop_toTopOf="@id/ivItemNearBackground"
         android:background="@drawable/ic_calender"
-        android:layout_marginTop="@dimen/_14dp"
+        android:layout_marginTop="@dimen/_6dp"
         android:layout_marginStart="@dimen/_15dp"/>
 
     <TextView
@@ -47,7 +48,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/ivItemNearBackground"
         app:layout_constraintStart_toEndOf="@id/ivItemNearCalender"
-        android:layout_marginTop="@dimen/_13dp"
+        android:layout_marginTop="@dimen/_5dp"
         android:layout_marginStart="@dimen/_7dp"/>
 
     <TextView
@@ -71,8 +72,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvItemNearAmount"
         app:layout_constraintEnd_toEndOf="@id/ivItemNearBackground"
         android:layout_marginTop="@dimen/_6dp"
-        android:layout_marginEnd="@dimen/_17dp"/>
-
+        android:layout_marginEnd="@dimen/_17dp"
+        android:layout_marginBottom="@dimen/_5dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -38,7 +38,7 @@ public class LoadVenueWoker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        loadListVenueFromApi(token, 8000, 21.017461, 105.780308);
+        loadListVenueFromApi(token, 50, 105.7809483, 21.017481);
         return Result.success();
     }
 

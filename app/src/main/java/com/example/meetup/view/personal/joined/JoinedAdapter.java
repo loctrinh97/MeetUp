@@ -90,11 +90,11 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         }
         checkEndDay(event);
         noti.add(notification);
-//        if (position >= 1 && noti.size() > position && notification.equals(noti.get(position - 1))) {
-//            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
-//        } else {
-//            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
-//        }
+        if (position >= 1 && noti.size() > position && notification.equals(noti.get(position - 1))) {
+            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.GONE);
+        } else {
+            holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
+        }
         holder.itemJoinedBinding.btnViewEndTime.setText(notification);
         holder.itemJoinedBinding.tvEventTime.setText(date);
         holder.itemJoinedBinding.tvPeopleJoin.setText(event.getGoingCount() + " " + MyApplication.getAppContext().getString(R.string.will_join));

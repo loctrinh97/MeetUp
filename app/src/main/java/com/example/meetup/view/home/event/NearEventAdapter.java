@@ -36,7 +36,14 @@ public class NearEventAdapter extends RecyclerView.Adapter<NearEventAdapter.View
     private ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
         @Override
         public void getOutline(View view, Outline outline) {
-            outline.setRoundRect(0, 0, view.getWidth()+45, view.getHeight() , 45F);
+            outline.setRoundRect(0, 0, view.getWidth()+45, view.getHeight() , 20F);
+        }
+    };
+
+    private ViewOutlineProvider viewOutlineProviderAll = new ViewOutlineProvider() {
+        @Override
+        public void getOutline(View view, Outline outline) {
+            outline.setRoundRect(0, 0, view.getWidth(), view.getHeight() , 20F);
         }
     };
     public NearEventAdapter(List<Event> eventList, Context context) {
@@ -58,6 +65,8 @@ public class NearEventAdapter extends RecyclerView.Adapter<NearEventAdapter.View
         Glide.with(context)
                 .load(event.getPhoto())
                 .into(holder.binding.ivItemNearImg);
+        holder.binding.ivItemNearBackground.setOutlineProvider(viewOutlineProviderAll);
+        holder.binding.ivItemNearBackground.setClipToOutline(true);
         holder.binding.ivItemNearImg.setOutlineProvider(viewOutlineProvider);
         holder.binding.ivItemNearImg.setClipToOutline(true);
         if (event.getGoingCount() == 0) {

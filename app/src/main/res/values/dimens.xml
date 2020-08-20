@@ -25,7 +25,6 @@
     <dimen name="_14dp">14dp</dimen>
     <dimen name="_7dp">7dp</dimen>
     <dimen name="_2dp">2dp</dimen>
-    <dimen name="_6dp">6dp</dimen>
     <dimen name="_141dp">141dp</dimen>
     <dimen name="_40dp">40dp</dimen>
     <dimen name="_3dp">3dp</dimen>
@@ -43,4 +42,7 @@
     <dimen name="_64dp">64dp</dimen>
     <dimen name="_37dp">37dp</dimen>
     <dimen name="height_bottom_item">50dp</dimen>
+    <dimen name="_6dp">6dp</dimen>
+    <dimen name="_70dp">70dp</dimen>
+    <dimen name="_107dp">107dp</dimen>
 </resources>
