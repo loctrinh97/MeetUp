@@ -1,4 +1,4 @@
-package com.example.meetup.view.category;
+package com.example.meetup.view.category.popular;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

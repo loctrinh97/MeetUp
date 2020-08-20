@@ -47,9 +47,9 @@ public class CanJoinFragment extends Fragment {
         setUpRecyclerDisplay();
 
         final Observer<List<Event>> joinedObserver = new Observer<List<Event>>() {
-            @Override
-            public void onChanged(List<Event> joinedList) {
-                joinedAdapter.setListEvent(joinedList);
+                    @Override
+                    public void onChanged(List<Event> joinedList) {
+                        joinedAdapter.setListEvent(joinedList);
             }
         };
 

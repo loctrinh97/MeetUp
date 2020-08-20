@@ -1,9 +1,8 @@
-package com.example.meetup.view.category;
+package com.example.meetup.view.category.popular;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +23,11 @@ import com.example.meetup.databinding.FragmentEventsBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
+import com.example.meetup.view.category.popular.PopularViewModel;
 import com.example.meetup.view.home.event.BottomDialogFragment;
 import com.example.meetup.view.home.event.DialogLogin;
 import com.example.meetup.view.home.event.EventAdapter;
 import com.example.meetup.view.home.event.EventDetailFragment;
-import com.example.meetup.view.home.event.EventViewModel;
-import com.example.meetup.view.home.event.EventsFragment;
 
 import java.util.ArrayList;
 import java.util.List;

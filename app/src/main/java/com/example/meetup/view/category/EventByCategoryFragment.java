@@ -11,20 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.meetup.R;
 import com.example.meetup.model.dataLocal.Category;
 import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
+import com.example.meetup.view.category.popular.PopularEventFragment;
+import com.example.meetup.view.category.time.TimeFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
 public class EventByCategoryFragment extends Fragment {
     public String POPULAR = "PHỔ BIẾN";
+    public String TIME = "THEO THỜI GIAN";
     ViewPagerAdapter adapter_category;
     ViewPager viewpager;
     TabLayout tabLayout;
@@ -55,6 +56,7 @@ public class EventByCategoryFragment extends Fragment {
         tvCategory.setText(category.getName() + " (" + getCount(category.getId()) + ")");
         adapter_category = new ViewPagerAdapter(getChildFragmentManager());
         adapter_category.addFrag(new PopularEventFragment(category.getId()), POPULAR);
+        adapter_category.addFrag(new TimeFragment(category),TIME);
         viewpager.setAdapter(adapter_category);
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override

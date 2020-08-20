@@ -35,13 +35,14 @@ import java.util.Objects;
 
 public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder> {
     public static final String GOING = " sẽ tham gia";
+    public static final int STATUS_SIZE = 8;
     Locale locale = new Locale("vi");
     private OnItemClickListener listener;
     private Context mContext;
     private List<Event> listEvent;
     private static Date currentTime = Calendar.getInstance().getTime();
-    private String[] timeStamp = {"HÔM NAY", "NGÀY MAI", "CUỐI TUẦN NÀY", "TUẦN TỚI", "CUỐI THÁNG NÀY", "THÁNG SAU TRỞ ĐI", "VĨNH VIỄN"};
-    private int[] flag = new int[7];
+    private String[] timeStamp = {"HÔM NAY", "NGÀY MAI", "CUỐI TUẦN NÀY", "TUẦN TỚI", "CUỐI THÁNG NÀY", "THÁNG SAU TRỞ ĐI", "VĨNH VIỄN","ĐÃ KẾT THÚC"};
+    private int[] flag = new int[STATUS_SIZE];
     private static final int EMPTY = -1;
 
     public JoinedAdapter(List<Event> event, Context context) {
@@ -76,7 +77,11 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
         holder.itemJoinedBinding.ivPhoto.setOutlineProvider(viewOutlineProvider);
         holder.itemJoinedBinding.ivPhoto.setClipToOutline(true);
 
-        if (event.getMyStatus() == 1) {
+        if (event.getMyStatus() == Define.STATUS_DEFAULT) {
+            Glide.with(mContext)
+                    .load(R.drawable.ic_join)
+                    .into(holder.itemJoinedBinding.ivStatus);
+        } else if (event.getMyStatus() == Define.STATUS_GOING) {
             Glide.with(mContext)
                     .load(R.drawable.ic_can_join)
                     .into(holder.itemJoinedBinding.ivStatus);
@@ -86,7 +91,7 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
                     .into(holder.itemJoinedBinding.ivStatus);
         }
 
-        for (int i = Define.TODAY; i <= Define.PERMANENT; i++) {
+        for (int i = Define.TODAY; i <= Define.ENDED; i++) {
             if (flag[i] == position) {
                 holder.itemJoinedBinding.btnViewEndTime.setVisibility(View.VISIBLE);
                 holder.itemJoinedBinding.btnViewEndTime.setText(timeStamp[i]);
@@ -154,7 +159,7 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
 
 
     private void clear() {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < STATUS_SIZE; i++) {
             flag[i] = EMPTY;
         }
     }
@@ -189,8 +194,9 @@ public class JoinedAdapter extends RecyclerView.Adapter<JoinedAdapter.ViewHolder
             int eventWeek = eventCalendar.get(Calendar.WEEK_OF_YEAR);
             int eventMonth = eventCalendar.get(Calendar.MONTH);
             if (eventDay < currentDay) {
-                // do nothing
-                Log.d("DAY", "check: ");
+                if(flag[Define.ENDED]==EMPTY){
+                    flag[Define.ENDED] = position;
+                }
             } else if (eventDay == currentDay) {
                 if (flag[Define.TODAY] == EMPTY) {
                     flag[Define.TODAY] = position;

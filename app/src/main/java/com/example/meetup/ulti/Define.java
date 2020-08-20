@@ -130,6 +130,7 @@ public class Define {
     public static int SAME_MONTH =4;
     public static int NEXT_MONTH =5;
     public static int PERMANENT =6;
+    public static int ENDED = 7;
     public static String PRE_TOKEN ="tokenPref";
     public static String TOKEN ="token";
 }

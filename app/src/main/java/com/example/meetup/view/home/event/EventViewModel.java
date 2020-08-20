@@ -18,9 +18,9 @@ public class EventViewModel extends ViewModel{
     VenueRepository venueRepository = VenueRepository.getInstance();
     EventsRepository eventsRepository = EventsRepository.getInstance();
     List<Event> eventList;
-   int page  = 0;
+    int page  = 0;
 
-    private MutableLiveData<List<Event>> list = new MutableLiveData<>();
+    protected MutableLiveData<List<Event>> list = new MutableLiveData<>();
 
     public MutableLiveData<List<Event>> getList() {
         return list;

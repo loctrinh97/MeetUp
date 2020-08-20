@@ -46,7 +46,7 @@ public class LoadInforWorker extends Worker {
 //        loadNewsFromApi();
 //        loadEventsFromApi();
 //        loadCategories();
-        loadEventsCategories();
+//        loadEventsCategories();
         return Result.success();
     }
 

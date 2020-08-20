@@ -53,15 +53,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         //worker
         Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-        OneTimeWorkRequest.Builder mBuider = new OneTimeWorkRequest.Builder(LoadPersonalWorker.class);
-        mBuider.setConstraints(constraints);
-        oneTimeWorkRequest = mBuider.build();
-        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
-
-        OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
-        mBuiderLoadVenue.setConstraints(constraints);
-        workRequest = mBuiderLoadVenue.build();
-        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+//        OneTimeWorkRequest.Builder mBuider = new OneTimeWorkRequest.Builder(LoadPersonalWorker.class);
+//        mBuider.setConstraints(constraints);
+//        oneTimeWorkRequest = mBuider.build();
+//        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
+//
+//        OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
+//        mBuiderLoadVenue.setConstraints(constraints);
+//        workRequest = mBuiderLoadVenue.build();
+//        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         appViewPager = findViewById(R.id.app_viewPager);

@@ -17,7 +17,7 @@
         android:background="@drawable/background">
     </ImageView>
     <ImageView
-        android:paddingVertical="@dimen/_5dp"
+        android:paddingVertical="@dimen/_7dp"
         android:paddingStart="@dimen/_16dp"
         android:src="@drawable/ic_back"
         android:id="@+id/ivIconBack"
@@ -40,13 +40,12 @@
     <TextView
         android:id="@+id/tvCategory"
         android:text="Công nghệ (10)"
-        android:textSize="@dimen/text_size_header"
+        android:textSize="@dimen/_20sp"
         android:textColor="@color/color_text_header"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/ivIconBack"
         app:layout_constraintTop_toTopOf="@id/header"
         android:layout_marginTop="@dimen/_20dp"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
