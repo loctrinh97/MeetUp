@@ -13,4 +13,5 @@
     <color name="color_background_title">#F6F6F6</color>
     <color name="color_text_header">#FFFFFF</color>
     <color name="color_invalid">#C8C5CD</color>
+    <color name="ic_launcher_background">#D8092D</color>
 </resources>

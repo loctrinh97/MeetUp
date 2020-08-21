@@ -186,7 +186,7 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                     for (int i =0 ; i < listMarker.size();i++){
                         if (listMarker.get(i).getTitle().equals(s)){
                             listMarker.get(i).setIcon(selected);
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(listMarker.get(i).getPosition(),20f));
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(listMarker.get(i).getPosition(),15f));
                         } else {
                             listMarker.get(i).setIcon(notSelected);
                         }
