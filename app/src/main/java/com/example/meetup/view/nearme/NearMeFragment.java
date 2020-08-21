@@ -23,8 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -38,8 +36,6 @@ import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.ulti.PermissionUtils;
-import com.example.meetup.view.home.event.EventDetailFragment;
-import com.example.meetup.view.home.event.EventDetailViewModel;
 import com.example.meetup.view.home.event.NearEventAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -58,7 +54,6 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static android.content.Context.LOCATION_SERVICE;
 import static com.example.meetup.ulti.Define.REQUEST_CODE_GPS_PERMISSION;
@@ -77,7 +72,6 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
     NearEventAdapter nearEventAdapter;
     Context context;
     RecyclerView recyclerView;
-    EventDetailViewModel viewModel;
     FragmentNearMeBinding fragmentNearMeBinding;
     double latitude,longitude;
     int lastScrollPosition;
@@ -94,7 +88,6 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
 
         if (isGpsOn()){
             nearMeViewModel = new ViewModelProvider(getActivity()).get(NearMeViewModel.class);
-            viewModel = new EventDetailViewModel();
             venues = nearMeViewModel.getVenuesNearMe();
             recyclerView = fragmentNearMeBinding.rvEventNear;
             setUpRecyclerView();

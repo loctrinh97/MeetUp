@@ -10,6 +10,7 @@
     <color name="color_icon_default">#A8A2B3</color>
     <color name="color_alert">#91152B</color>
     <color name="black">#000000</color>
+    <color name="color_background_title">#F6F6F6</color>
     <color name="color_text_header">#FFFFFF</color>
     <color name="color_invalid">#C8C5CD</color>
 </resources>

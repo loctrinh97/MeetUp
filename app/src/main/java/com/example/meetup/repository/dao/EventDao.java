@@ -22,6 +22,8 @@ public interface EventDao {
     void insertEvents(List<Event> events);
     @Query("update events set my_status = :myStatus where id = :eventId")
     void updateEvent(int myStatus,int eventId);
+    @Query("update events set category_id = :category_id where id = :eventId")
+    void updateEventCategory(int category_id,int eventId);
     @Query("delete from events")
     void deleteEvents();
     @Query("select * from events e, venues v where e.venue_id == v.id and e.distance < 50 and e.distance > 0")
@@ -32,4 +34,9 @@ public interface EventDao {
     void updateDistance(int id, double distance);
     @Query("select * from events e, venues v where v.id == e.venue_id and  e.distance != 0.0 ")
     List<Venue> getVenuesNear();
+
+    @Query("select * from events where category_id = :categoryId Order by going_count desc limit :pageSize")
+    List<Event> getListEventByCategory(int pageSize,int categoryId);
+    @Query("select count(*) from events where category_id = :categoryId")
+    int getCountEventByCategory(int categoryId);
 }
