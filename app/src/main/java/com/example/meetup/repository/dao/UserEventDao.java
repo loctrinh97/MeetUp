@@ -13,6 +13,6 @@ public interface UserEventDao {
     void updateUsersEvent(int listId, long status);
     @Query("delete from users_events")
     void deleteUsersEvents();
-    @Query("select * from events where my_status=:status limit:pageSize")
+    @Query("select * from events where my_status=:status limit:pageSize ")
     List<Event> getListEventJoined(int pageSize, long status);
 }

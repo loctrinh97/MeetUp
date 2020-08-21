@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="nearMe"
@@ -44,83 +45,17 @@
         app:layout_constraintStart_toStartOf="@id/ivHeader"
         app:layout_constraintTop_toTopOf="@id/ivHeader" />
 
-
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clNearMe"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    <ImageView
-        android:id="@+id/ivNearBackground"
-        android:layout_marginHorizontal="@dimen/_16dp"
-        android:background="@drawable/ic_item_event_near_bg"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEventNear"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-
-        <ImageView
-            android:id="@+id/ivNearImg"
-            android:layout_width="120dp"
-            android:layout_height="107dp"
-            android:background="@drawable/stock2"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/ivNearBackground"
-            app:layout_constraintStart_toStartOf="@id/ivNearBackground"
-            app:layout_constraintTop_toTopOf="@id/ivNearBackground" />
-
-    <ImageView
-        android:id="@+id/ivNearCalender"
+        android:layout_marginHorizontal="@dimen/_16dp"
+        android:layout_marginBottom="@dimen/_70dp"
         android:layout_width="@dimen/_0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/ivNearImg"
-        app:layout_constraintTop_toTopOf="@id/ivNearBackground"
-        android:background="@drawable/ic_calender"
-        android:layout_marginTop="@dimen/_14dp"
-        android:layout_marginStart="@dimen/_15dp"/>
+        android:layout_height="@dimen/_107dp"
+        tools:listitem="@layout/item_event_near"/>
 
-    <TextView
-        android:id="@+id/tvNearTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{nearMe.scheduleStartTime}"
-        android:textColor="#5D20CD"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/ivNearBackground"
-        app:layout_constraintStart_toEndOf="@id/ivNearCalender"
-        android:layout_marginTop="@dimen/_13dp"
-        android:layout_marginStart="@dimen/_7dp"/>
-
-    <TextView
-        android:id="@+id/tvNearAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{nearMe.goingCount}"
-        android:textColor="#5D20CD"
-        app:layout_constraintTop_toBottomOf="@id/tvNearTime"
-        app:layout_constraintStart_toStartOf="@id/tvNearTime"
-        android:layout_marginTop="@dimen/_2dp"/>
-
-    <TextView
-        android:id="@+id/tvNearTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@{nearMe.name}"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/ivNearCalender"
-        app:layout_constraintTop_toBottomOf="@id/tvNearAmount"
-        app:layout_constraintEnd_toEndOf="@id/ivNearBackground"
-        android:layout_marginTop="@dimen/_6dp"
-        android:layout_marginEnd="@dimen/_17dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
