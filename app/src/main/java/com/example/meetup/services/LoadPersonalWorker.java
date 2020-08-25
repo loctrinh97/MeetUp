@@ -26,10 +26,10 @@ import retrofit2.Response;
 
 public class LoadPersonalWorker extends Worker {
 
+    public static boolean tokenExpired;
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     String token = sharedPref.getString("token",null);
-
     ApiUtils apiUtils = new ApiUtils();
     private EventJoinedServices mEventJoinedServices;
     public LoadPersonalWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -52,6 +52,7 @@ public class LoadPersonalWorker extends Worker {
             if (response.isSuccessful()){
                 if(response.body().getStatus() == 0 ){
                     sharedPref.edit().putString("token",null).apply();
+                    tokenExpired = true;
                 }else {
                     List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                     List<Integer> listIdJoined = new ArrayList<>();
@@ -62,6 +63,7 @@ public class LoadPersonalWorker extends Worker {
                     personalJoinedRepository.deleteUsersEvents();
                     personalJoinedRepository.updateUsersEvents(listIdJoined,status);
                     personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT,status);
+                    tokenExpired = false;
                 }
             }
         }
@@ -82,8 +84,8 @@ public class LoadPersonalWorker extends Worker {
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()){
                     if(response.body().getStatus() == 0 ){
-                        sharedPref.edit().clear();
-                        sharedPref.edit().apply();
+                        sharedPref.edit().putString("token",null).apply();
+                        tokenExpired = true;
                     }else {
                         List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                         ArrayList listIdCanJoin = new ArrayList();

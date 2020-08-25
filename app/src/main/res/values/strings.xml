@@ -66,5 +66,7 @@
     <string name="tag">fragment_alert</string>
     <string name="current_location">Bạn đang ở đây</string>
     <string name="location_not_found">Không thể tìm thấy vị trí của bạn</string>
+    <string name="key_token">keyToken</string>
+    <string name="token_expired">Token hết hạn, vui lòng đăng nhập lại</string>
 
 </resources>

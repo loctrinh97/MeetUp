@@ -4,6 +4,7 @@ package com.example.meetup.view.personal.joined;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,8 @@ import com.example.meetup.databinding.FragmentPersonalJoinedBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.services.LoadPersonalWorker;
 import com.example.meetup.ulti.Define;
+import com.example.meetup.view.nearme.DialogGPS;
+import com.example.meetup.view.personal.DialogTokenExpired;
 import com.example.meetup.view.registerlogin.LoginActivity;
 
 import java.util.ArrayList;
@@ -47,8 +51,10 @@ public class JoinedFragment extends Fragment {
         SharedPreferences sharedPref = getContext().getSharedPreferences("tokenPref",MODE_PRIVATE);
         sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
         token = sharedPref.getString("token",null);
-        if (token == null){
-            Toast.makeText(getContext(),"asdsa",Toast.LENGTH_SHORT);
+        if (LoadPersonalWorker.tokenExpired){
+            FragmentManager fm = getParentFragmentManager();
+            DialogTokenExpired dialogTokenExpired = DialogTokenExpired.newInstance(getString(R.string.key_token));
+            dialogTokenExpired.show(fm, getString(R.string.tag));
         }
 
         fragmentPersonalJoinedBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_personal_joined, container, false);
