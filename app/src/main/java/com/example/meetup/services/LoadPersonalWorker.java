@@ -51,8 +51,7 @@ public class LoadPersonalWorker extends Worker {
         public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
             if (response.isSuccessful()){
                 if(response.body().getStatus() == 0 ){
-                    sharedPref.edit().clear();
-                    sharedPref.edit().apply();
+                    sharedPref.edit().putString("token",null).apply();
                 }else {
                     List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                     List<Integer> listIdJoined = new ArrayList<>();

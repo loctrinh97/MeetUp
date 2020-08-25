@@ -26,7 +26,7 @@ public interface EventDao {
     void updateEventCategory(int category_id,int eventId);
     @Query("delete from events")
     void deleteEvents();
-    @Query("select * from events e, venues v where e.venue_id == v.id and e.distance < 50 and e.distance > 0")
+    @Query("select * from events e where e.venue_id and e.distance < 50 and e.distance > 0")
     List<Event> getEventNear();
     @Query("update venues set geo_long = :geoLong, geo_lat = :geoLat, contact_address =:contactAddress where id =:venueId")
     void updateVenues(int venueId, String contactAddress, String geoLong, String geoLat);

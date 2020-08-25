@@ -43,9 +43,9 @@ public class LoadInforWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-//        loadNewsFromApi();
-//        loadEventsFromApi();
-//        loadCategories();
+        loadNewsFromApi();
+        loadEventsFromApi();
+        loadCategories();
         loadEventsCategories();
         return Result.success();
     }

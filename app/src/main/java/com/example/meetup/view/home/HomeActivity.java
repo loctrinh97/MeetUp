@@ -10,6 +10,7 @@ import androidx.work.WorkManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -58,10 +59,11 @@ public class HomeActivity extends AppCompatActivity {
         oneTimeWorkRequest = mBuider.build();
         WorkManager.getInstance(MyApplication.getAppContext()).enqueue(oneTimeWorkRequest);
 
-        OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
-        mBuiderLoadVenue.setConstraints(constraints);
-        workRequest = mBuiderLoadVenue.build();
-        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+//        OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
+//        mBuiderLoadVenue.setConstraints(constraints);
+//        workRequest = mBuiderLoadVenue.build();
+//        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+
         loginViewModel = new ViewModelProvider(HomeActivity.this).get(LoginViewModel.class);
         appAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         appViewPager = findViewById(R.id.app_viewPager);
@@ -70,10 +72,10 @@ public class HomeActivity extends AppCompatActivity {
         appAdapter.addFrag(new HomeFragment(),"Trang chủ");
         appAdapter.addFrag(new NearMeFragment(),"Gần tôi");
         appAdapter.addFrag(new CategoryFragment(),"Danh mục");
+//        SharedPreferences sharedPref = this.getSharedPreferences("tokenPref",MODE_PRIVATE);
+//        sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+//        token = sharedPref.getString("token",null);
         token = loginViewModel.getPrefToken();
-        SharedPreferences sharedPref = this.getSharedPreferences("tokenPref",MODE_PRIVATE);
-        sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
-
         if (token == null){
             appAdapter.addFrag(new PersonalLoginFragment(),getString(R.string.personal));
         } else {
@@ -83,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
         setupTabIcons();
         appTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+                public void onTabSelected(TabLayout.Tab tab) {
                 Objects.requireNonNull(tab.getIcon()).setTint(getResources().getColor(R.color.color_common));
             }
 
@@ -100,6 +102,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+
     private void setupTabIcons() {
 
         Objects.requireNonNull(appTabLayout.getTabAt(0)).setIcon(tabIcons[0]);

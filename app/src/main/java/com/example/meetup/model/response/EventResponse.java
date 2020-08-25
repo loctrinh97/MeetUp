@@ -12,6 +12,17 @@ public class EventResponse {
     @SerializedName("response")
     @Expose
     private Response response;
+    @SerializedName("error_code")
+    @Expose
+    private int errorCode;
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
 
     public Response getResponse() {
         return response;

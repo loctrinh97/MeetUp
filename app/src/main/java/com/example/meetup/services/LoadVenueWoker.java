@@ -12,8 +12,10 @@ import com.example.meetup.R;
 import com.example.meetup.model.response.EventGetFromApi;
 import com.example.meetup.model.response.EventResponse;
 import com.example.meetup.model.response.EventVenue;
+import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.repository.EventsRepository;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,9 @@ public class LoadVenueWoker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        loadListVenueFromApi(token, 50, 105.7809483, 21.017481);
+        if (Define.CURRENT_LOCATION_LAT != 0.0 && Define.CURRENT_LOCATION_LONG != 0.0){
+            loadListVenueFromApi(token, 50,Define.CURRENT_LOCATION_LONG ,Define.CURRENT_LOCATION_LAT );
+        }
         return Result.success();
     }
 
@@ -47,7 +51,7 @@ public class LoadVenueWoker extends Worker {
         venueServices.getListNearlyEvents(token, radius, longitue, latitude).enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
-                if ( response.body().getStatus() == 1) {
+                if ( response.isSuccessful()) {
                     List<EventGetFromApi> listEventNearFromApi = response.body().getResponse().getEvents();
                     List<EventVenue> listEventNearId = new ArrayList<>();
                     StringBuilder sb = new StringBuilder();
@@ -58,7 +62,6 @@ public class LoadVenueWoker extends Worker {
                     sharedPrefEventNearId.putString("listIdNear", sb.toString());
                     EventsRepository eventsRepository = EventsRepository.getInstance();
                     eventsRepository.updateEventNear(listEventNearId);
-//                    eventsRepository.getEventById(listEventNearId);
                 }
             }
 
@@ -66,6 +69,6 @@ public class LoadVenueWoker extends Worker {
             public void onFailure(Call<EventResponse> call, Throwable t) {
                 Toast.makeText(MyApplication.getAppContext(), R.string.api_error, Toast.LENGTH_LONG);
             }
-        });
+        });   
     }
 }
