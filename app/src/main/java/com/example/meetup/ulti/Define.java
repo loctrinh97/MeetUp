@@ -2,8 +2,11 @@ package com.example.meetup.ulti;
 
 import android.annotation.SuppressLint;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.meetup.R;
 import com.example.meetup.model.dataLocal.Event;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -94,6 +97,9 @@ public class Define {
     public static final int STATUS_GOING = 1;
     public static final int STATUS_WENT = 2;
     public static final int PAGE_SIZE_DEFAULT = 10;
+    public static final int ERROR_CODE_TOKEN = 101;
+    public static double CURRENT_LOCATION_LAT;
+    public static double CURRENT_LOCATION_LONG;
     private static  Date currentTime = Calendar.getInstance().getTime();
     private static  Locale locale = new Locale("vi");
     @SuppressLint("SimpleDateFormat")
@@ -132,4 +138,7 @@ public class Define {
     public static int PERMANENT =6;
     public static String PRE_TOKEN ="tokenPref";
     public static String TOKEN ="token";
+    public static boolean tokenExpired;
+
+
 }

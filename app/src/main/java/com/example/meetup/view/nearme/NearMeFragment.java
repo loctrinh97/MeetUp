@@ -5,17 +5,22 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,20 +36,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentNearMeBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.Venue;
+import com.example.meetup.services.LoadVenueWoker;
+import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.ulti.PermissionUtils;
 import com.example.meetup.view.home.event.NearEventAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -66,29 +82,33 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
     List<Event> nearMe;
     List<Venue> venues;
     List<Marker> listMarker;
-    LatLng eventLatLng, chooseLatLng;
+    LatLng eventLatLng;
     Marker myMarker;
     FusedLocationProviderClient fusedLocationProviderClient;
     NearEventAdapter nearEventAdapter;
-    Context context;
     RecyclerView recyclerView;
     FragmentNearMeBinding fragmentNearMeBinding;
-    double latitude,longitude;
+    LocationListener locationListener;
+    LocationManager locationManager;
+    double latitude, longitude;
     int lastScrollPosition;
+    OneTimeWorkRequest workRequest;
+
+
     private MutableLiveData<String> eventName = new MutableLiveData<>();
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        fragmentNearMeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_near_me, container, false);
+        fragmentNearMeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_near_me, container, false);
         fragmentNearMeBinding.setLifecycleOwner(getViewLifecycleOwner());
-        nearMe = new ArrayList<>();
-
-        if (isGpsOn()){
+        if (isGpsOn()) {
             nearMeViewModel = new ViewModelProvider(getActivity()).get(NearMeViewModel.class);
             venues = nearMeViewModel.getVenuesNearMe();
+            nearMe = nearMeViewModel.getEventNearMe();
             recyclerView = fragmentNearMeBinding.rvEventNear;
             setUpRecyclerView();
             SnapHelper snapHelper = new LinearSnapHelper();
@@ -100,15 +120,16 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                 }
             });
         } else {
-            AlertDialog.Builder dialogGPS = new AlertDialog.Builder(getActivity());
-            dialogGPS.setTitle("Vui lòng bật GPS");
+            FragmentManager fm = getParentFragmentManager();
+            DialogGPS dialogGPS = DialogGPS.newInstance(getString(R.string.gps_key));
+            dialogGPS.show(fm, getString(R.string.tag));
         }
         return fragmentNearMeBinding.getRoot();
     }
+
     private void setUpRecyclerView() {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        nearMe = nearMeViewModel.getEventNearMe();
         nearEventAdapter = new NearEventAdapter(nearMe, getContext());
         recyclerView.setAdapter(nearEventAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -116,13 +137,13 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 lastScrollPosition = layoutManager.findLastCompletelyVisibleItemPosition();
-                Log.d("test1", String.valueOf(lastScrollPosition));
-                if (lastScrollPosition>0){
+                if (lastScrollPosition >= 0) {
                     eventName.setValue(venues.get(lastScrollPosition).getName());
                 }
             }
         });
     }
+
     @Override
     public void onResume() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
@@ -130,7 +151,7 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
         super.onResume();
     }
 
-    private void getLastLocation() {
+    private void checkPermission(){
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
                 .PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -142,16 +163,36 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    private void getLastLocation() {
+        checkPermission();
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
-                if (location != null) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    map.addMarker(new MarkerOptions().position(latLng).title("My Location"));
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+                if (task.isSuccessful()){
+                    try {
+                        Location location = task.getResult();
+                        if (location != null){
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                            LatLng latLng = new LatLng(latitude, longitude);
+                            Define.CURRENT_LOCATION_LAT = latitude;
+                            Define.CURRENT_LOCATION_LONG = longitude;
+                            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+                            OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
+                            mBuiderLoadVenue.setConstraints(constraints);
+                            workRequest = mBuiderLoadVenue.build();
+                            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+                            map.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.current_location))).showInfoWindow();
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+                        } else {
+                            checkPermission();
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, locationListener);
+                        }
+                     }catch (Exception e){
+                        Toast.makeText(getActivity(), R.string.location_not_found   , Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -167,31 +208,54 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if (isGpsOn()){
+        if (isGpsOn()) {
             MapsInitializer.initialize(getContext());
             map = googleMap;
             listMarker = new ArrayList<>();
-            final BitmapDescriptor notSelected = BitmapDescriptorFactory.fromResource(R.drawable.not_selected);
-            final BitmapDescriptor selected = BitmapDescriptorFactory.fromResource(R.drawable.selected);
+            Drawable markRed = getResources().getDrawable(R.drawable.ic_location_red);
+            Drawable markYellow = getResources().getDrawable(R.drawable.ic_location_yellow);
+            Drawable markWhite = getResources().getDrawable(R.drawable.ic_location_white);
+            Drawable markHighlight = getResources().getDrawable(R.drawable.ic_location_highlight);
+            final BitmapDescriptor smarkRed = getMarkerIconFromDrawable(markRed);
+            final BitmapDescriptor smarkYellow = getMarkerIconFromDrawable(markYellow);
+            final BitmapDescriptor notSelected = getMarkerIconFromDrawable(markWhite);
+            final BitmapDescriptor selected = getMarkerIconFromDrawable(markHighlight);
+
             for (int i = 0; i < venues.size(); i++) {
                 eventLatLng = new LatLng(Double.parseDouble(venues.get(i).getGeoLat()), Double.parseDouble(venues.get(i).getGeoLong()));
-                myMarker = map.addMarker(new MarkerOptions().position(eventLatLng).icon(notSelected).title(venues.get(i).getName()));
+                myMarker = map.addMarker(new MarkerOptions().position(eventLatLng).title(venues.get(i).getName()));
                 listMarker.add(myMarker);
+                if (nearMe.get(i).getMyStatus() == Define.STATUS_GOING) {
+                    myMarker.setIcon(smarkRed);
+                } else if (nearMe.get(i).getMyStatus() == Define.STATUS_DEFAULT) {
+                    myMarker.setIcon(notSelected);
+                } else if (nearMe.get(i).getMyStatus() == Define.STATUS_WENT) {
+                    myMarker.setIcon(smarkYellow);
+                }
             }
             eventName.observe(this, new Observer<String>() {
                 @Override
                 public void onChanged(String s) {
-                    for (int i =0 ; i < listMarker.size();i++){
-                        if (listMarker.get(i).getTitle().equals(s)){
+                    for (int i = 0; i < listMarker.size(); i++) {
+                        if (listMarker.get(i).getTitle().equals(s)) {
                             listMarker.get(i).setIcon(selected);
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(listMarker.get(i).getPosition(),15f));
+                            listMarker.get(i).showInfoWindow();
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(listMarker.get(i).getPosition(), 15f));
                         } else {
-                            listMarker.get(i).setIcon(notSelected);
+                           listMarker.get(i).setIcon(notSelected);
                         }
                     }
-
                 }
             });
         }

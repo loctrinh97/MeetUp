@@ -29,7 +29,6 @@ public class LoadPersonalWorker extends Worker {
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     String token = sharedPref.getString("token",null);
-
     ApiUtils apiUtils = new ApiUtils();
     private EventJoinedServices mEventJoinedServices;
     public LoadPersonalWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -51,8 +50,8 @@ public class LoadPersonalWorker extends Worker {
         public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
             if (response.isSuccessful()){
                 if(response.body().getStatus() == 0 ){
-                    sharedPref.edit().clear();
-                    sharedPref.edit().apply();
+                    sharedPref.edit().putString("token",null).apply();
+                    Define.tokenExpired = true;
                 }else {
                     List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                     List<Integer> listIdJoined = new ArrayList<>();
@@ -63,6 +62,7 @@ public class LoadPersonalWorker extends Worker {
                     personalJoinedRepository.deleteUsersEvents();
                     personalJoinedRepository.updateUsersEvents(listIdJoined,status);
                     personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT,status);
+                    Define.tokenExpired = false;
                 }
             }
         }
@@ -83,8 +83,8 @@ public class LoadPersonalWorker extends Worker {
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()){
                     if(response.body().getStatus() == 0 ){
-                        sharedPref.edit().clear();
-                        sharedPref.edit().apply();
+                        sharedPref.edit().putString("token",null).apply();
+                        Define.tokenExpired = true;
                     }else {
                         List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                         ArrayList listIdCanJoin = new ArrayList();
@@ -95,6 +95,7 @@ public class LoadPersonalWorker extends Worker {
                         personalJoinedRepository.deleteUsersEvents();
                         personalJoinedRepository.updateUsersEvents(listIdCanJoin, status);
                         personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT, status);
+                        Define.tokenExpired = false;
                     }
                 }
             }

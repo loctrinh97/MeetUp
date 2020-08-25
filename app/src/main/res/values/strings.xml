@@ -59,5 +59,14 @@
     <string name="manual_access">Cấp quyền thủ công</string>
     <string name="cancel">Hủy</string>
     <string name="granted_permissions_success">Đã cấp quyền cho ứng dụng</string>
+    <string name="notification">Thông báo</string>
+    <string name="gps_key">gps</string>
+    <string name="turn_on_gps">Vui lòng bật GPS !</string>
+    <string name="ok">Đồng ý</string>
+    <string name="tag">fragment_alert</string>
+    <string name="current_location">Bạn đang ở đây</string>
+    <string name="location_not_found">Không thể tìm thấy vị trí của bạn</string>
+    <string name="key_token">keyToken</string>
+    <string name="token_expired">Token hết hạn, vui lòng đăng nhập lại</string>
 
 </resources>

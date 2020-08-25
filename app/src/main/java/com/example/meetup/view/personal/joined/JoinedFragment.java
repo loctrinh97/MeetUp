@@ -2,7 +2,9 @@ package com.example.meetup.view.personal.joined;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,12 +26,17 @@ import com.example.meetup.databinding.FragmentPersonalJoinedBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.services.LoadPersonalWorker;
 import com.example.meetup.ulti.Define;
+import com.example.meetup.view.nearme.DialogGPS;
+import com.example.meetup.view.personal.DialogTokenExpired;
 import com.example.meetup.view.registerlogin.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class JoinedFragment extends Fragment {
+    String token;
     private RecyclerView recyclerView;
     private JoinedAdapter joinedAdapter;
     private List<Event> joinedList;
@@ -40,6 +48,15 @@ public class JoinedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        SharedPreferences sharedPref = getContext().getSharedPreferences("tokenPref",MODE_PRIVATE);
+        sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+        token = sharedPref.getString("token",null);
+        if (Define.tokenExpired){
+            FragmentManager fm = getParentFragmentManager();
+            DialogTokenExpired dialogTokenExpired = DialogTokenExpired.newInstance(getString(R.string.key_token));
+            dialogTokenExpired.show(fm, getString(R.string.tag));
+        }
+
         fragmentPersonalJoinedBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_personal_joined, container, false);
         joinedList = new ArrayList<>();
         joinedViewModel = new ViewModelProvider(getParentFragment()).get(JoinedViewModel.class);
@@ -51,13 +68,7 @@ public class JoinedFragment extends Fragment {
                 joinedAdapter.setListEvent(joinedList);
             }
         };
-        // test click item
-//        joinedAdapter.setOnItemClickListener(new JoinedAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                Toast.makeText(getContext(),joinedList.get(position).getId(),Toast.LENGTH_SHORT);
-//            }
-//        });
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -79,7 +90,6 @@ public class JoinedFragment extends Fragment {
             }
         });
         return fragmentPersonalJoinedBinding.getRoot();
-
     }
 
     private void setUpRecyclerDisplay() {
@@ -89,6 +99,16 @@ public class JoinedFragment extends Fragment {
         joinedAdapter = new JoinedAdapter(joinedList,getContext());
         recyclerView.setAdapter(joinedAdapter);
     }
+
+    SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPref, String key) {
+            if (key.equals("token")){
+                // Write your code here
+                token = sharedPref.getString("token",null);
+            }
+        }
+    };
 
 }
 
