@@ -6,8 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
     tools:context=".view.category.time.SearchFragment">
-
-    <androidx.viewpager.widget.ViewPager
+    <TextView
+        android:id="@+id/tvNoResult"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textColor="@color/color_text_default"
+        android:textSize="@dimen/_20sp"
+        android:text="@string/noResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.example.meetup.view.category.CustomViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -27,6 +35,7 @@
         app:tabIndicator="@drawable/botron_indicator"
         app:tabIndicatorColor="@color/color_common"
         app:tabSelectedTextColor="@color/color_common"
+        app:tabIndicatorAnimationDuration="1"
         app:tabTextColor="@color/color_text_default">
     </com.google.android.material.tabs.TabLayout>
 

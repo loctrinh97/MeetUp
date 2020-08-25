@@ -31,7 +31,7 @@ public class LoadPersonalWorker extends Worker {
     String token = sharedPref.getString("token",null);
 
     ApiUtils apiUtils = new ApiUtils();
-    private EventJoinedServices mEventJoinedServices;
+    private BaseService service = apiUtils.getService();
     public LoadPersonalWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -45,8 +45,8 @@ public class LoadPersonalWorker extends Worker {
     }
 
     private void loadEventJoinedFromApi(final String token, final long status) {
-    mEventJoinedServices = apiUtils.getEventJoinedServices();
-    mEventJoinedServices.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
+
+    service.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
         @Override
         public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
             if (response.isSuccessful()){
@@ -77,8 +77,8 @@ public class LoadPersonalWorker extends Worker {
 
 
     private void loadEventCanJoinFromApi(String token, final long status) {
-        mEventJoinedServices = apiUtils.getEventJoinedServices();
-        mEventJoinedServices.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
+
+        service.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()){

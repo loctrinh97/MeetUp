@@ -40,6 +40,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
     private CategoryViewModel viewModel;
+    int check = 0;
     List<Category> list;
 
     @Nullable
@@ -72,18 +73,29 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE) {
-                    FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+                    String tag = check==0?getString(R.string.firstFragment):null;
+                    FragmentManager fm = getParentFragmentManager();
                     FragmentTransaction fragmentTransaction = fm.beginTransaction();
                     SearchFragment fragment = new SearchFragment((edtCategorySearch.getText().toString()));
                     fragmentTransaction.replace(R.id.flSearch, fragment);
-                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.addToBackStack(tag);
                     fragmentTransaction.commit();
-                    closeKeyboard();
+                    edtCategorySearch.clearFocus();
                 }
                 return false;
             }
         });
-
+        edtCategorySearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(hasFocus){
+                    edtCategorySearch.setText("");
+                }
+                else{
+                    closeKeyboard();
+                }
+            }
+        });
         return view;
     }
 
@@ -106,15 +118,20 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         if (v.equals(ivBack)) {
             ivSearch.setVisibility(View.VISIBLE);
             tvHeader.setVisibility(View.VISIBLE);
+            edtCategorySearch.setText("");
+            closeKeyboard();
+            getParentFragmentManager().popBackStack(getString(R.string.firstFragment),1);
             edtCategorySearch.setVisibility(View.GONE);
             ivBack.setVisibility(View.GONE);
+
+
         }
     }
 
     private void closeKeyboard() {
         View view = getActivity().getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }

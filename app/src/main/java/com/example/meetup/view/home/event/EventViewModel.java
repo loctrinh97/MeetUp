@@ -1,5 +1,8 @@
 package com.example.meetup.view.home.event;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -9,6 +12,9 @@ import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.repository.CategoryRepository;
 import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.repository.VenueRepository;
+import com.example.meetup.services.worker.UpdateData;
+import com.example.meetup.ulti.Define;
+import com.example.meetup.ulti.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +23,12 @@ public class EventViewModel extends ViewModel{
     CategoryRepository categoryRepository = CategoryRepository.getInstance();
     VenueRepository venueRepository = VenueRepository.getInstance();
     EventsRepository eventsRepository = EventsRepository.getInstance();
+    public SharedPreferences sharedPref = MyApplication.getAppContext()
+            .getSharedPreferences(Define.PRE_TOKEN, Context.MODE_PRIVATE);
     List<Event> eventList;
     int page  = 0;
 
-    protected MutableLiveData<List<Event>> list = new MutableLiveData<>();
+    private MutableLiveData<List<Event>> list = new MutableLiveData<>();
 
     public MutableLiveData<List<Event>> getList() {
         return list;
@@ -37,6 +45,11 @@ public class EventViewModel extends ViewModel{
         return eventList;
     }
     public void updateEvent(int myStatus, int eventId){
+        String token = sharedPref.getString(Define.TOKEN,"");
+        if(!token.isEmpty()) {
+            UpdateData updateData = new UpdateData(token, myStatus, eventId);
+            updateData.run();
+        }
         eventsRepository.updateEvent(myStatus,eventId);
     }
     public int getCount(){

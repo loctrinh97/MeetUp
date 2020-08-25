@@ -2,27 +2,35 @@ package com.example.meetup.services;
 
 public class ApiUtils {
     private  UserService userService;
-    private EventJoinedServices eventJoinedServices;
-    private  EventService eventService;
-    private NewsService newsService;
-    private CategoryService categoryService;
+//    private EventJoinedServices eventJoinedServices;
+//    private  EventService eventService;
+//    private NewsService newsService;
+//    private CategoryService categoryService;
     private VenueServices venueServices;
+    private BaseService service;
     public static final String BASE_URL = "http://meetup.rikkei.org/api/v0/";
     public ApiUtils(){
     }
 
-    public CategoryService getCategoryService(){
-        if(categoryService==null){
-            categoryService = RetrofitClient.getClient(BASE_URL).create(CategoryService.class);
+    public BaseService getService() {
+        if(service == null){
+            service = RetrofitClient.getClient(BASE_URL).create(BaseService.class);
         }
-        return categoryService;
+        return service;
     }
-    public  EventService getEventService() {
-        if(eventService==null){
-            eventService = RetrofitClient.getClient(BASE_URL).create(EventService.class);
-        }
-        return eventService;
-    }
+
+//    public CategoryService getCategoryService(){
+//        if(categoryService==null){
+//            categoryService = RetrofitClient.getClient(BASE_URL).create(CategoryService.class);
+//        }
+//        return categoryService;
+//    }
+//    public  EventService getEventService() {
+//        if(eventService==null){
+//            eventService = RetrofitClient.getClient(BASE_URL).create(EventService.class);
+//        }
+//        return eventService;
+//    }
 
     public UserService getUserService() {
         if (userService == null) {
@@ -31,24 +39,24 @@ public class ApiUtils {
         return userService;
     }
 
-    public NewsService getNewsService() {
-        if (newsService == null) {
-           newsService = RetrofitClient.getClient(BASE_URL).create(NewsService.class);
-        }
-        return newsService;
-    }
+//   public NewsService getNewsService() {
+//        if (newsService == null) {
+//           newsService = RetrofitClient.getClient(BASE_URL).create(NewsService.class);
+//        }
+//        return newsService;
+//    }
+//
+//    public EventJoinedServices getEventJoinedServices(){
+//        if (eventJoinedServices == null) {
+//            eventJoinedServices = RetrofitClient.getClient(BASE_URL).create(EventJoinedServices.class);
+//        }
+//        return eventJoinedServices;
+//    }
 
-    public EventJoinedServices getEventJoinedServices(){
-        if (eventJoinedServices == null) {
-            eventJoinedServices = RetrofitClient.getClient(BASE_URL).create(EventJoinedServices.class);
-        }
-        return eventJoinedServices;
-    }
-
-    public VenueServices getVenueServices(){
-        if (venueServices == null){
-            venueServices = RetrofitClient.getClient(BASE_URL).create(VenueServices.class);
-        }
-        return venueServices;
-    }
+//    public VenueServices getVenueServices(){
+//        if (venueServices == null){
+//            venueServices = RetrofitClient.getClient(BASE_URL).create(VenueServices.class);
+//        }
+//        return venueServices;
+//    }
 }

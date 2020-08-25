@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Query;
 
-interface VenueServices {
+public interface VenueServices {
     @GET("listNearlyEvents")
     Call<EventResponse> getListNearlyEvents(
             @Header("token") String token,

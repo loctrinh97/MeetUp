@@ -15,6 +15,7 @@ import com.example.meetup.R;
 import com.example.meetup.model.response.User;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
+import com.example.meetup.services.worker.UpdateData;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 
@@ -30,7 +31,7 @@ public class LoginViewModel extends ViewModel {
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     public SharedPreferences.Editor token = sharedPref.edit();
-
+    SharedPreferences updateSp = MyApplication.getAppContext().getSharedPreferences(Define.UPDATE_LIST_TOKEN, Context.MODE_PRIVATE);
     public void accountLogin(String emailLogin, String passwordLogin) {
         mUserService = apiUtils.getUserService();
         mUserService.login(emailLogin, passwordLogin).enqueue(new Callback<User>() {
@@ -58,11 +59,25 @@ public class LoginViewModel extends ViewModel {
     }
 
     public String getPrefToken() {
-        String token = sharedPref.getString("token", null);
+        String token = sharedPref.getString(Define.TOKEN, null);
         return token;
     }
 
     public SharedPreferences.Editor clearPrefToken() {
+        String appToken = sharedPref.getString(Define.TOKEN, "");
+        String list = updateSp.getString(Define.LIST,"");
+        if(!list.isEmpty()){
+            String[] strings = list.split("-");
+            int size = strings.length;
+            for(int i=1 ; i<size ; i+=2){
+                int eventId = Integer.parseInt(strings[i]);
+                int status = Integer.parseInt(strings[i+1]);
+
+                UpdateData updateData = new UpdateData(appToken,eventId,status);
+                updateData.run();
+
+            }
+        }
         token.clear();
         token.apply();
         return token;

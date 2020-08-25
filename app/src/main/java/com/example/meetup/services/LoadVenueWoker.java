@@ -29,7 +29,7 @@ public class LoadVenueWoker extends Worker {
     public SharedPreferences.Editor sharedPrefEventNearId = sharedPref.edit();
 
     ApiUtils apiUtils = new ApiUtils();
-    private VenueServices venueServices;
+    private BaseService service;
 
     public LoadVenueWoker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -43,8 +43,8 @@ public class LoadVenueWoker extends Worker {
     }
 
     private void loadListVenueFromApi(String token, double radius, double longitue, double latitude) {
-        venueServices = apiUtils.getVenueServices();
-        venueServices.getListNearlyEvents(token, radius, longitue, latitude).enqueue(new Callback<EventResponse>() {
+
+        service.getListNearlyEvents(token, radius, longitue, latitude).enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if ( response.body().getStatus() == 1) {
@@ -58,7 +58,7 @@ public class LoadVenueWoker extends Worker {
                     sharedPrefEventNearId.putString("listIdNear", sb.toString());
                     EventsRepository eventsRepository = EventsRepository.getInstance();
                     eventsRepository.updateEventNear(listEventNearId);
-//                    eventsRepository.getEventById(listEventNearId);
+
                 }
             }
 

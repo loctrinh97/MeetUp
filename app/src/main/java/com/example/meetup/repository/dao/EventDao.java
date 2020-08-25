@@ -52,17 +52,17 @@ public interface EventDao {
     @Query("select * from events where category_id = :categoryId Order by schedule_end_date desc limit :pageSize")
     List<Event> getListWithTime(int pageSize, int categoryId);
 
-    @Query("select * from events where category_id = :categoryId and strftime('%Y-%m-%d',schedule_end_date) < strftime('%Y-%m-%d',:currentDate)  Order by schedule_end_date desc limit :pageSize")
-    List<Event> getListEnd(int pageSize, int categoryId, String currentDate);
+    @Query("select * from events where name like'%' ||:keyword|| '%' and strftime('%Y-%m-%d',schedule_end_date) < strftime('%Y-%m-%d',:currentDate)  Order by schedule_end_date desc limit :pageSize")
+    List<Event> getListEnd(int pageSize, String keyword, String currentDate);
 
-    @Query("select * from events where category_id = :categoryId and strftime('%Y-%m-%d',schedule_end_date) >= strftime('%Y-%m-%d',:currentDate)  Order by schedule_end_date desc limit :pageSize")
-    List<Event> getListHappen(int pageSize, int categoryId, String currentDate);
+    @Query("select * from events where name like '%' ||:keyword|| '%' and strftime('%Y-%m-%d',schedule_end_date) >= strftime('%Y-%m-%d',:currentDate)  Order by schedule_end_date desc limit :pageSize")
+    List<Event> getListHappen(int pageSize, String keyword, String currentDate);
 
-    @Query("select count(*) from events where category_id = :categoryId and strftime('%Y-%m-%d',schedule_end_date) < strftime('%Y-%m-%d',:currentDate)")
-    int getCountEnd(int categoryId, String currentDate);
+    @Query("select count(*) from events where name like '%' ||:keyword|| '%' and strftime('%Y-%m-%d',schedule_end_date) < strftime('%Y-%m-%d',:currentDate)")
+    int getCountEnd(String keyword, String currentDate);
 
-    @Query("select count(*) from events where category_id = :categoryId and strftime('%Y-%m-%d',schedule_end_date) >= strftime('%Y-%m-%d',:currentDate)")
-    int getCountHappen(int categoryId, String currentDate);
+    @Query("select count(*) from events where name like '%' ||:keyword|| '%' and strftime('%Y-%m-%d',schedule_end_date) >= strftime('%Y-%m-%d',:currentDate)")
+    int getCountHappen(String keyword, String currentDate);
 
     @Query("select count(*) from events where category_id = :categoryId")
     int getCountEventByCategory(int categoryId);

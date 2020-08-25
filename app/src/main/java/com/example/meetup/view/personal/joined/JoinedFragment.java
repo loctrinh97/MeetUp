@@ -51,13 +51,7 @@ public class JoinedFragment extends Fragment {
                 joinedAdapter.setListEvent(joinedList);
             }
         };
-        // test click item
-//        joinedAdapter.setOnItemClickListener(new JoinedAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//                Toast.makeText(getContext(),joinedList.get(position).getId(),Toast.LENGTH_SHORT);
-//            }
-//        });
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

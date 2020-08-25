@@ -81,18 +81,18 @@ public class EventsRepository {
         return dao.getListWithTime(pageSize, categoryId);
     }
 
-    public List<Event> getListEnd(int pageSize,int categoryId,String date){
-        return dao.getListEnd(pageSize, categoryId, date);
+    public List<Event> getListEnd(int pageSize,String keyword,String date){
+        return dao.getListEnd(pageSize, keyword, date);
     }
-    public List<Event> getListHappen(int pageSize,int categoryId,String date){
-        return dao.getListHappen(pageSize, categoryId, date);
+    public List<Event> getListHappen(int pageSize,String keyword,String date){
+        return dao.getListHappen(pageSize, keyword, date);
     }
 
-    public int getCountEnd(int categoryId,String date){
-        return dao.getCountEnd(categoryId, date);
+    public int getCountEnd(String keyword,String date){
+        return dao.getCountEnd(keyword, date);
     }
-    public int getCountHappen(int categoryId,String date){
-        return dao.getCountHappen(categoryId, date);
+    public int getCountHappen(String keyword,String date){
+        return dao.getCountHappen(keyword, date);
     }
 
 }

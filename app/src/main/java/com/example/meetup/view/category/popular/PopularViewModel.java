@@ -36,7 +36,7 @@ public class PopularViewModel extends EventViewModel {
         return eventList;
     }
     public void updateEvent(int myStatus, int eventId){
-        eventsRepository.updateEvent(myStatus,eventId);
+        super.updateEvent(myStatus,eventId);
     }
     public int getCount(){
         return eventsRepository.getCountEvent();

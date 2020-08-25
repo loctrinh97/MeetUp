@@ -59,5 +59,10 @@
     <string name="manual_access">Cấp quyền thủ công</string>
     <string name="cancel">Hủy</string>
     <string name="granted_permissions_success">Đã cấp quyền cho ứng dụng</string>
+    <string name="noResult">Không tìm thấy sự kiện phù hợp</string>
+    <string name="eventEnded">ĐÃ KẾT THÚC</string>
+    <string name="eventHappen">CHƯA KẾT THÚC</string>
+    <string name="firstFragment">first Fragment</string>
+    <string name="UpdateList">UpdateList</string>
 
 </resources>

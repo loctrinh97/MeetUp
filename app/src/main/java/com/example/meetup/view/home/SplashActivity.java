@@ -7,14 +7,22 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import com.example.meetup.R;
+import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.repository.CategoryRepository;
+import com.example.meetup.repository.EventsRepository;
+import com.example.meetup.services.worker.WorkController;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.services.LoadInforWorker;
 //import com.example.meetup.services.LoadPersonalWorker;
@@ -23,15 +31,17 @@ import com.example.meetup.ulti.MyApplication;
 
 public class SplashActivity extends AppCompatActivity {
     private Handler delay = new Handler();
-    OneTimeWorkRequest workRequest;
-    CategoryRepository repository = CategoryRepository.getInstance();
+    WorkController workController = WorkController.getInstance();
+    EventsRepository repository = EventsRepository.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int event = repository.getCountCategories();
-        Log.d("Category", "Size: " + event);
-        load();
+        int event = repository.getCountEvent();
+        if (event == 0) {
+            workController.setWorkPeriodic();
+        }
+
         Define.initMap();
         // hide notification bar
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
@@ -61,11 +71,4 @@ public class SplashActivity extends AppCompatActivity {
         delay.removeCallbacksAndMessages(null);
     }
 
-    public void load() {
-        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-        OneTimeWorkRequest.Builder myBuilder = new OneTimeWorkRequest.Builder(LoadInforWorker.class);
-        myBuilder.setConstraints(constraints);
-        workRequest = myBuilder.build();
-        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
-    }
 }

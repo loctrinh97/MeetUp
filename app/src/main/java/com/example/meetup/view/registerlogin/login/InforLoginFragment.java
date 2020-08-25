@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.meetup.R;
+import com.example.meetup.services.worker.WorkController;
 import com.example.meetup.view.home.HomeActivity;
 import com.example.meetup.view.registerlogin.resetpassword.ForgotPasswordFragment;
 
@@ -127,6 +128,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
                     public void onChanged(String s) {
                         tvMessLogin.setText(loginViewModel.messLogin.getValue());
                         if (loginViewModel.messLogin.getValue().equals(getString(R.string.login_success))) {
+                            WorkController.getInstance().setDownDataWork();
                             tvMessLogin.setTextColor(getResources().getColor(R.color.colorPrimary));
                             Intent intent = new Intent(getActivity(), HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
