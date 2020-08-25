@@ -138,5 +138,7 @@ public class Define {
     public static int PERMANENT =6;
     public static String PRE_TOKEN ="tokenPref";
     public static String TOKEN ="token";
+    public static boolean tokenExpired;
+
 
 }

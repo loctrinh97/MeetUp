@@ -51,7 +51,7 @@ public class JoinedFragment extends Fragment {
         SharedPreferences sharedPref = getContext().getSharedPreferences("tokenPref",MODE_PRIVATE);
         sharedPref.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
         token = sharedPref.getString("token",null);
-        if (LoadPersonalWorker.tokenExpired){
+        if (Define.tokenExpired){
             FragmentManager fm = getParentFragmentManager();
             DialogTokenExpired dialogTokenExpired = DialogTokenExpired.newInstance(getString(R.string.key_token));
             dialogTokenExpired.show(fm, getString(R.string.tag));

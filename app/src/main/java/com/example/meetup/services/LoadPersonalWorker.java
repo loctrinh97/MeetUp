@@ -26,7 +26,6 @@ import retrofit2.Response;
 
 public class LoadPersonalWorker extends Worker {
 
-    public static boolean tokenExpired;
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     String token = sharedPref.getString("token",null);
@@ -52,7 +51,7 @@ public class LoadPersonalWorker extends Worker {
             if (response.isSuccessful()){
                 if(response.body().getStatus() == 0 ){
                     sharedPref.edit().putString("token",null).apply();
-                    tokenExpired = true;
+                    Define.tokenExpired = true;
                 }else {
                     List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                     List<Integer> listIdJoined = new ArrayList<>();
@@ -63,7 +62,7 @@ public class LoadPersonalWorker extends Worker {
                     personalJoinedRepository.deleteUsersEvents();
                     personalJoinedRepository.updateUsersEvents(listIdJoined,status);
                     personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT,status);
-                    tokenExpired = false;
+                    Define.tokenExpired = false;
                 }
             }
         }
@@ -85,7 +84,7 @@ public class LoadPersonalWorker extends Worker {
                 if (response.isSuccessful()){
                     if(response.body().getStatus() == 0 ){
                         sharedPref.edit().putString("token",null).apply();
-                        tokenExpired = true;
+                        Define.tokenExpired = true;
                     }else {
                         List<EventGetFromApi> listEvent = response.body().getResponse().getEvents();
                         ArrayList listIdCanJoin = new ArrayList();
@@ -96,6 +95,7 @@ public class LoadPersonalWorker extends Worker {
                         personalJoinedRepository.deleteUsersEvents();
                         personalJoinedRepository.updateUsersEvents(listIdCanJoin, status);
                         personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT, status);
+                        Define.tokenExpired = false;
                     }
                 }
             }
