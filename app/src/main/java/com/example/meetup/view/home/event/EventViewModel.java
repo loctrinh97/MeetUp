@@ -1,5 +1,8 @@
 package com.example.meetup.view.home.event;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -9,16 +12,33 @@ import com.example.meetup.model.dataLocal.Venue;
 import com.example.meetup.repository.CategoryRepository;
 import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.repository.VenueRepository;
+import com.example.meetup.services.worker.UpdateData;
+import com.example.meetup.ulti.Define;
+import com.example.meetup.ulti.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventViewModel extends ViewModel{
+    public static int LOGIN = 1;
+    public static int GUESS = 0;
     CategoryRepository categoryRepository = CategoryRepository.getInstance();
     VenueRepository venueRepository = VenueRepository.getInstance();
     EventsRepository eventsRepository = EventsRepository.getInstance();
+    int checkLogin ;
+
+    public void setCheckLogin(int checkLogin) {
+        this.checkLogin = checkLogin;
+    }
+
+    public int getCheckLogin() {
+        return checkLogin;
+    }
+
+    public SharedPreferences sharedPref = MyApplication.getAppContext()
+            .getSharedPreferences(Define.PRE_TOKEN, Context.MODE_PRIVATE);
     List<Event> eventList;
-   int page  = 0;
+    int page  = 0;
 
     private MutableLiveData<List<Event>> list = new MutableLiveData<>();
 
@@ -37,6 +57,11 @@ public class EventViewModel extends ViewModel{
         return eventList;
     }
     public void updateEvent(int myStatus, int eventId){
+        String token = sharedPref.getString(Define.TOKEN,"");
+        if(!token.isEmpty()) {
+            UpdateData updateData = new UpdateData(token, myStatus, eventId);
+            updateData.run();
+        }
         eventsRepository.updateEvent(myStatus,eventId);
     }
     public int getCount(){
@@ -48,7 +73,7 @@ public class EventViewModel extends ViewModel{
     }
     public List<Event> getEventNearList(){
         // Fake data
-        return eventsRepository.getListEvent(5);
+        return eventsRepository.getEventNear();
     }
     public Category getCategory(int categoryId){
         return categoryRepository.getCategory(categoryId);

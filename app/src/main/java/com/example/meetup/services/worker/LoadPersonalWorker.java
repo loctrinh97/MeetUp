@@ -1,4 +1,4 @@
-package com.example.meetup.services;
+package com.example.meetup.services.worker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +13,8 @@ import com.example.meetup.R;
 import com.example.meetup.model.response.EventGetFromApi;
 import com.example.meetup.model.response.EventResponse;
 import com.example.meetup.repository.PersonalJoinedRepository;
+import com.example.meetup.services.ApiUtils;
+import com.example.meetup.services.BaseService;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.view.registerlogin.login.LoginViewModel;
@@ -30,7 +32,7 @@ public class LoadPersonalWorker extends Worker {
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     String token = sharedPref.getString("token",null);
     ApiUtils apiUtils = new ApiUtils();
-    private EventJoinedServices mEventJoinedServices;
+    private BaseService service = apiUtils.getService();
     public LoadPersonalWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -44,8 +46,8 @@ public class LoadPersonalWorker extends Worker {
     }
 
     private void loadEventJoinedFromApi(final String token, final long status) {
-    mEventJoinedServices = apiUtils.getEventJoinedServices();
-    mEventJoinedServices.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
+
+    service.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
         @Override
         public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
             if (response.isSuccessful()){
@@ -77,8 +79,8 @@ public class LoadPersonalWorker extends Worker {
 
 
     private void loadEventCanJoinFromApi(String token, final long status) {
-        mEventJoinedServices = apiUtils.getEventJoinedServices();
-        mEventJoinedServices.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
+
+        service.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()){

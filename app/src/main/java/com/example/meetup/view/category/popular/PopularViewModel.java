@@ -1,4 +1,4 @@
-package com.example.meetup.view.category;
+package com.example.meetup.view.category.popular;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -36,7 +36,7 @@ public class PopularViewModel extends EventViewModel {
         return eventList;
     }
     public void updateEvent(int myStatus, int eventId){
-        eventsRepository.updateEvent(myStatus,eventId);
+        super.updateEvent(myStatus,eventId);
     }
     public int getCount(){
         return eventsRepository.getCountEvent();
@@ -46,8 +46,7 @@ public class PopularViewModel extends EventViewModel {
         list.setValue(eventList);
     }
     public List<Event> getEventNearList(){
-        // Fake data
-        return eventsRepository.getListEvent(5);
+        return eventsRepository.getEventNear();
     }
 
 }

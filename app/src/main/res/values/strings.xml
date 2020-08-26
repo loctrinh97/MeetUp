@@ -68,5 +68,13 @@
     <string name="location_not_found">Không thể tìm thấy vị trí của bạn</string>
     <string name="key_token">keyToken</string>
     <string name="token_expired">Token hết hạn, vui lòng đăng nhập lại</string>
+    <string name="noResult">Không tìm thấy sự kiện phù hợp</string>
+    <string name="eventEnded">ĐÃ KẾT THÚC</string>
+    <string name="eventHappen">CHƯA KẾT THÚC</string>
+    <string name="firstFragment">first Fragment</string>
+    <string name="UpdateList">UpdateList</string>
+    <string name="MyPage">Trang chủ</string>
+    <string name="nearMe">Gần tôi</string>
+    <string name="categories">Danh mục</string>
 
 </resources>

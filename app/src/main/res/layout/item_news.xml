@@ -10,6 +10,7 @@
         android:paddingBottom="13dp">
 
         <FrameLayout
+            android:layout_marginTop="@dimen/_10dp"
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

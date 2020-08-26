@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,7 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final EventAdapter.ViewHolder holder, final int position) {
-        Event event = eventList.get(position);
+        final Event event = eventList.get(position);
         Glide.with(context)
                 .load(event.getPhoto())
                 .placeholder(R.drawable.error)
@@ -89,6 +90,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             public void onClick(View view) {
                 if (listener != null) {
                     listener.onClickJoin(position);
+                    Toast.makeText(holder.binding.getRoot().getContext(),event.getCategoryId()+"",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -129,6 +131,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     listener.onItemClick(position);
+
                 }
             });
 

@@ -24,7 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentPersonalJoinedBinding;
 import com.example.meetup.model.dataLocal.Event;
-import com.example.meetup.services.LoadPersonalWorker;
+
 import com.example.meetup.ulti.Define;
 import com.example.meetup.view.nearme.DialogGPS;
 import com.example.meetup.view.personal.DialogTokenExpired;

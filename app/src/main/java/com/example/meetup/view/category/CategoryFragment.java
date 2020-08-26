@@ -1,10 +1,13 @@
 package com.example.meetup.view.category;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetup.R;
 import com.example.meetup.model.dataLocal.Category;
-import com.example.meetup.view.home.event.EventDetailFragment;
+import com.example.meetup.view.category.search.SearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +34,16 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     private TextView tvHeader;
     private EditText edtCategorySearch;
     private ImageView ivBack;
-    private  RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private CategoryAdapter adapter;
     private CategoryViewModel viewModel;
+    int check = 0;
     List<Category> list;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category,container,false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
         recyclerView = view.findViewById(R.id.rvCategories);
         viewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(CategoryViewModel.class);
         list = new ArrayList<>();
@@ -51,17 +55,44 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         adapter.setOnItemListener(new CategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.d("Category", "onItemClick: "+position);
-                FragmentManager fm  = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+                FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 EventByCategoryFragment fragment = new EventByCategoryFragment(list.get(position));
-                fragmentTransaction.replace(R.id.activity,fragment);
+                fragmentTransaction.replace(R.id.activity, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
         ivSearch.setOnClickListener(this);
         ivBack.setOnClickListener(this);
+
+        edtCategorySearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) {
+                    String tag = check==0?getString(R.string.firstFragment):null;
+                    FragmentManager fm = getParentFragmentManager();
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    SearchFragment fragment = new SearchFragment((edtCategorySearch.getText().toString()));
+                    fragmentTransaction.replace(R.id.flSearch, fragment);
+                    fragmentTransaction.addToBackStack(tag);
+                    fragmentTransaction.commit();
+                    edtCategorySearch.clearFocus();
+                }
+                return false;
+            }
+        });
+        edtCategorySearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(hasFocus){
+                    edtCategorySearch.setText("");
+                }
+                else{
+                    closeKeyboard();
+                }
+            }
+        });
         return view;
     }
 
@@ -69,25 +100,36 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         list = viewModel.getList();
-        adapter = new CategoryAdapter(list,getContext());
+        adapter = new CategoryAdapter(list, getContext());
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.equals(ivSearch)){
+        if (v.equals(ivSearch)) {
             ivSearch.setVisibility(View.GONE);
             tvHeader.setVisibility(View.GONE);
             edtCategorySearch.setVisibility(View.VISIBLE);
             ivBack.setVisibility(View.VISIBLE);
         }
-        if (v.equals(ivBack)){
+        if (v.equals(ivBack)) {
             ivSearch.setVisibility(View.VISIBLE);
             tvHeader.setVisibility(View.VISIBLE);
+            edtCategorySearch.setText("");
+            closeKeyboard();
+            getParentFragmentManager().popBackStack(getString(R.string.firstFragment),1);
             edtCategorySearch.setVisibility(View.GONE);
             ivBack.setVisibility(View.GONE);
+
+
         }
     }
 
-
+    private void closeKeyboard() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 }

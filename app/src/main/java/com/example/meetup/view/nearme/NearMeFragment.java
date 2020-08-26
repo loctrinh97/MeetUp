@@ -2,10 +2,8 @@ package com.example.meetup.view.nearme;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -36,30 +34,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
-import androidx.work.Constraints;
-import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentNearMeBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.Venue;
-import com.example.meetup.services.LoadVenueWoker;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.ulti.PermissionUtils;
 import com.example.meetup.view.home.event.NearEventAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -179,11 +170,11 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                             LatLng latLng = new LatLng(latitude, longitude);
                             Define.CURRENT_LOCATION_LAT = latitude;
                             Define.CURRENT_LOCATION_LONG = longitude;
-                            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-                            OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
-                            mBuiderLoadVenue.setConstraints(constraints);
-                            workRequest = mBuiderLoadVenue.build();
-                            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+//                            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+//                            OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
+//                            mBuiderLoadVenue.setConstraints(constraints);
+//                            workRequest = mBuiderLoadVenue.build();
+//                            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
                             map.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.current_location))).showInfoWindow();
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
                         } else {
@@ -236,12 +227,14 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                 eventLatLng = new LatLng(Double.parseDouble(venues.get(i).getGeoLat()), Double.parseDouble(venues.get(i).getGeoLong()));
                 myMarker = map.addMarker(new MarkerOptions().position(eventLatLng).title(venues.get(i).getName()));
                 listMarker.add(myMarker);
-                if (nearMe.get(i).getMyStatus() == Define.STATUS_GOING) {
-                    myMarker.setIcon(smarkRed);
-                } else if (nearMe.get(i).getMyStatus() == Define.STATUS_DEFAULT) {
-                    myMarker.setIcon(notSelected);
-                } else if (nearMe.get(i).getMyStatus() == Define.STATUS_WENT) {
-                    myMarker.setIcon(smarkYellow);
+                if(nearMe.size()!=0) {
+                    if (nearMe.get(i).getMyStatus() == Define.STATUS_GOING) {
+                        myMarker.setIcon(smarkRed);
+                    } else if (nearMe.get(i).getMyStatus() == Define.STATUS_DEFAULT) {
+                        myMarker.setIcon(notSelected);
+                    } else if (nearMe.get(i).getMyStatus() == Define.STATUS_WENT) {
+                        myMarker.setIcon(smarkYellow);
+                    }
                 }
             }
             eventName.observe(this, new Observer<String>() {

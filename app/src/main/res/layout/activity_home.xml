@@ -25,7 +25,7 @@
             android:id="@+id/app_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60dp"
-            android:background="@drawable/botron"
+            android:background="@drawable/botron_tab"
             android:elevation="@dimen/_10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

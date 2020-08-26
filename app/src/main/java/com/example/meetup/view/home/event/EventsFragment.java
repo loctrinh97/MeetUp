@@ -28,6 +28,7 @@ import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentEventsBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.repository.CategoryRepository;
+import com.example.meetup.services.worker.UpdateData;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -38,30 +39,35 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class EventsFragment extends Fragment{
-    private RecyclerView recyclerView;
+public class EventsFragment extends Fragment {
+    private static int LOGIN = 1;
+    private static int GUESS = 0;
+    protected RecyclerView recyclerView;
     public EventViewModel eventViewModel;
-    List<Event> eventList;
-    EventAdapter adapter;
+    protected List<Event> eventList;
+    protected EventAdapter adapter;
     int pageSize;
-    private FragmentEventsBinding binding;
+    protected FragmentEventsBinding binding;
+    protected SwipeRefreshLayout refreshLayout;
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences(Define.PRE_TOKEN, Context.MODE_PRIVATE);
+
+    protected void setViewModel() {
+        eventViewModel = new ViewModelProvider(getParentFragment()).get(EventViewModel.class);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false);
         eventList = new ArrayList<>();
         pageSize = Define.PAGE_SIZE_DEFAULT;
-        eventViewModel = new ViewModelProvider(getParentFragment()).get(EventViewModel.class);
+        refreshLayout = binding.swipe;
+        setViewModel();
         recyclerView = binding.recyclerEvents;
         setUpRecyclerView();
-        final Observer<List<Event>> eventObserver = new Observer<List<Event>>() {
-            @Override
-            public void onChanged(List<Event> eventList) {
-                adapter.setEventList(eventList);
-            }
-        };
+        loginCheck();
+        observe();
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -80,55 +86,83 @@ public class EventsFragment extends Fragment{
                 super.onScrollStateChanged(recyclerView, newState);
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                     pageSize += Define.PAGE_SIZE_DEFAULT;
-                    eventList = eventViewModel.getEventList(pageSize); }
+                    eventList = setList(pageSize);
+                }
             }
         });
-        eventViewModel.getList().observe(getViewLifecycleOwner(), eventObserver);
+
         binding.setLifecycleOwner(this);
-        binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                eventList = eventViewModel.getEventList(Define.PAGE_SIZE_DEFAULT);
+                eventList = setList(Define.PAGE_SIZE_DEFAULT);
+                adapter.setEventList(eventList);
                 binding.swipe.setRefreshing(false);
             }
         });
         return binding.getRoot();
     }
 
-    private void showDetailEvent(int position) {
-        FragmentManager fm  = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+    protected void loginCheck() {
+        final String token = sharedPref.getString(Define.TOKEN, "");
+        if(token.isEmpty()){
+            eventViewModel.setCheckLogin(GUESS);
+        }
+        else{
+            eventViewModel.setCheckLogin(LOGIN);
+        }
+    }
+
+    protected List<Event> setList(int pageSize) {
+        return eventViewModel.getEventList(pageSize);
+    }
+
+    protected void observe() {
+        final Observer<List<Event>> eventObserver = new Observer<List<Event>>() {
+            @Override
+            public void onChanged(List<Event> eventList) {
+                adapter.setEventList(eventList);
+            }
+        };
+        eventViewModel.getList().observe(getViewLifecycleOwner(), eventObserver);
+    }
+
+    protected void showDetailEvent(int position) {
+        FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        EventDetailFragment fragment = new EventDetailFragment(eventList.get(position),getContext(),eventViewModel);
-        fragmentTransaction.replace(R.id.activity,fragment);
+        EventDetailFragment fragment = new EventDetailFragment(eventList.get(position), getContext(), eventViewModel);
+        fragmentTransaction.replace(R.id.activity, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
-    private void joinCheck(final int position) {
-        String token = sharedPref.getString(Define.TOKEN, "");
-        if (token.isEmpty()) {
+    protected void joinCheck(final int position) {
+
+        if (eventViewModel.getCheckLogin()==GUESS) {
             DialogLogin dialogLogin = new DialogLogin();
             dialogLogin.showDialog(getActivity());
 
+
         } else {
             BottomDialogFragment bottomDialog = new BottomDialogFragment(eventList.get(position).getMyStatus());
-            bottomDialog.show(getChildFragmentManager(),"");
+            bottomDialog.show(getChildFragmentManager(), "");
             bottomDialog.setBottomListener(new BottomDialogFragment.BottomListener() {
                 @Override
                 public void onBottomItemClicked(int status) {
-                    eventViewModel.updateEvent(status,eventList.get(position).getId());
-                    eventList = eventViewModel.getEventList(pageSize);
+                    eventViewModel.updateEvent(status, eventList.get(position).getId());
+                    eventList = setList(pageSize);
                     adapter.setEventList(eventList);
                 }
             });
+
         }
 
     }
 
-    private void setUpRecyclerView() {
+    protected void setUpRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        eventList = eventViewModel.getEventList(pageSize);
+        eventList = setList(Define.PAGE_SIZE_DEFAULT);
         adapter = new EventAdapter(eventList, getContext());
         recyclerView.setAdapter(adapter);
     }

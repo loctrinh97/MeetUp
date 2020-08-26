@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
         addFragmentLogin();
-   //     addFragmentSignupInfor();
 
         if (PersonalLoginFragment.personalLogin){
             addFragmentLoginInfor();
