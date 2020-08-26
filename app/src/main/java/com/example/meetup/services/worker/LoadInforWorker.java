@@ -74,10 +74,6 @@ public class LoadInforWorker extends Worker {
         thread.start();
         loadCategories();
 
-        if (Define.CURRENT_LOCATION_LAT != 0.0 && Define.CURRENT_LOCATION_LONG != 0.0) {
-            loadListVenueFromApi(token, 7, Define.CURRENT_LOCATION_LONG, Define.CURRENT_LOCATION_LAT);
-        }
-
         ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
         Runnable run = new Runnable() {
@@ -90,39 +86,6 @@ public class LoadInforWorker extends Worker {
         loadNewsFromApi();
 
         return Result.success();
-    }
-
-    private void loadListVenueFromApi(final String token, final double radius, final double longitue, final double latitude) {
-        service.getListNearlyEvents(token, radius, longitue, latitude).enqueue(new Callback<EventResponse>() {
-            @Override
-            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
-                if (response.isSuccessful()) {
-                    List<EventGetFromApi> listEventNearFromApi = response.body().getResponse().getEvents();
-                    List<EventVenue> listEventNearId = new ArrayList<>();
-                    StringBuilder sb = new StringBuilder();
-                    for (EventGetFromApi e : listEventNearFromApi) {
-                        listEventNearId.add(new EventVenue(e.getId(), e.getPhoto(), e.getName(), e.getLink(), e.getGoingCount(), e.getWentCount(), e.getScheduleStartDate(), e.getVenue().getId(), e.getDistance(), e.getVenue().getContactAddress(), e.getVenue().getGeoArea(), e.getVenue().getGeoLong(), e.getVenue().getGeoLat()));
-                        sb.append(e.getId()).append(",");
-                    }
-                    sharedPrefEventNearId.putString("listIdNear", sb.toString());
-                    EventsRepository eventsRepository = EventsRepository.getInstance();
-                    eventsRepository.updateEventNear(listEventNearId);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<EventResponse> call, Throwable t) {
-                ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
-
-                Runnable run = new Runnable() {
-                    public void run() {
-                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-                        loadListVenueFromApi(token,radius,longitue,latitude);
-                    }
-                };
-                worker.schedule(run, 2, TimeUnit.SECONDS);
-            }
-        });
     }
 
     private void loadEventsFromApi() {
