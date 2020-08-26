@@ -45,6 +45,15 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
         forgotPasswordViewModel = new ViewModelProvider(getActivity()).get(ForgotPasswordViewModel.class);
         imgBack.setOnClickListener(this);
         btnResetPassword.setOnClickListener(this);
+        tvIgnoreResetPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
         edtEmailForgot.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -67,10 +76,6 @@ public class ForgotPasswordFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v.equals(tvIgnoreResetPw)) {
-            Intent intent = new Intent(getActivity(), HomeActivity.class);
-            startActivity(intent);
-        }
         if (v.equals(imgBack)) {
             FragmentManager fragmentManager = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
