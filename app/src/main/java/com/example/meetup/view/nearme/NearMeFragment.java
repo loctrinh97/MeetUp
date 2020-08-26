@@ -170,11 +170,6 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                             LatLng latLng = new LatLng(latitude, longitude);
                             Define.CURRENT_LOCATION_LAT = latitude;
                             Define.CURRENT_LOCATION_LONG = longitude;
-//                            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-//                            OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
-//                            mBuiderLoadVenue.setConstraints(constraints);
-//                            workRequest = mBuiderLoadVenue.build();
-//                            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
                             map.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.current_location))).showInfoWindow();
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
                         } else {

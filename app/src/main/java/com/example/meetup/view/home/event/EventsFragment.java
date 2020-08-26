@@ -27,8 +27,6 @@ import android.widget.Toast;
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentEventsBinding;
 import com.example.meetup.model.dataLocal.Event;
-import com.example.meetup.repository.CategoryRepository;
-import com.example.meetup.services.worker.UpdateData;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;

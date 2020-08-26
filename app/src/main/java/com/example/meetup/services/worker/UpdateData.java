@@ -15,32 +15,35 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateData implements Runnable {
+    private final String BEARER = "Bearer ";
     int status;
     int eventId;
     String token;
     SharedPreferences updateSp = MyApplication.getAppContext().getSharedPreferences(Define.UPDATE_LIST_TOKEN, Context.MODE_PRIVATE);
 
     ApiUtils apiUtils = new ApiUtils();
-    public UpdateData(String token,int eventId,int status){
+
+    public UpdateData(String token, int status, int eventId) {
         this.status = status;
         this.eventId = eventId;
         this.token = token;
     }
+
     @Override
     public void run() {
         Log.d("Update", "run: ");
-        apiUtils.getService().doUpdateEvent(token,status,eventId).enqueue(new Callback<ResultUpdateResponse>() {
+        apiUtils.getService().doUpdateEvent(BEARER + token, status, eventId).enqueue(new Callback<ResultUpdateResponse>() {
             @Override
             public void onResponse(Call<ResultUpdateResponse> call, Response<ResultUpdateResponse> response) {
                 assert response.body() != null;
-                Log.d("Update", "onResponse: "+ response.body().errorCode);
+                Log.d("Update", "onResponse: " + response.body().errorCode);
             }
 
             @Override
             public void onFailure(Call<ResultUpdateResponse> call, Throwable t) {
-                String list = updateSp.getString(Define.LIST,"");
+                String list = updateSp.getString(Define.LIST, "");
                 list = list + "-" + eventId + "-" + status;
-                updateSp.edit().putString("List",list).apply();
+                updateSp.edit().putString("List", list).apply();
 
             }
         });
