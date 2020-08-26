@@ -95,4 +95,8 @@ public class EventsRepository {
         return dao.getCountHappen(keyword, date);
     }
 
+    public void clearStatus(){
+        dao.clearStatus();
+    }
+
 }

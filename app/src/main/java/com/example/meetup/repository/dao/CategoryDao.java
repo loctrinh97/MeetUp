@@ -18,7 +18,6 @@ public interface CategoryDao {
     int getCountCategories();
     @Query("delete from categories")
     void deleteCategories();
-
     @Insert
     void insertCategories(List<Category> categories );
 }

@@ -61,7 +61,7 @@ public class EventViewModel extends ViewModel{
     }
     public List<Event> getEventNearList(){
         // Fake data
-        return eventsRepository.getListEvent(5);
+        return eventsRepository.getEventNear();
     }
     public Category getCategory(int categoryId){
         return categoryRepository.getCategory(categoryId);

@@ -1,4 +1,4 @@
-package com.example.meetup.view.category.time;
+package com.example.meetup.view.category.search;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

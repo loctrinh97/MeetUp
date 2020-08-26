@@ -33,8 +33,7 @@ public interface EventDao {
 
     @Query("delete from events")
     void deleteEvents();
-
-    @Query("select * from events e, venues v where e.venue_id == v.id and e.distance != 0.0")
+    @Query("select * from events e where e.venue_id and e.distance < 50 and e.distance > 0")
     List<Event> getEventNear();
 
     @Query("update venues set geo_long = :geoLong, geo_lat = :geoLat, contact_address =:contactAddress where id =:venueId")
@@ -66,4 +65,7 @@ public interface EventDao {
 
     @Query("select count(*) from events where category_id = :categoryId")
     int getCountEventByCategory(int categoryId);
+
+    @Query("update events set my_status = 0")
+    public void clearStatus();
 }

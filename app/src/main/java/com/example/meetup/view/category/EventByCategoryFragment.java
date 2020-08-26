@@ -53,17 +53,28 @@ public class EventByCategoryFragment extends Fragment {
         tabLayout.setupWithViewPager(viewpager);
         tvCategory = view.findViewById(R.id.tvCategory);
         iconBack = view.findViewById(R.id.ivIconBack);
-        tvCategory.setText(category.getName() + " (" + getCount(category.getId()) + ")");
-        adapter_category = new ViewPagerAdapter(getChildFragmentManager());
-        adapter_category.addFrag(new PopularEventFragment(category.getId()), POPULAR);
-        adapter_category.addFrag(new TimeFragment(category),TIME);
-        viewpager.setAdapter(adapter_category);
+        TextView tv = view.findViewById(R.id.tvNoResult);
+        if (getCount(category.getId()) == 0) {
+            tv.setVisibility(View.VISIBLE);
+            viewpager.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+        } else {
+            tv.setVisibility(View.GONE);
+            viewpager.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.VISIBLE);
+            tvCategory.setText(category.getName() + " (" + getCount(category.getId()) + ")");
+            adapter_category = new ViewPagerAdapter(getChildFragmentManager());
+            adapter_category.addFrag(new PopularEventFragment(category.getId()), POPULAR);
+            adapter_category.addFrag(new TimeFragment(category), TIME);
+            viewpager.setAdapter(adapter_category);
+        }
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
             }
         });
+
         return view;
     }
 }

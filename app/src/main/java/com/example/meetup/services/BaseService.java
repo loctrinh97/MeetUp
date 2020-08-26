@@ -24,6 +24,8 @@ public interface BaseService {
     @GET("listPopularEvents")
     Call<EventResponse> getListPopularEvents();
 
+
+
     @GET("listEventsByCategory")
     Call<EventResponse> getListEventsByCategory(
             @Query("category_id") int category_id
@@ -38,6 +40,11 @@ public interface BaseService {
 
     @GET("listNews")
     Call<NewResponse> getListNews();
+    @GET("listNews")
+    Call<NewResponse> getListNewsFirst(
+            @Query("pageIndex") int pageIndex,
+            @Query("pageSize")  int pageSize
+    );
 
     @GET("listNearlyEvents")
     Call<EventResponse> getListNearlyEvents(

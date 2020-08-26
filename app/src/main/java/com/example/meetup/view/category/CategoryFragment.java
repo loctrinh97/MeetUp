@@ -2,7 +2,6 @@ package com.example.meetup.view.category;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetup.R;
 import com.example.meetup.model.dataLocal.Category;
-import com.example.meetup.view.category.time.SearchFragment;
-import com.example.meetup.view.home.event.EventDetailFragment;
+import com.example.meetup.view.category.search.SearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;

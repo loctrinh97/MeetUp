@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @SuppressLint("CheckResult")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Category category = categoryList.get(position);
         holder.tvName.setText(category.getName());
         Glide.with(context).load(Define.getImage(category.getId()))
@@ -57,7 +58,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         TextView tvName;
         ImageView ivIconNext;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             ivIcon = itemView.findViewById(R.id.ivItemIconLeft);
             ivIconNext = itemView.findViewById(R.id.ivItemIconRight);
@@ -67,6 +68,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     listener.onItemClick(position);
+
                 }
             });
         }

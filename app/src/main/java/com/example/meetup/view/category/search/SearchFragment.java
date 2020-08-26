@@ -1,18 +1,12 @@
-package com.example.meetup.view.category.time;
-
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+package com.example.meetup.view.category.search;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,9 +14,7 @@ import android.widget.TextView;
 import com.example.meetup.R;
 import com.example.meetup.view.adapter.ViewPagerAdapter;
 import com.example.meetup.view.category.CustomViewPager;
-import com.example.meetup.view.home.event.EventViewModel;
-import com.example.meetup.view.home.event.EventsFragment;
-import com.example.meetup.view.home.news.NewsFragment;
+import com.example.meetup.view.category.time.EventCategoryFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class SearchFragment extends Fragment {

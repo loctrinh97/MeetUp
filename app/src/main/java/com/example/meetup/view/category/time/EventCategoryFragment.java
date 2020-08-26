@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.lifecycle.Observer;
 
 import com.example.meetup.model.dataLocal.Event;
+import com.example.meetup.view.category.search.SearchViewModel;
 import com.example.meetup.view.home.event.EventsFragment;
 
 import java.util.List;

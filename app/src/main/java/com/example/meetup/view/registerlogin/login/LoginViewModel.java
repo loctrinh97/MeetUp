@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.meetup.R;
 import com.example.meetup.model.response.User;
+import com.example.meetup.repository.EventsRepository;
 import com.example.meetup.services.ApiUtils;
 import com.example.meetup.services.UserService;
 import com.example.meetup.services.worker.UpdateData;
@@ -64,6 +65,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public SharedPreferences.Editor clearPrefToken() {
+        EventsRepository.getInstance().clearStatus();
         String appToken = sharedPref.getString(Define.TOKEN, "");
         String list = updateSp.getString(Define.LIST,"");
         if(!list.isEmpty()){

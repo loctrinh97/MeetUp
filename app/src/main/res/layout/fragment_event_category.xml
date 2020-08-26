@@ -27,29 +27,31 @@
         app:layout_constraintTop_toTopOf="@id/tvCategory"
         android:layout_width="50dp"
         android:layout_height="@dimen/_40dp"/>
-    <ImageView
-        android:id="@+id/ivSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_icon_search"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/_24dp"
-        android:layout_marginRight="@dimen/_20dp">
-    </ImageView>
     <TextView
         android:id="@+id/tvCategory"
         android:text="Công nghệ (10)"
         android:textSize="@dimen/_20sp"
+        android:paddingEnd="@dimen/_30dp"
         android:textColor="@color/color_text_header"
         android:textStyle="bold"
+        android:lines="1"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/ivIconBack"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/header"
         android:layout_marginTop="@dimen/_20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content">
     </TextView>
-
+    <TextView
+        android:id="@+id/tvNoResult"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textColor="@color/color_text_default"
+        android:textSize="@dimen/_20sp"
+        android:text="@string/noResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpListEvent"
         android:layout_width="match_parent"
@@ -72,4 +74,5 @@
         app:tabSelectedTextColor="@color/color_common"
         app:tabTextColor="@color/color_text_default">
     </com.google.android.material.tabs.TabLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
