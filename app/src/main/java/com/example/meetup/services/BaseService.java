@@ -17,7 +17,7 @@ public interface BaseService {
 
     @GET("listMyEvents")
     Call<EventResponse> getListMyEventsJoined(
-            @Query("token") String token,
+            @Header("Authorization") String authHeader,
             @Query("status") long status
     );
 
@@ -33,7 +33,7 @@ public interface BaseService {
 
     @POST("doUpdateEvent")
     Call<ResultUpdateResponse> doUpdateEvent(
-            @Query("token") String token,
+            @Header("Authorization") String authHeader,
             @Query("status") int status,
             @Query("event_id") int eventId
     );

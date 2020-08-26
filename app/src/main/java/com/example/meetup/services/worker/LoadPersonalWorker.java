@@ -27,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoadPersonalWorker extends Worker {
-
+    private final String BEARER = "Bearer ";
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
     String token = sharedPref.getString("token",null);
@@ -40,12 +40,12 @@ public class LoadPersonalWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        loadEventJoinedFromApi(token,Define.STATUS_WENT);
-        loadEventCanJoinFromApi(token,Define.STATUS_GOING);
+        loadEventJoinedFromApi(BEARER+token,Define.STATUS_WENT);
+        loadEventCanJoinFromApi(BEARER+token,Define.STATUS_GOING);
         return Result.success();
     }
 
-    private void loadEventJoinedFromApi(final String token, final long status) {
+    private void loadEventJoinedFromApi(String token, long status) {
 
     service.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
         @Override
@@ -62,8 +62,8 @@ public class LoadPersonalWorker extends Worker {
                     }
                     PersonalJoinedRepository personalJoinedRepository = PersonalJoinedRepository.getInstance();
                     personalJoinedRepository.deleteUsersEvents();
-                    personalJoinedRepository.updateUsersEvents(listIdJoined,status);
-                    personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT,status);
+                    personalJoinedRepository.updateUsersEvents(listIdJoined,Define.STATUS_WENT);
+                    personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT,Define.STATUS_WENT);
                     Define.tokenExpired = false;
                 }
             }
@@ -78,7 +78,7 @@ public class LoadPersonalWorker extends Worker {
     }
 
 
-    private void loadEventCanJoinFromApi(String token, final long status) {
+    private void loadEventCanJoinFromApi(String token,  long status) {
 
         service.getListMyEventsJoined(token,status).enqueue(new Callback<EventResponse>() {
             @Override
@@ -95,8 +95,8 @@ public class LoadPersonalWorker extends Worker {
                         }
                         PersonalJoinedRepository personalJoinedRepository = PersonalJoinedRepository.getInstance();
                         personalJoinedRepository.deleteUsersEvents();
-                        personalJoinedRepository.updateUsersEvents(listIdCanJoin, status);
-                        personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT, status);
+                        personalJoinedRepository.updateUsersEvents(listIdCanJoin, Define.STATUS_GOING);
+                        personalJoinedRepository.getListEventJoined(Define.PAGE_SIZE_DEFAULT, Define.STATUS_GOING);
                         Define.tokenExpired = false;
                     }
                 }
