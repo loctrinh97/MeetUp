@@ -55,6 +55,7 @@ public class EventByCategoryFragment extends Fragment {
         iconBack = view.findViewById(R.id.ivIconBack);
         TextView tv = view.findViewById(R.id.tvNoResult);
         if (getCount(category.getId()) == 0) {
+            tvCategory.setText(category.getName() + " (" + getCount(category.getId()) + ")");
             tv.setVisibility(View.VISIBLE);
             viewpager.setVisibility(View.GONE);
             tabLayout.setVisibility(View.GONE);

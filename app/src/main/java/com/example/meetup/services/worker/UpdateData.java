@@ -41,7 +41,6 @@ public class UpdateData implements Runnable {
                 String list = updateSp.getString(Define.LIST,"");
                 list = list + "-" + eventId + "-" + status;
                 updateSp.edit().putString("List",list).apply();
-                Log.d("Update", "onFailure: ");
 
             }
         });

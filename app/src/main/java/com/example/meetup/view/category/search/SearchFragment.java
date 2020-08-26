@@ -18,7 +18,7 @@ import com.example.meetup.view.category.time.EventCategoryFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class SearchFragment extends Fragment {
-    private int ZERO = 0;
+    private int RESULT_NOT_FOUND = 0;
     String keyword;
     ViewPagerAdapter adapter;
     CustomViewPager viewpager;
@@ -38,7 +38,7 @@ public class SearchFragment extends Fragment {
         viewpager = view.findViewById(R.id.viewpager);
         tabLayout = view.findViewById(R.id.tabLayout);
         tvNoResult = view.findViewById(R.id.tvNoResult);
-        if (mViewModel.getCountHappen(keyword) + mViewModel.getCountEnd(keyword) == ZERO) {
+        if (mViewModel.getCountHappen(keyword) + mViewModel.getCountEnd(keyword) == RESULT_NOT_FOUND) {
             tvNoResult.setVisibility(View.VISIBLE);
             viewpager.setVisibility(View.GONE);
             tabLayout.setVisibility(View.GONE);

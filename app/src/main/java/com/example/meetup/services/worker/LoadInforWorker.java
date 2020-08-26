@@ -51,8 +51,8 @@ public class LoadInforWorker extends Worker {
     EventsRepository eventsRepository = EventsRepository.getInstance();
 
     public SharedPreferences sharedPref = MyApplication.getAppContext()
-            .getSharedPreferences("tokenPref", Context.MODE_PRIVATE);
-    String token = sharedPref.getString("token", "");
+            .getSharedPreferences(Define.PRE_TOKEN, Context.MODE_PRIVATE);
+    String token = sharedPref.getString(Define.TOKEN, "");
     public SharedPreferences.Editor sharedPrefEventNearId = sharedPref.edit();
 
     public LoadInforWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -92,7 +92,7 @@ public class LoadInforWorker extends Worker {
         return Result.success();
     }
 
-    private void loadListVenueFromApi(String token, double radius, double longitue, double latitude) {
+    private void loadListVenueFromApi(final String token, final double radius, final double longitue, final double latitude) {
         service.getListNearlyEvents(token, radius, longitue, latitude).enqueue(new Callback<EventResponse>() {
             @Override
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
@@ -112,7 +112,15 @@ public class LoadInforWorker extends Worker {
 
             @Override
             public void onFailure(Call<EventResponse> call, Throwable t) {
-                Toast.makeText(MyApplication.getAppContext(), R.string.api_error, Toast.LENGTH_LONG);
+                ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+
+                Runnable run = new Runnable() {
+                    public void run() {
+                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                        loadListVenueFromApi(token,radius,longitue,latitude);
+                    }
+                };
+                worker.schedule(run, 2, TimeUnit.SECONDS);
             }
         });
     }
@@ -150,7 +158,15 @@ public class LoadInforWorker extends Worker {
 
             @Override
             public void onFailure(@NotNull Call<EventResponse> call, @NotNull Throwable t) {
+                ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
+                Runnable run = new Runnable() {
+                    public void run() {
+                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                        loadEventsFromApi();
+                    }
+                };
+                worker.schedule(run, 2, TimeUnit.SECONDS);
             }
         });
 
@@ -171,7 +187,15 @@ public class LoadInforWorker extends Worker {
 
             @Override
             public void onFailure(@NonNull Call<NewResponse> call, @NotNull Throwable t) {
-                Log.d("LoadNewsFromApi", "onFailure: ");
+                ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+
+                Runnable run = new Runnable() {
+                    public void run() {
+                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                        loadNewsFromApi();
+                    }
+                };
+                worker.schedule(run, 2, TimeUnit.SECONDS);
             }
         });
     }
@@ -191,7 +215,15 @@ public class LoadInforWorker extends Worker {
 
             @Override
             public void onFailure(@NonNull Call<NewResponse> call, @NotNull Throwable t) {
-                Log.d("LoadNewsFromApi", "onFailure: ");
+                ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+
+                Runnable run = new Runnable() {
+                    public void run() {
+                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                        loadNewsFromApi();
+                    }
+                };
+                worker.schedule(run, 2, TimeUnit.SECONDS);
             }
         });
     }
@@ -213,7 +245,15 @@ public class LoadInforWorker extends Worker {
 
                 @Override
                 public void onFailure(@NotNull Call<EventResponse> call, Throwable t) {
-                    Log.d("TAG", "onFailure: ");
+                    ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+
+                    Runnable run = new Runnable() {
+                        public void run() {
+                            android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                            loadEventsCategories();
+                        }
+                    };
+                    worker.schedule(run, 2, TimeUnit.SECONDS);
                 }
             });
         }
@@ -233,7 +273,15 @@ public class LoadInforWorker extends Worker {
 
             @Override
             public void onFailure(Call<CategoryResponse> call, Throwable t) {
+                ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
+                Runnable run = new Runnable() {
+                    public void run() {
+                        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+                        loadCategories();
+                    }
+                };
+                worker.schedule(run, 1, TimeUnit.HOURS);
             }
         });
     }

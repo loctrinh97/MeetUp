@@ -20,9 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventViewModel extends ViewModel{
+    public static int LOGIN = 1;
+    public static int GUESS = 0;
     CategoryRepository categoryRepository = CategoryRepository.getInstance();
     VenueRepository venueRepository = VenueRepository.getInstance();
     EventsRepository eventsRepository = EventsRepository.getInstance();
+    int checkLogin ;
+
+    public void setCheckLogin(int checkLogin) {
+        this.checkLogin = checkLogin;
+    }
+
+    public int getCheckLogin() {
+        return checkLogin;
+    }
+
     public SharedPreferences sharedPref = MyApplication.getAppContext()
             .getSharedPreferences(Define.PRE_TOKEN, Context.MODE_PRIVATE);
     List<Event> eventList;

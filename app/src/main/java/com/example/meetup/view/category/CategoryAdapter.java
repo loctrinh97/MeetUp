@@ -44,6 +44,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Category category = categoryList.get(position);
         holder.tvName.setText(category.getName());
         Glide.with(context).load(Define.getImage(category.getId()))
+                .placeholder(R.drawable.error)
                 .into(holder.ivIcon);
 
     }

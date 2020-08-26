@@ -24,9 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int event = repository.getCountEvent();
-        if (event == 0) {
-            workController.setWorkPeriodic();
-        }
+
         Define.initMap();
         // hide notification bar
         requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
@@ -35,18 +33,36 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         // delay & go to home screen
-        delay.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                } catch (Exception ignored) {
-                    ignored.printStackTrace();
+        if (event == 0) {
+            workController.setWorkPeriodic();
+            delay.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception ignored) {
+                        ignored.printStackTrace();
+                    }
                 }
-            }
-        }, 1000);
+            }, 3000);
+        }
+        else {
+            delay.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception ignored) {
+                        ignored.printStackTrace();
+                    }
+                }
+            }, 500);
+        }
+
     }
 
 

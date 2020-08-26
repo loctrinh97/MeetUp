@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +38,13 @@ public class EventDetailFragment extends Fragment {
     private Venue venue;
     RecyclerView recyclerView;
     NearEventAdapter adapter;
-    Button buttonCanJoin, buttonJoined;
     List<Event> nearList;
     int status;
     private FragmentDetailEventBinding binding;
     public EventViewModel viewModel;
     Context context;
 
-    public EventDetailFragment(Event event, Context context,EventViewModel eventViewModel) {
+    public EventDetailFragment(Event event, Context context, EventViewModel eventViewModel) {
         this.context = context;
         this.event = event;
         viewModel = eventViewModel;
@@ -65,8 +65,7 @@ public class EventDetailFragment extends Fragment {
         binding.setCategory(category);
         binding.setEvent(event);
         binding.setVenue(venue);
-        buttonCanJoin = binding.btnCanJoin;
-        buttonJoined = binding.btnJoined;
+
         recyclerView = binding.rvEventNear;
         setUpRecyclerView();
         setWithStatus(status);
@@ -77,7 +76,7 @@ public class EventDetailFragment extends Fragment {
                 FragmentManager fm;
                 fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                EventDetailFragment fragment = new EventDetailFragment(nearList.get(position), context,viewModel);
+                EventDetailFragment fragment = new EventDetailFragment(nearList.get(position), context, viewModel);
                 fragmentTransaction.replace(R.id.activity, fragment);
                 fragmentTransaction.addToBackStack("");
                 fragmentTransaction.commit();
@@ -86,27 +85,32 @@ public class EventDetailFragment extends Fragment {
         binding.ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.refresh();
                 Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
             }
         });
 
         mapData(context);
-
-        buttonJoined.setOnClickListener(new View.OnClickListener() {
+        if (viewModel.getCheckLogin() == EventViewModel.GUESS) {
+            binding.btnJoined.setVisibility(View.GONE);
+            binding.btnCanJoin.setVisibility(View.GONE);
+        } else {
+            binding.btnJoined.setVisibility(View.VISIBLE);
+            binding.btnCanJoin.setVisibility(View.VISIBLE);
+        }
+        binding.btnJoined.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 status = Define.STATUS_WENT;
-                viewModel.updateEvent(status,event.getId());
+                viewModel.updateEvent(status, event.getId());
                 setWithStatus(status);
             }
         });
 
-        buttonCanJoin.setOnClickListener(new View.OnClickListener() {
+        binding.btnCanJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 status = Define.STATUS_GOING;
-                viewModel.updateEvent(status,event.getId());
+                viewModel.updateEvent(status, event.getId());
                 setWithStatus(status);
             }
         });
@@ -127,32 +131,44 @@ public class EventDetailFragment extends Fragment {
         binding.tvAmount.setText(event.getGoingCount() + " sẽ tham gia");
         binding.tvTime.setText(Define.checkDate(event));
     }
+
     @SuppressLint("ResourceAsColor")
-    private void setWithStatus(int status){
+    private void setWithStatus(int status) {
         if (status == Define.STATUS_GOING) {
             setWithGoing();
         } else if (status == Define.STATUS_WENT) {
             setWent();
         } else {
-           setNoJoin();
+            setNoJoin();
         }
     }
-    private void setWithGoing(){
-        buttonCanJoin.setSelected(false);
-        buttonCanJoin.setEnabled(false);
-        buttonJoined.setSelected(true);
-        buttonJoined.setEnabled(true);
+
+    private void setWithGoing() {
+        binding.btnCanJoin.setSelected(false);
+        binding.btnCanJoin.setEnabled(false);
+        binding.btnJoined.setSelected(true);
+        binding.btnJoined.setEnabled(true);
     }
-    private void setWent(){
-        buttonCanJoin.setSelected(false);
-        buttonJoined.setSelected(false);
-        buttonCanJoin.setEnabled(false);
-        buttonJoined.setEnabled(false);
+
+    private void setWent() {
+        binding.btnCanJoin.setSelected(false);
+        binding.btnCanJoin.setEnabled(false);
+        binding.btnJoined.setSelected(false);
+        binding.btnJoined.setEnabled(false);
     }
-    private void setNoJoin(){
-        buttonCanJoin.setSelected(true);
-        buttonJoined.setSelected(false);
-        buttonCanJoin.setEnabled(true);
-        buttonJoined.setEnabled(false);
+
+    private void setNoJoin() {
+        binding.btnCanJoin.setSelected(true);
+        binding.btnCanJoin.setEnabled(true);
+        binding.btnJoined.setSelected(false);
+        binding.btnJoined.setEnabled(false);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        viewModel.refresh();
+
+    }
+
 }

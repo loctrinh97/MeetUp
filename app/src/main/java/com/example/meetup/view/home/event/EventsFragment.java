@@ -40,6 +40,8 @@ import java.util.Objects;
 
 
 public class EventsFragment extends Fragment {
+    private static int LOGIN = 1;
+    private static int GUESS = 0;
     protected RecyclerView recyclerView;
     public EventViewModel eventViewModel;
     protected List<Event> eventList;
@@ -64,6 +66,7 @@ public class EventsFragment extends Fragment {
         setViewModel();
         recyclerView = binding.recyclerEvents;
         setUpRecyclerView();
+        loginCheck();
         observe();
         adapter.setOnItemClickListener(new EventAdapter.OnItemClickListener() {
             @Override
@@ -100,6 +103,16 @@ public class EventsFragment extends Fragment {
         return binding.getRoot();
     }
 
+    protected void loginCheck() {
+        final String token = sharedPref.getString(Define.TOKEN, "");
+        if(token.isEmpty()){
+            eventViewModel.setCheckLogin(GUESS);
+        }
+        else{
+            eventViewModel.setCheckLogin(LOGIN);
+        }
+    }
+
     protected List<Event> setList(int pageSize) {
         return eventViewModel.getEventList(pageSize);
     }
@@ -124,10 +137,11 @@ public class EventsFragment extends Fragment {
     }
 
     protected void joinCheck(final int position) {
-        final String token = sharedPref.getString(Define.TOKEN, "");
-        if (token.isEmpty()) {
+
+        if (eventViewModel.getCheckLogin()==GUESS) {
             DialogLogin dialogLogin = new DialogLogin();
             dialogLogin.showDialog(getActivity());
+
 
         } else {
             BottomDialogFragment bottomDialog = new BottomDialogFragment(eventList.get(position).getMyStatus());
@@ -140,6 +154,7 @@ public class EventsFragment extends Fragment {
                     adapter.setEventList(eventList);
                 }
             });
+
         }
 
     }

@@ -46,8 +46,7 @@ public class PopularViewModel extends EventViewModel {
         list.setValue(eventList);
     }
     public List<Event> getEventNearList(){
-        // Fake data
-        return eventsRepository.getListEvent(5);
+        return eventsRepository.getEventNear();
     }
 
 }
