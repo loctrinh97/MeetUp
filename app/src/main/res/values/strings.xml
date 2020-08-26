@@ -76,5 +76,6 @@
     <string name="MyPage">Trang chủ</string>
     <string name="nearMe">Gần tôi</string>
     <string name="categories">Danh mục</string>
+    <string name="ignore">Bỏ qua</string>
 
 </resources>
