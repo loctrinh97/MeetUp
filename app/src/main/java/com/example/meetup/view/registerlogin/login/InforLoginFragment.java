@@ -134,6 +134,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
                             tvMessLogin.setTextColor(getResources().getColor(R.color.colorPrimary));
                             Intent intent = new Intent(getActivity(), HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } else {
                             tvMessLogin.setTextColor(getResources().getColor(R.color.color_alert));
