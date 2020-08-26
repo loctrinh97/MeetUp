@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,7 +71,8 @@ public class EventDetailFragment extends Fragment {
         recyclerView = binding.rvEventNear;
         setUpRecyclerView();
         setWithStatus(status);
-
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
         adapter.setOnItemClickListener(new NearEventAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {

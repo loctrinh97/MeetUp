@@ -90,7 +90,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             public void onClick(View view) {
                 if (listener != null) {
                     listener.onClickJoin(position);
-                    Toast.makeText(holder.binding.getRoot().getContext(),event.getCategoryId()+"",Toast.LENGTH_SHORT).show();
                 }
             }
         });

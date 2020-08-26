@@ -35,11 +35,13 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.Worker;
 
 import com.example.meetup.R;
 import com.example.meetup.databinding.FragmentNearMeBinding;
 import com.example.meetup.model.dataLocal.Event;
 import com.example.meetup.model.dataLocal.Venue;
+import com.example.meetup.services.worker.WorkController;
 import com.example.meetup.ulti.Define;
 import com.example.meetup.ulti.MyApplication;
 import com.example.meetup.ulti.PermissionUtils;
@@ -170,11 +172,7 @@ public class NearMeFragment extends Fragment implements OnMapReadyCallback {
                             LatLng latLng = new LatLng(latitude, longitude);
                             Define.CURRENT_LOCATION_LAT = latitude;
                             Define.CURRENT_LOCATION_LONG = longitude;
-//                            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
-//                            OneTimeWorkRequest.Builder mBuiderLoadVenue = new OneTimeWorkRequest.Builder(LoadVenueWoker.class);
-//                            mBuiderLoadVenue.setConstraints(constraints);
-//                            workRequest = mBuiderLoadVenue.build();
-//                            WorkManager.getInstance(MyApplication.getAppContext()).enqueue(workRequest);
+                            WorkController.getInstance().loadVenue();
                             map.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.current_location))).showInfoWindow();
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
                         } else {
