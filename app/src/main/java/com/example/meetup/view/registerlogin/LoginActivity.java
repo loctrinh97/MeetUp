@@ -1,10 +1,13 @@
 package com.example.meetup.view.registerlogin;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -37,6 +40,13 @@ public class LoginActivity extends AppCompatActivity {
             addFragmentSignupInfor();
         }
 
+
+
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

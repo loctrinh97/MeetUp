@@ -1,5 +1,6 @@
 package com.example.meetup.view.registerlogin.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -72,7 +74,6 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
             }
         });
 
-
         edtPasswordLogin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,6 +90,7 @@ public class InforLoginFragment extends Fragment implements View.OnClickListener
                 loginViewModel.checkEnableButtonLogin(edtEmailLogin, edtPasswordLogin, btnLoginConfirm);
             }
         });
+
         return view;
     }
 

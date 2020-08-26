@@ -17,6 +17,7 @@ public class WorkController {
     private static WorkController workController = null;
     public PeriodicWorkRequest myWork;
     OneTimeWorkRequest downDataWork;
+    OneTimeWorkRequest loadVenue;
 
     public static WorkController getInstance() {
         if (workController == null) {
@@ -43,6 +44,17 @@ public class WorkController {
         mBuider.setConstraints(constraints);
         downDataWork = mBuider.build();
         WorkManager.getInstance(MyApplication.getAppContext()).enqueue(downDataWork);
+    }
+
+
+    //load venue
+    @SuppressLint("EnqueueWork")
+    public void loadVenue() {
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+        OneTimeWorkRequest.Builder mBuider = new OneTimeWorkRequest.Builder(LoadVenueWorker.class);
+        mBuider.setConstraints(constraints);
+        loadVenue = mBuider.build();
+        WorkManager.getInstance(MyApplication.getAppContext()).enqueue(loadVenue);
     }
 
     public void cancelWork() {
